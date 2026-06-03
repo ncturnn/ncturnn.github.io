@@ -5,14 +5,10 @@
     <title>NOCTURN | Welcome to the Void</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* BAZINIAI STILIAI IR FONAS */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-        html {
-            scroll-behavior: smooth; /* Sklandus nuvažiavimas paspaudus mygtuką */
         }
         body {
             background-color: #0a0a0a !important;
@@ -20,16 +16,12 @@
             font-family: 'Courier New', Courier, monospace;
             overflow-x: hidden;
         }
-
-        /* VINTAGE GRUNGE TRIUKŠMO EFEKTAS */
         .noise-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 9999; opacity: 0.04;
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png');
         }
-
-        /* VIRŠUTINIS MENIU (NAVBAR) */
         .navbar {
             display: flex; 
             justify-content: space-between; 
@@ -60,8 +52,6 @@
         .nav-links a:hover { 
             color: #88ff00; 
         }
-
-        /* PAGRINDINIS TITULINIS BLOKAS (HERO) */
         .hero {
             height: 75vh; 
             display: flex; 
@@ -100,72 +90,15 @@
             color: #0a0a0a;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
         }
-
-        /* PRODUKTŲ SEKCIJA */
-        .products-section {
-            padding: 5rem 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: #0a0a0a;
-        }
-        .section-title {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 2rem;
-            letter-spacing: 4px;
-            margin-bottom: 3rem;
-            border-bottom: 1px solid #333;
-            padding-bottom: 1rem;
-            color: #fff;
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-        .product-card {
-            background: #0f0f0f;
-            border: 1px solid #222;
-            padding: 1rem;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            border-color: #88ff00;
-        }
-        .image-placeholder {
-            width: 100%;
-            height: 400px;
-            background: #1a1a1a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #444;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            border: 1px dashed #333;
-            margin-bottom: 1.5rem;
-        }
-        .product-info h3 {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-            color: #fff;
-        }
-        .price {
-            color: #88ff00;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
     </style>
 </head>
 <body>
     <div class="noise-overlay"></div>
     
     <nav class="navbar">
-        <div class="logo">NOCTURN</div>
+        <div class="logo"><a href="index.html" style="color: #fff; text-decoration: none;">NOCTURN</a></div>
         <ul class="nav-links">
-            <li><a href="#shop">Shop</a></li>
+            <li><a href="shop.html">Shop</a></li>
             <li><a href="#">Archive</a></li>
             <li><a href="#">About</a></li>
         </ul>
@@ -174,34 +107,7 @@
     <header class="hero">
         <h1>OUT OF ORBIT</h1>
         <p>DROP 001 // ENTER THE NOCTURN</p>
-        <a href="#shop" class="shop-btn">EXPLORE COLLECTION</a>
+        <a href="shop.html" class="shop-btn">EXPLORE COLLECTION</a>
     </header>
-
-    <section id="shop" class="products-section">
-        <h2 class="section-title">CURRENT_DROP</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
-                <div class="product-info">
-                    <h3>HEAVYWEIGHT HOODIE</h3>
-                    <p class="price">$75.00</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
-                <div class="product-info">
-                    <h3>GRAPHIC TEE</h3>
-                    <p class="price">$40.00</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
-                <div class="product-info">
-                    <h3>THERMAL LONG SLEEVE</h3>
-                    <p class="price">$50.00</p>
-                </div>
-            </div>
-        </div>
-    </section>
 </body>
 </html>
