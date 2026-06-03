@@ -29,22 +29,29 @@
             padding: 2rem 4rem; 
             font-family: 'Syncopate', sans-serif;
             background-color: #0a0a0a;
+            position: relative;
+            z-index: 10;
         }
         
-        /* REAKTYVUS LOGOTIPAS */
         .logo a {
-            font-size: 2rem; 
-            font-weight: 700; 
-            letter-spacing: 5px;
-            color: #ffffff;
-            text-decoration: none;
-            transition: all 0.3s ease;
+            font-size: 2rem !important; 
+            font-weight: 700 !important; 
+            letter-spacing: 5px !important;
+            color: #ffffff !important;
+            text-decoration: none !important;
+            transition: all 0.3s ease !important;
+            display: inline-block !important;
         }
         .logo a:hover {
             color: #ff007f !important;
-            text-shadow: 0 0 15px rgba(255, 0, 127, 0.8);
+            text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important;
         }
 
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
         .nav-links { 
             list-style: none; 
             display: flex; 
@@ -60,6 +67,70 @@
         .nav-links a:hover { 
             color: #ff007f; 
         }
+
+        .cart-trigger {
+            background: none;
+            border: none;
+            color: #fff;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .cart-trigger:hover {
+            color: #ff007f;
+            text-shadow: 0 0 8px rgba(255, 0, 127, 0.6);
+        }
+        .cart-count { color: #ff007f; font-weight: bold; }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0; right: -400px; width: 400px; height: 100vh;
+            background: #0d0d0d;
+            border-left: 1px solid #222;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            z-index: 999;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99);
+        }
+        .cart-sidebar.active { right: 0; }
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .cart-header h2 { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; letter-spacing: 2px;}
+        .close-cart { background: none; border: none; color: #666; font-size: 1.5rem; cursor: pointer; }
+        .close-cart:hover { color: #ff007f; }
+        .cart-items-container { flex: 1; overflow-y: auto; }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #151515;
+            font-size: 0.9rem;
+        }
+        .cart-item-info h4 { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; margin-bottom: 0.3rem;}
+        .cart-item-price { color: #ff007f; }
+        .remove-item-btn { background: none; border: none; color: #444; cursor: pointer; font-size: 0.8rem;}
+        .remove-item-btn:hover { color: #ff007f; }
+        .cart-footer { border-top: 1px solid #222; padding-top: 2rem; margin-top: 1rem; }
+        .cart-total { display: flex; justify-content: space-between; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .checkout-btn {
+            background: #ff007f; color: #fff; border: none; width: 100%; padding: 1.2rem;
+            font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer;
+            transition: background 0.3s; text-align: center; display: block;
+        }
+        .checkout-btn:hover { background: #e00070; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
+        .empty-message { color: #444; text-align: center; margin-top: 3rem; font-style: italic; }
+
         .hero {
             height: 75vh; 
             display: flex; 
@@ -105,17 +176,90 @@
     
     <nav class="navbar">
         <div class="logo"><a href="index.html">NOCTURN</a></div>
-        <ul class="nav-links">
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="archive.html">Archive</a></li>
-            <li><a href="about.html">About</a></li>
-        </ul>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="archive.html">Archive</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+            <button class="cart-trigger" id="cartTrigger">BAG (<span class="cart-count" id="cartCount">0</span>)</button>
+        </div>
     </nav>
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>YOUR_BAG</h2>
+            <button class="close-cart" id="closeCart">×</button>
+        </div>
+        <div class="cart-items-container" id="cartItemsContainer"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>TOTAL:</span>
+                <span id="cartTotalSum">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="processCheckout()">PROCEED TO CHECKOUT</button>
+        </div>
+    </div>
 
     <header class="hero">
         <h1>OUT OF ORBIT</h1>
         <p>DROP 001 // ENTER THE NOCTURN</p>
         <a href="shop.html" class="shop-btn">EXPLORE COLLECTION</a>
     </header>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('nocturn_cart')) || [];
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartTrigger = document.getElementById('cartTrigger');
+        const closeCart = document.getElementById('closeCart');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartCount = document.getElementById('cartCount');
+        const cartTotalSum = document.getElementById('cartTotalSum');
+
+        cartTrigger.addEventListener('click', () => cartSidebar.classList.add('active'));
+        closeCart.addEventListener('click', () => cartSidebar.classList.remove('active'));
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function updateCart() {
+            localStorage.setItem('nocturn_cart', JSON.stringify(cart));
+            cartCount.innerText = cart.length;
+            cartItemsContainer.innerHTML = '';
+            
+            if(cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-message">BAG IS EMPTY</p>';
+                cartTotalSum.innerText = '$0.00';
+                return;
+            }
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                cartItemsContainer.innerHTML += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <span class="cart-item-price">$${item.price.toFixed(2)}</span>
+                        </div>
+                        <button class="remove-item-btn" onclick="removeItem(${index})">[REMOVE]</button>
+                    </div>
+                `;
+            });
+            cartTotalSum.innerText = `$${total.toFixed(2)}`;
+        }
+
+        function processCheckout() {
+            if(cart.length === 0) return;
+            alert("Sujungiama su mokėjimo sistema... Užsakymas priimtas!");
+            cart = [];
+            updateCart();
+            cartSidebar.classList.remove('active');
+        }
+
+        updateCart();
+    </script>
 </body>
 </html>
