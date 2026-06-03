@@ -30,17 +30,21 @@
             font-family: 'Syncopate', sans-serif;
             background-color: #0a0a0a;
         }
-        .logo {
+        
+        /* REAKTYVUS LOGOTIPAS */
+        .logo a {
             font-size: 2rem; 
             font-weight: 700; 
             letter-spacing: 5px;
             color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 0, 127, 0.3);
-        }
-        .logo a {
-            color: #fff;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
+        .logo a:hover {
+            color: #ff007f !important;
+            text-shadow: 0 0 15px rgba(255, 0, 127, 0.8);
+        }
+
         .nav-links { 
             list-style: none; 
             display: flex; 
@@ -56,7 +60,6 @@
         .nav-links a:hover { 
             color: #ff007f; 
         }
-        
         .products-section {
             padding: 5rem 4rem;
             max-width: 1200px;
@@ -70,20 +73,18 @@
             margin-bottom: 3rem;
             border-bottom: 1px solid #222;
             padding-bottom: 1rem;
-            color: #555; /* Pilkesnis, nes tai archyvas */
+            color: #555; 
         }
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 3rem;
         }
-        
-        /* IŠPARDUOTOS PREKĖS KORTELĖ */
         .product-card {
             background: #0b0b0b;
             border: 1px solid #151515;
             padding: 1rem;
-            opacity: 0.6; /* Padaro prekes blausias */
+            opacity: 0.6; 
             position: relative;
         }
         .image-placeholder {
@@ -106,8 +107,6 @@
             margin-bottom: 0.5rem;
             color: #888;
         }
-        
-        /* PERBRAUKTA KAINA IR ROŽINIS SOLD OUT */
         .price-sold {
             display: flex;
             justify-content: space-between;
@@ -141,7 +140,6 @@
     <section class="products-section">
         <h2 class="section-title">PAST_EXPERIMENTS // ARCHIVE</h2>
         <div class="product-grid">
-            
             <div class="product-card">
                 <div class="image-placeholder">DROP_000 // TEE</div>
                 <div class="product-info">
@@ -152,7 +150,6 @@
                     </div>
                 </div>
             </div>
-            
             <div class="product-card">
                 <div class="image-placeholder">DROP_000 // ZIP</div>
                 <div class="product-info">
@@ -163,7 +160,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 </body>
