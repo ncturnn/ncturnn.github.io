@@ -11,8 +11,11 @@
             padding: 0;
             box-sizing: border-box;
         }
+        html {
+            scroll-behavior: smooth; /* Sklandus nuvažiavimas paspaudus mygtuką */
+        }
         body {
-            background-color: #0a0a0a !important; /* Priverstinai juodas fonas */
+            background-color: #0a0a0a !important;
             color: #f0f0f0;
             font-family: 'Courier New', Courier, monospace;
             overflow-x: hidden;
@@ -55,7 +58,7 @@
             transition: color 0.3s;
         }
         .nav-links a:hover { 
-            color: #88ff00; /* Neoninė žalia užvedus pelę */
+            color: #88ff00; 
         }
 
         /* PAGRINDINIS TITULINIS BLOKAS (HERO) */
