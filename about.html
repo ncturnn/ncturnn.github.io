@@ -30,17 +30,21 @@
             font-family: 'Syncopate', sans-serif;
             background-color: #0a0a0a;
         }
-        .logo {
+        
+        /* REAKTYVUS LOGOTIPAS */
+        .logo a {
             font-size: 2rem; 
             font-weight: 700; 
             letter-spacing: 5px;
             color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 0, 127, 0.3);
-        }
-        .logo a {
-            color: #fff;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
+        .logo a:hover {
+            color: #ff007f !important;
+            text-shadow: 0 0 15px rgba(255, 0, 127, 0.8);
+        }
+
         .nav-links { 
             list-style: none; 
             display: flex; 
@@ -56,7 +60,6 @@
         .nav-links a:hover { 
             color: #ff007f; 
         }
-        
         .about-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -75,13 +78,11 @@
             margin-bottom: 2.5rem;
             color: #fff;
         }
-        
         .glow-text {
             color: #ff007f;
             text-shadow: 0 0 8px rgba(255, 0, 127, 0.6);
             font-weight: bold;
         }
-
         .censored {
             background: #222;
             color: #222;
@@ -93,7 +94,6 @@
             background: transparent;
             color: #ff007f;
         }
-
         .about-text p {
             font-size: 0.95rem;
             line-height: 1.9;
@@ -137,21 +137,15 @@
 
     <main class="about-container">
         <div class="about-text">
-            <h1>SYSTEM OVERRIDE.<br>ESTABLISHED IN THE VOID.</h1>
-            
+            <h1>SYSTEM OVERRIDE.<br>ESTABLISHED in THE VOID.</h1>
             <p>NOCTURN IS NOT A BRAND, IT IS A DISTORTION OF THE COMFORT ZONE. WE EXIST OUTSIDE THE REGULAR ORBIT, SHREDDING TRADITIONAL STREETWEAR TO PIECES AND REBUILDING IT FROM THE DARKEST CORNERS OF CONSCIOUSNESS.</p>
-            
             <p>WE DON'T DO MASS PRODUCTION. WE DON'T FOLLOW SEASONS. EVERY SINGLE PIECE IS AN ARCHIVAL EXPERIMENT FOCUSING ON EXTREMELY <span class="glow-text">HEAVYWEIGHT TEXTURES</span>, RAW DISTRESSED DETAILS, AND AGGRESSIVE OVERSIZED SILHOUETTES THAT ACT AS AN ARMOR FOR THE STREETS.</p>
-            
             <p>OUR BLUEPRINTS ARE CLASSIFIED. OPERATING UNDER PROJECT ID: <span class="censored">NTRN-001</span>. ONCE A DROP SELLS OUT, THE FILES ARE PERMANENTLY DELETED FROM THE SERVER. NO RESTOCKS. NO SECOND CHANCES.</p>
-            
             <p class="glow-text">// ENTER THE NOCTURN. WELCOME TO THE ARCHIVE.</p>
-            
             <div class="meta-data">
                 <p>STATUS: ACTIVE // LOCATION: UNKNOWN // TERMINAL: #0991X</p>
             </div>
         </div>
-        
         <div class="about-image">
             [ARCHIVE_VISUAL_LOCKED]
         </div>
