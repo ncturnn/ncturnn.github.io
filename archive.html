@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARCHIVE // NOCTURN</title>
+    <title>ARCHIVE // N★CTURN</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -32,6 +32,8 @@
             position: relative;
             z-index: 10;
         }
+        
+        /* LOGOTIPAS: ŽVAIGŽDUTĖ + PAKREIPTAS Į DEŠINĘ */
         .logo a {
             font-size: 2rem !important; 
             font-weight: 700 !important; 
@@ -40,11 +42,19 @@
             text-decoration: none !important;
             transition: all 0.3s ease !important;
             display: inline-block !important;
+            font-style: italic !important;
+        }
+        .logo a span {
+            color: #ff007f;
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.8);
+            font-style: normal !important;
+            display: inline-block;
         }
         .logo a:hover {
             color: #ff007f !important;
             text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important;
         }
+        
         .nav-links { 
             list-style: none; 
             display: flex; 
@@ -139,7 +149,7 @@
     <div class="noise-overlay"></div>
     
     <nav class="navbar">
-        <div class="logo"><a href="index.html">NOCTURN</a></div>
+        <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
         <ul class="nav-links">
             <li><a href="shop.html">Shop</a></li>
             <li><a href="archive.html">Archive</a></li>
@@ -236,7 +246,7 @@
 
         function processCheckout() {
             if(cart.length === 0) return;
-            alert("Sujungiama su mokėjimo sistema... Užsakymas priimtas!");
+            alert("Connecting to payment gateway... Order processed!");
             cart = [];
             updateCart();
             cartSidebar.classList.remove('active');
