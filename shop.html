@@ -9,17 +9,22 @@
         body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         
-        /* INTEGRUOTAS TEISINGAS LOGO STILIUS IŠ NUOTRAUKOS */
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
         .logo a { font-size: 2rem !important; font-weight: 700 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
-        .logo a span { color: #ff007f; text-shadow: 0 0 12px rgba(255, 0, 127, 1), 0 0 5px rgba(255, 0, 127, 0.8); font-style: normal !important; display: inline-block; }
-        .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
+        
+        /* BREATHING LOGO */
+        .logo a span { 
+            color: #ff007f; 
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); 
+            font-style: normal !important; 
+            display: inline-block;
+            animation: starBreathe 3s ease-in-out infinite;
+        }
         
         .nav-links { list-style: none; display: flex; gap: 2rem; align-items: center; }
         .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; transition: color 0.3s; }
         .nav-links a:hover { color: #ff007f; }
         
-        /* KREPŠELIO ELEMENTAI */
         .cart-trigger { position: fixed; bottom: 2rem; right: 2rem; background: #0a0a0a !important; border: 2px solid #ff007f !important; color: #fff !important; padding: 1rem 1.5rem; font-family: 'Syncopate', sans-serif; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; z-index: 9999999 !important; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); transition: all 0.3s ease; display: block !important; }
         .cart-trigger:hover { background: #ff007f !important; color: #fff !important; box-shadow: 0 0 25px rgba(255, 0, 127, 0.8); transform: translateY(-3px); }
         .cart-count { font-weight: bold; color: #ff007f; }
@@ -43,7 +48,6 @@
         .checkout-btn:hover { background: #e00070; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
         .empty-message { color: #444; text-align: center; margin-top: 3rem; font-style: italic; }
         
-        /* PRODUKTŲ TINKLELIS */
         .products-section { padding: 5rem 4rem; max-width: 1200px; margin: 0 auto; background-color: #0a0a0a; position: relative; z-index: 1; }
         .section-title { font-family: 'Syncopate', sans-serif; font-size: 2rem; letter-spacing: 4px; margin-bottom: 3rem; border-bottom: 1px solid #222; padding-bottom: 1rem; color: #fff; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
@@ -57,18 +61,19 @@
         .add-to-bag-btn { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 1rem; font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; }
         .add-to-bag-btn:hover { background: #fff; color: #000; border-color: #fff; }
 
-        /* MOBILIŲJŲ TELEFONŲ RESPONSIVE KLASĖS */
+        @keyframes starBreathe {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.4); }
+            50% { transform: scale(1.15); text-shadow: 0 0 18px rgba(255, 0, 127, 1), 0 0 35px rgba(255, 0, 127, 0.8); }
+        }
+
         @media (max-width: 768px) {
             .navbar { padding: 1.5rem 1.5rem; flex-direction: column; gap: 1.5rem; text-align: center; }
             .logo a { font-size: 1.5rem !important; letter-spacing: 3px !important; }
             .nav-links { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
-            
             .products-section { padding: 3rem 1.5rem; }
             .section-title { font-size: 1.2rem; letter-spacing: 2px; text-align: center; margin-bottom: 2rem; }
-            
             .product-grid { grid-template-columns: 1fr; gap: 2rem; }
             .image-placeholder { height: 320px; }
-            
             .cart-sidebar { width: 100%; right: -100%; padding: 2rem 1.5rem; }
             .cart-trigger { bottom: 1.5rem; right: 1.5rem; padding: 0.8rem 1.2rem; font-size: 0.75rem; }
         }
@@ -140,7 +145,7 @@
         function addToCart(name, price) {
             cart.push({ name: name, price: price });
             updateCart();
-            cartSidebar.classList.add('active'); // Automatiškai atidaro krepšelį įdėjus prekę
+            cartSidebar.classList.add('active');
         }
 
         function removeItem(index) {
@@ -177,7 +182,6 @@
             if(cart.length === 0) return;
             window.location.href = 'checkout.html';
         }
-        
         updateCart();
     </script>
 </body>
