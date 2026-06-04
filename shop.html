@@ -15,10 +15,10 @@
         .logo a:hover { transform: scale(1.05); }
         .logo a:hover span { color: #fff; text-shadow: 0 0 10px #ff007f; }
         
-        .nav-links { list-style: none; display: flex; gap: 2rem; }
+        .nav-links { list-style: none; display: flex; gap: 2rem; align-items: center; }
         .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; transition: color 0.3s; }
         .nav-links a:hover { color: #ff007f; }
-        .cart-icon { cursor: pointer; font-size: 1rem; letter-spacing: 1px; transition: color 0.3s; }
+        .cart-icon { cursor: pointer; font-size: 0.9rem; letter-spacing: 2px; transition: color 0.3s; color: #f0f0f0; font-family: 'Syncopate', sans-serif; }
         .cart-icon:hover { color: #ff007f; }
 
         .shop-container { max-width: 1200px; margin: 4rem auto; padding: 0 4rem; }
@@ -55,6 +55,24 @@
         .cart-total-price { color: #ff007f; text-shadow: 0 0 5px rgba(255, 0, 127, 0.3); }
         .checkout-btn { width: 100%; background: #ff007f; border: none; color: #fff; padding: 1.2rem; font-family: 'Syncopate', sans-serif; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; }
         .checkout-btn:hover { background: #e00070; box-shadow: 0 0 20px rgba(255, 0, 127, 0.5); }
+
+        /* MOBILAUS TELEFONO RESPONSIVE KLASĖS */
+        @media (max-width: 768px) {
+            .navbar { padding: 1.5rem 1.5rem; flex-direction: column; gap: 1.5rem; text-align: center; }
+            .logo a { font-size: 1.3rem; letter-spacing: 2px; }
+            .nav-links { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
+            .nav-links a, .cart-icon { font-size: 0.8rem; letter-spacing: 1px; }
+            
+            .shop-container { padding: 0 1.5rem; margin: 2rem auto; }
+            .section-title { font-size: 1.2rem; letter-spacing: 2px; text-align: center; margin-bottom: 2rem; }
+            
+            .products-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .product-card { padding: 1rem; }
+            .product-image-placeholder { height: 300px; }
+            
+            .cart-sidebar { width: 100%; right: -100%; padding: 2rem 1.5rem; }
+            .cart-header { margin-bottom: 2rem; }
+        }
     </style>
 </head>
 <body>
@@ -70,7 +88,7 @@
     </nav>
 
     <main class="shop-container">
-        <h1 class="section-title">DROP_001 // PROTOYPES</h1>
+        <h1 class="section-title">DROP_001 // PROTOTYPES</h1>
         <div class="products-grid">
             <div class="product-card">
                 <div class="product-image-placeholder">Image_Unavailable</div>
@@ -96,8 +114,7 @@
             <h2>YOUR_BAG</h2>
             <div class="close-cart" onclick="toggleCart()">×</div>
         </div>
-        <div class="cart-items-container" id="cartItemsContainer">
-            </div>
+        <div class="cart-items-container" id="cartItemsContainer"></div>
         <div class="cart-footer">
             <div class="cart-total-row">
                 <span>TOTAL:</span>
