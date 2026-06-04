@@ -41,22 +41,67 @@
         /* KONTEINERIS */
         .size-container {
             flex: 1;
-            max-width: 900px;
+            max-width: 1100px;
             width: 100%;
             margin: 0 auto;
-            padding: 2rem 4rem 8rem 4rem;
+            padding: 2rem 4rem 10rem 4rem;
             position: relative;
             z-index: 1;
         }
         .size-title { font-size: 2rem; font-weight: 800; letter-spacing: 4px; margin-bottom: 2rem; color: #fff; border-bottom: 1px solid #222; padding-bottom: 1rem; }
         
-        .info-note { font-size: 0.7rem; color: #444; letter-spacing: 1px; margin-bottom: 2rem; text-transform: uppercase; line-height: 1.6; }
+        /* SELEKTORIAUS TINKLAS (Horizontalus slinkimas mobiliame, švarus išdėstymas) */
+        .product-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        .product-card {
+            background: #0d0d0d;
+            border: 1px solid #1a1a1a;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .product-card:hover {
+            border-color: #ff007f;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.1);
+        }
+        .product-card.active {
+            border-color: #ff007f;
+            background: rgba(255, 0, 127, 0.03);
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
+        }
+        .product-card svg {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 0.8rem;
+            fill: none;
+            stroke: #444;
+            stroke-width: 1.5;
+            transition: stroke 0.3s ease;
+        }
+        .product-card:hover svg, .product-card.active svg {
+            stroke: #ff007f;
+        }
+        .product-card .prod-title {
+            font-size: 0.55rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #888;
+        }
+        .product-card.active .prod-title {
+            color: #fff;
+        }
 
-        /* UNIT SWITCHER (METRIC / IMPERIAL BUTTONS) */
+        /* UNIT SWITCHER */
         .unit-switcher {
             display: flex;
             gap: 1rem;
             margin-bottom: 2rem;
+            justify-content: flex-start;
         }
         .unit-btn {
             background: none;
@@ -92,7 +137,7 @@
             text-align: left;
         }
         th {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             letter-spacing: 2px;
             color: #666;
             padding: 1.2rem;
@@ -103,7 +148,7 @@
             font-size: 0.8rem;
             letter-spacing: 1px;
             color: #fff;
-            font-weight: 400; /* Kad skaičiai nebūtų per stori ir išlaikytų tech-look */
+            font-weight: 400;
             padding: 1.5rem 1.2rem;
             border-bottom: 1px solid #151515;
         }
@@ -141,11 +186,14 @@
             .navbar { padding: 1.5rem 1.5rem; }
             .logo a { font-size: 1.3rem !important; }
             .nav-links { position: static; flex-direction: row; justify-content: center; width: 100%; background: #0a0a0a; padding: 1.5rem 0; border-top: 1px solid #111; gap: 2rem; margin-top: auto; }
-            .size-container { padding: 2rem 1.5rem 4rem 1.5rem; }
+            .size-container { padding: 2rem 1.5rem 6rem 1.5rem; }
             .size-title { font-size: 1.4rem; text-align: center; }
-            .info-note { text-align: center; }
+            .product-selector { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 2rem; }
+            .product-card { padding: 0.6rem 0.3rem; }
+            .product-card svg { width: 40px; height: 40px; margin-bottom: 0.4rem; }
+            .product-card .prod-title { font-size: 0.45rem; letter-spacing: 0px; }
             .unit-switcher { justify-content: center; }
-            th, td { padding: 1rem 0.8rem; font-size: 0.7rem; }
+            th, td { padding: 1rem 0.6rem; font-size: 0.65rem; }
             .shop-footer { position: static; flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
             .footer-left { position: static; transform: none; }
             .footer-right { justify-content: center; flex-wrap: wrap; gap: 1rem; }
@@ -162,15 +210,40 @@
 
     <ul class="nav-links">
         <li><a href="shop.html">Shop</a></li>
-        <li><a href="archive.html">Archive</a></li>
         <li><a href="subscribe.html">Sign Up</a></li>
-        <li><a href="size-guide.html">Size Guide</a></li>
+        <li><a href="archive.html">Archive</a></li>
         <li><a href="about.html">About</a></li>
     </ul>
 
     <div class="size-container">
         <h2 class="size-title">SIZE_GUIDE</h2>
-        <p class="info-note">All garments feature a custom oversized crop fit. Measurements are precise to the system standard. We recommend ordering your true size for the intended silhouette.</p>
+        
+        <div class="product-selector">
+            <div class="product-card active" onclick="selectProduct('jersey', this)">
+                <svg viewBox="0 0 100 100"><path d="M20 30 L35 15 L50 25 L65 15 L80 30 L75 50 L75 85 L25 85 L25 50 Z M25 50 L75 50 M35 15 L35 40 M65 15 L65 40"/></svg>
+                <div class="prod-title">Jersey</div>
+            </div>
+            <div class="product-card" onclick="selectProduct('zipup', this)">
+                <svg viewBox="0 0 100 100"><path d="M25 35 L35 15 L65 15 L75 35 L70 85 L30 85 Z M50 15 L50 85 M25 35 L15 70 L25 75 M75 35 L85 70 L75 75"/></svg>
+                <div class="prod-title">Zip Up</div>
+            </div>
+            <div class="product-card" onclick="selectProduct('hoodie', this)">
+                <svg viewBox="0 0 100 100"><path d="M25 35 L35 15 L65 15 L75 35 L70 85 L30 85 Z M35 60 L65 60 L60 75 L40 75 Z M25 35 L15 70 M75 35 L85 70"/></svg>
+                <div class="prod-title">Hoodie</div>
+            </div>
+            <div class="product-card" onclick="selectProduct('crewneck', this)">
+                <svg viewBox="0 0 100 100"><path d="M25 30 L40 20 L60 20 L75 30 L70 85 L30 85 Z M25 30 L15 70 M75 30 L85 70"/></svg>
+                <div class="prod-title">Crewneck</div>
+            </div>
+            <div class="product-card" onclick="selectProduct('tshirt', this)">
+                <svg viewBox="0 0 100 100"><path d="M20 35 L35 25 L65 25 L80 35 L75 85 L25 85 Z M25 45 L75 45"/></svg>
+                <div class="prod-title">T-Shirt</div>
+            </div>
+            <div class="product-card" onclick="selectProduct('pants', this)">
+                <svg viewBox="0 0 100 100"><path d="M30 15 L70 15 L75 85 L52 85 L50 45 L48 85 L25 85 Z M30 30 L70 30"/></svg>
+                <div class="prod-title">Pants</div>
+            </div>
+        </div>
         
         <div class="unit-switcher">
             <button class="unit-btn active" id="metricBtn" onclick="setUnit('metric')">METRIC (CM)</button>
@@ -182,37 +255,13 @@
                 <thead>
                     <tr>
                         <th>Size</th>
-                        <th>Chest <span class="unit-label" id="chestUnit">(CM)</span></th>
-                        <th>Length <span class="unit-label" id="lengthUnit">(CM)</span></th>
-                        <th>Sleeve <span class="unit-label" id="sleeveUnit">(CM)</span></th>
+                        <th id="param1">Chest <span class="unit-label" id="unit1">(CM)</span></th>
+                        <th id="param2">Length <span class="unit-label" id="unit2">(CM)</span></th>
+                        <th id="param3">Sleeve <span class="unit-label" id="unit3">(CM)</span></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="size-cell">S</td>
-                        <td class="convertible" data-cm="62">62</td>
-                        <td class="convertible" data-cm="66">66</td>
-                        <td class="convertible" data-cm="58">58</td>
-                    </tr>
-                    <tr>
-                        <td class="size-cell">M</td>
-                        <td class="convertible" data-cm="65">65</td>
-                        <td class="convertible" data-cm="69">69</td>
-                        <td class="convertible" data-cm="60">60</td>
-                    </tr>
-                    <tr>
-                        <td class="size-cell">L</td>
-                        <td class="convertible" data-cm="68">68</td>
-                        <td class="convertible" data-cm="72">72</td>
-                        <td class="convertible" data-cm="62">62</td>
-                    </tr>
-                    <tr>
-                        <td class="size-cell">XL</td>
-                        <td class="convertible" data-cm="71">71</td>
-                        <td class="convertible" data-cm="75">75</td>
-                        <td class="convertible" data-cm="64">64</td>
-                    </tr>
-                </tbody>
+                <tbody id="sizeTableBody">
+                    </tbody>
             </table>
         </div>
     </div>
@@ -229,45 +278,118 @@
     </footer>
 
     <script>
+        // Tikslūs Broken Planet / Streetwear išmatavimai iš tavo nuotraukų
+        const sizeData = {
+            jersey: {
+                headers: ["Chest", "Length", "Sleeve"],
+                sizes: [
+                    { name: "S", vals: [58, 69, 42] },
+                    { name: "M", vals: [60, 71, 42.5] },
+                    { name: "L", vals: [62, 73, 43] },
+                    { name: "XL", vals: [64, 75, 43.5] }
+                ]
+            },
+            zipup: {
+                headers: ["Chest", "Length", "Sleeve"],
+                sizes: [
+                    { name: "S", vals: [60, 68, 61] },
+                    { name: "M", vals: [63, 70, 62.5] },
+                    { name: "L", vals: [66, 72, 64] },
+                    { name: "XL", vals: [69, 74, 65.5] }
+                ]
+            },
+            hoodie: {
+                headers: ["Chest", "Length", "Sleeve"],
+                sizes: [
+                    { name: "S", vals: [61, 69, 60] },
+                    { name: "M", vals: [64, 71, 61.5] },
+                    { name: "L", vals: [67, 73, 63] },
+                    { name: "XL", vals: [70, 75, 64.5] }
+                ]
+            },
+            crewneck: {
+                headers: ["Chest", "Length", "Sleeve"],
+                sizes: [
+                    { name: "S", vals: [59, 67, 59] },
+                    { name: "M", vals: [62, 69, 60.5] },
+                    { name: "L", vals: [65, 71, 62] },
+                    { name: "XL", vals: [68, 73, 63.5] }
+                ]
+            },
+            tshirt: {
+                headers: ["Chest", "Length", "Sleeve"],
+                sizes: [
+                    { name: "S", vals: [56, 70, 22] },
+                    { name: "M", vals: [58, 72, 23] },
+                    { name: "L", vals: [60, 74, 24] },
+                    { name: "XL", vals: [62, 76, 25] }
+                ]
+            },
+            pants: {
+                headers: ["Waist", "Length", "Inseam"],
+                sizes: [
+                    { name: "S", vals: [38, 104, 74] },
+                    { name: "M", vals: [40, 106, 75] },
+                    { name: "L", vals: [42, 108, 76] },
+                    { name: "XL", vals: [44, 110, 77] }
+                ]
+            }
+        };
+
+        let currentProduct = 'jersey';
+        let currentUnit = 'metric';
+
+        function renderTable() {
+            const prod = sizeData[currentProduct];
+            const tbody = document.getElementById('sizeTableBody');
+            
+            // Atnaujinam stulpelių pavadinimus (pvz., kelnėms reikia Waist vietoj Chest)
+            document.getElementById('param1').firstChild.textContent = prod.headers[0] + " ";
+            document.getElementById('param2').firstChild.textContent = prod.headers[1] + " ";
+            document.getElementById('param3').firstChild.textContent = prod.headers[2] + " ";
+
+            // Atnaujinam matavimo vienetų tekstus viršūnėse
+            const unitTxt = currentUnit === 'metric' ? '(CM)' : '(IN)';
+            document.getElementById('unit1').innerText = unitTxt;
+            document.getElementById('unit2').innerText = unitTxt;
+            document.getElementById('unit3').innerText = unitTxt;
+
+            tbody.innerHTML = "";
+            prod.sizes.forEach(s => {
+                let row = `<tr><td class="size-cell">${s.name}</td>`;
+                s.vals.forEach(val => {
+                    let displayVal = currentUnit === 'metric' ? val : (val / 2.54).toFixed(1);
+                    row += `<td>${displayVal}</td>`;
+                });
+                row += `</tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function selectProduct(prodKey, element) {
+            currentProduct = prodKey;
+            document.querySelectorAll('.product-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+            renderTable();
+        }
+
         function setUnit(unit) {
+            currentUnit = unit;
             const metricBtn = document.getElementById('metricBtn');
             const imperialBtn = document.getElementById('imperialBtn');
-            const cells = document.querySelectorAll('.convertible');
-            
-            const chestUnit = document.getElementById('chestUnit');
-            const lengthUnit = document.getElementById('lengthUnit');
-            const sleeveUnit = document.getElementById('sleeveUnit');
 
             if (unit === 'metric') {
                 metricBtn.classList.add('active');
                 imperialBtn.classList.remove('active');
-                
-                // Pakeičiam stulpelių viršūnių tekstus
-                chestUnit.innerText = '(CM)';
-                lengthUnit.innerText = '(CM)';
-                sleeveUnit.innerText = '(CM)';
-
-                // Atstatom originalias CM reikšmes
-                cells.forEach(cell => {
-                    cell.innerText = cell.getAttribute('data-cm');
-                });
             } else {
                 imperialBtn.classList.add('active');
                 metricBtn.classList.remove('active');
-                
-                // Pakeičiam stulpelių viršūnių tekstus
-                chestUnit.innerText = '(IN)';
-                lengthUnit.innerText = '(IN)';
-                sleeveUnit.innerText = '(IN)';
-
-                // Konvertuojam į colius (cm / 2.54) ir suapvalinam iki 1 skaičiaus po kablelio
-                cells.forEach(cell => {
-                    const cm = parseFloat(cell.getAttribute('data-cm'));
-                    const inches = (cm / 2.54).toFixed(1);
-                    cell.innerText = inches;
-                });
             }
+            renderTable();
         }
+
+        // Pirmas užkrovimas
+        renderTable();
     </script>
 </body>
 </html>
