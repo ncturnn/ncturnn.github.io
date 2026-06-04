@@ -3,10 +3,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SHOP // N★CTURN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght=700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+        body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Syncopate', sans-serif; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         
         /* NAVBAR LOGO IR BAG DEŠINĖJE VIRŠUJE */
@@ -46,8 +46,8 @@
         .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid #151515; font-size: 0.9rem; }
         .cart-item-info h4 { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; margin-bottom: 0.3rem;}
         .cart-item-size { font-size: 0.75rem; color: #666; display: block; margin-bottom: 0.2rem; letter-spacing: 1px; }
-        .cart-item-price { color: #ff007f; font-family: 'Courier New', Courier, monospace; }
-        .remove-item-btn { background: none; border: none; color: #444; cursor: pointer; font-size: 0.8rem; font-family: 'Courier New', Courier, monospace;}
+        .cart-item-price { color: #ff007f; font-family: 'Syncopate', sans-serif; font-weight: 700; }
+        .remove-item-btn { background: none; border: none; color: #444; cursor: pointer; font-size: 0.8rem; font-family: 'Syncopate', sans-serif;}
         .remove-item-btn:hover { color: #ff007f; }
         .cart-footer { border-top: 1px solid #222; padding-top: 2rem; margin-top: 1rem; }
         .cart-total { display: flex; justify-content: space-between; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; margin-bottom: 1.5rem; }
@@ -70,11 +70,11 @@
 
         .product-info { margin-bottom: 1rem; }
         .product-info h3 { font-family: 'Syncopate', sans-serif; font-size: 1rem; letter-spacing: 1px; margin-bottom: 0.5rem; color: #fff; }
-        .price { font-family: 'Courier New', Courier, monospace; font-weight: bold; letter-spacing: 1px; color: #ff007f; font-size: 1.1rem; }
+        .price { font-family: 'Syncopate', sans-serif; font-weight: bold; letter-spacing: 1px; color: #ff007f; font-size: 1.1rem; }
         
         /* DYDŽIŲ PASIRINKIMAS */
         .size-selector { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
-        .size-btn { background: transparent; color: #666; border: 1px solid #222; padding: 0.5rem 0.8rem; font-family: 'Courier New', Courier, monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease; min-width: 40px; text-align: center; }
+        .size-btn { background: transparent; color: #666; border: 1px solid #222; padding: 0.5rem 0.8rem; font-family: 'Syncopate', sans-serif; font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease; min-width: 40px; text-align: center; }
         .size-btn:hover { border-color: #fff; color: #fff; }
         .size-btn.selected { border-color: #ff007f; color: #fff; background: rgba(255, 0, 127, 0.1); text-shadow: 0 0 5px #ff007f; }
 
@@ -86,7 +86,7 @@
         .custom-notification.show { top: 2rem; }
 
         /* FOOTER (PUSLAPIO APAČIA) */
-        .shop-footer { background: #0a0a0a; border-top: 1px solid #111; padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #444; letter-spacing: 1px; position: relative; z-index: 10; margin-top: auto; font-family: 'Courier New', Courier, monospace; }
+        .shop-footer { background: #0a0a0a; border-top: 1px solid #111; padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #444; letter-spacing: 1px; position: relative; z-index: 10; margin-top: auto; font-family: 'Syncopate', sans-serif; }
         .footer-left span { color: #555; }
         .footer-right { display: flex; gap: 2rem; font-family: 'Syncopate', sans-serif; }
         .footer-right a { color: #444; text-decoration: none; transition: color 0.3s; text-transform: uppercase; }
