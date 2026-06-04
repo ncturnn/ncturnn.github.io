@@ -8,27 +8,38 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
-        .logo a { font-size: 2rem !important; font-weight: 700 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
-        .logo a span { color: #ff007f; text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); font-style: normal !important; display: inline-block; }
-        .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
+        .logo a { display: inline-block; text-decoration: none; }
+        .logo img { height: 60px; width: auto; display: block; mix-blend-mode: screen; }
         .nav-links { list-style: none; display: flex; gap: 2rem; }
         .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; transition: color 0.3s; }
         .nav-links a:hover { color: #ff007f; }
         .checkout-container { max-width: 1100px; margin: 0 auto; padding: 3rem 4rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; position: relative; z-index: 1; }
         .checkout-section h2 { font-family: 'Syncopate', sans-serif; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 2rem; border-bottom: 1px solid #222; padding-bottom: 0.5rem; color: #fff; }
+        
+        /* MOKĖJIMO BŪDO PASIRINKIMAS */
+        .payment-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+        .method-btn { background: #0d0d0d; border: 1px solid #222; color: #888; padding: 1rem; font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 1px; cursor: pointer; transition: all 0.3s; text-align: center; }
+        .method-btn:hover { border-color: #ff007f; color: #fff; }
+        .method-btn.active { background: #111; border-color: #ff007f; color: #fff; box-shadow: 0 0 10px rgba(255, 0, 127, 0.2); }
+        
         .form-group { margin-bottom: 1.5rem; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         label { display: block; font-size: 0.75rem; letter-spacing: 1px; color: #666; margin-bottom: 0.5rem; text-transform: uppercase; }
         input { width: 100%; background: #0d0d0d; border: 1px solid #222; padding: 1rem; color: #fff; font-family: 'Courier New', monospace; font-size: 0.9rem; transition: border-color 0.3s; }
         input:focus { outline: none; border-color: #ff007f; }
+        
+        /* PAYPAL SPECIFINIS MYGTUKAS */
+        .paypal-submit-btn { background: #ffc439; color: #012169; font-weight: bold; font-style: italic; }
+        .paypal-submit-btn:hover { background: #f4b41a; box-shadow: 0 0 20px rgba(255, 196, 57, 0.4); }
+
         .order-summary { background: #0d0d0d; border: 1px solid #151515; padding: 2rem; align-self: start; }
         .summary-items { margin-bottom: 2rem; max-height: 250px; overflow-y: auto; }
         .summary-item { display: flex; justify-content: space-between; font-size: 0.9rem; padding: 0.8rem 0; border-bottom: 1px solid #151515; }
         .summary-item h4 { font-family: 'Syncopate', sans-serif; font-size: 0.75rem; color: #aaa; }
         .summary-total { display: flex; justify-content: space-between; font-family: 'Syncopate', sans-serif; font-size: 1rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #222; }
         .total-price { color: #ff007f; text-shadow: 0 0 5px rgba(255, 0, 127, 0.4); }
-        .pay-btn { background: #ff007f; color: #fff; border: none; width: 100%; padding: 1.2rem; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; transition: background 0.3s, box-shadow 0.3s; margin-top: 2rem; }
+        .pay-btn { color: #fff; border: none; width: 100%; padding: 1.2rem; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; transition: background 0.3s, box-shadow 0.3s; margin-top: 2rem; background: #ff007f; }
         .pay-btn:hover { background: #e00070; box-shadow: 0 0 20px rgba(255, 0, 127, 0.6); }
         .success-screen { display: none; text-align: center; padding: 5rem 2rem; max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
         .success-screen h1 { font-family: 'Syncopate', sans-serif; color: #ff007f; font-size: 2.5rem; margin-bottom: 1.5rem; text-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
@@ -40,7 +51,7 @@
 <body>
     <div class="noise-overlay"></div>
     <nav class="navbar">
-        <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
+        <div class="logo"><a href="index.html"><img src="nxturn.png" alt="N★CTURN"></a></div>
         <ul class="nav-links">
             <li><a href="shop.html">Shop</a></li>
             <li><a href="archive.html">Archive</a></li>
@@ -50,7 +61,13 @@
 
     <main class="checkout-container" id="checkoutMain">
         <div class="checkout-section">
-            <h2>SHIPPING_&_PAYMENT</h2>
+            <h2>SELECT_METHOD</h2>
+            <div class="payment-methods">
+                <button class="method-btn active" id="methodCard" onclick="setPaymentMethod('card')">CREDIT_CARD</button>
+                <button class="method-btn" id="methodPaypal" onclick="setPaymentMethod('paypal')">PAYPAL</button>
+            </div>
+
+            <h2>SHIPPING_DETAILS</h2>
             <form id="paymentForm" onsubmit="handlePayment(event)">
                 <div class="form-group">
                     <label>Email Address</label>
@@ -65,22 +82,25 @@
                     <input type="text" required placeholder="Street name, Apt, City, Postal Code">
                 </div>
                 
-                <h2 style="margin-top: 3rem;">CARD_DETAILS</h2>
-                <div class="form-group">
-                    <label>Card Number</label>
-                    <input type="text" required maxlength="19" placeholder="0000 0000 0000 0000" id="cardNum">
-                </div>
-                <div class="form-row">
+                <div id="cardDetailsZone">
+                    <h2 style="margin-top: 3rem;">CARD_DETAILS</h2>
                     <div class="form-group">
-                        <label>Expiry Date</label>
-                        <input type="text" required maxlength="5" placeholder="MM/YY" id="cardExpiry">
+                        <label>Card Number</label>
+                        <input type="text" maxlength="19" placeholder="0000 0000 0000 0000" id="cardNum" class="card-required">
                     </div>
-                    <div class="form-group">
-                        <label>CVV</label>
-                        <input type="password" required maxlength="3" placeholder="***" id="cardCvv">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Expiry Date</label>
+                            <input type="text" maxlength="5" placeholder="MM/YY" id="cardExpiry" class="card-required">
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="password" maxlength="3" placeholder="***" id="cardCvv" class="card-required">
+                        </div>
                     </div>
                 </div>
-                <button type="submit" class="pay-btn">AUTHORIZE_PAYMENT</button>
+
+                <button type="submit" class="pay-btn" id="mainSubmitBtn">AUTHORIZE_PAYMENT</button>
             </form>
         </div>
 
@@ -104,6 +124,8 @@
         let cart = JSON.parse(localStorage.getItem('nocturn_cart')) || [];
         const summaryItems = document.getElementById('summaryItems');
         const summaryTotal = document.getElementById('summaryTotal');
+        
+        let currentMethod = 'card';
 
         function renderSummary() {
             if (cart.length === 0) {
@@ -124,10 +146,50 @@
             summaryTotal.innerText = `$${total.toFixed(2)}`;
         }
 
+        // PERJUNGIMAS TARP KORTELĖS IR PAYPAL
+        function setPaymentMethod(method) {
+            currentMethod = method;
+            const cardBtn = document.getElementById('methodCard');
+            const paypalBtn = document.getElementById('methodPaypal');
+            const cardZone = document.getElementById('cardDetailsZone');
+            const submitBtn = document.getElementById('mainSubmitBtn');
+            const cardInputs = document.querySelectorAll('.card-required');
+
+            if (method === 'card') {
+                cardBtn.classList.add('active');
+                paypalBtn.classList.remove('active');
+                cardZone.style.display = 'block';
+                
+                // Padarom korteles laukus privalomus
+                cardInputs.forEach(input => input.required = true);
+                
+                // Atstatom mygtuko stilių
+                submitBtn.innerText = "AUTHORIZE_PAYMENT";
+                submitBtn.className = "pay-btn";
+            } else {
+                paypalBtn.classList.add('active');
+                cardBtn.classList.remove('active');
+                cardZone.style.display = 'none';
+                
+                // Nuimam reikalavimą kortelės laukams
+                cardInputs.forEach(input => input.required = false);
+                
+                // Pakeičiam mygtuką į geltoną PayPal stilių
+                submitBtn.innerText = "PayPal Checkout";
+                submitBtn.className = "pay-btn paypal-submit-btn";
+            }
+        }
+
         function handlePayment(event) {
             event.preventDefault();
-            const payBtn = document.querySelector('.pay-btn');
-            payBtn.innerText = "CONNECTING_TO_GATEWAY...";
+            const payBtn = document.getElementById('mainSubmitBtn');
+            
+            if (currentMethod === 'card') {
+                payBtn.innerText = "CONNECTING_TO_GATEWAY...";
+            } else {
+                payBtn.innerText = "REDIRECTING TO PAYPAL...";
+            }
+            
             payBtn.disabled = true;
 
             setTimeout(() => {
@@ -144,6 +206,8 @@
             e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{2})/, '$1/').trim();
         });
 
+        // Pradiniai nustatymai
+        setPaymentMethod('card');
         renderSummary();
     </script>
 </body>
