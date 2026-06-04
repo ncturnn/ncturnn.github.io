@@ -51,6 +51,29 @@
         .success-screen p { color: #888; line-height: 1.8; margin-bottom: 3rem; }
         .back-home-btn { background: transparent; color: #fff; border: 2px solid #fff; padding: 1rem 2.5rem; font-family: 'Syncopate', sans-serif; font-size: 0.85rem; text-decoration: none; transition: all 0.3s; }
         .back-home-btn:hover { background: #fff; color: #0a0a0a; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+
+        /* MOBILIŲJŲ TELEFONŲ PRITAIKYMAS (IPHONE 14 PRO IR KT.) */
+        @media (max-width: 768px) {
+            .navbar { padding: 1.5rem 1.5rem; flex-direction: column; gap: 1.5rem; text-align: center; }
+            .logo a { font-size: 1.3rem; letter-spacing: 2px; }
+            .nav-links { gap: 1.5rem; }
+            
+            .checkout-container { grid-template-columns: 1fr; gap: 3rem; padding: 2rem 1.5rem; }
+            .checkout-section h2 { font-size: 1.1rem; margin-bottom: 1.5rem; }
+            
+            .payment-methods { gap: 0.5rem; margin-bottom: 2rem; }
+            .method-btn { padding: 0.8rem; font-size: 0.7rem; }
+            
+            input { padding: 0.8rem; font-size: 0.85rem; }
+            .form-row { gap: 0.5rem; }
+            
+            .order-summary { padding: 1.5rem; }
+            .pay-btn { padding: 1rem; font-size: 0.8rem; }
+            
+            .success-screen { padding: 4rem 1.5rem; }
+            .success-screen h1 { font-size: 1.6rem; }
+            .success-screen p { font-size: 0.85rem; margin-bottom: 2.5rem; }
+        }
     </style>
 </head>
 <body>
@@ -124,7 +147,7 @@
         <h1>ORDER_CONFIRMED</h1>
         <p>YOUR TRANSACTION WAS SUCCESSFUL. THE SYSTEM IS PROCESSING DROP 001 ORDER BLUEPRINTS. A CONFIRMATION ENVELOPE WILL BE SENT TO YOUR DIGITAL TERMINAL SHORTLY.</p>
         <a href="index.html" class="back-home-btn">RETURN TO THE VOID</a>
-    </div>
+    </div >
 
     <script>
         let cart = JSON.parse(localStorage.getItem('nocturn_cart')) || [];
@@ -193,7 +216,6 @@
             document.getElementById('successScreen').style.display = 'block';
         }
 
-        // INTEGRUOTA TIKRA PAYPAL LOGIKA (VALIUTA: EUR)
         if (typeof paypal !== 'undefined') {
             paypal.Buttons({
                 style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'checkout' },
