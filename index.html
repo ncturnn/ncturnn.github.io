@@ -1,3 +1,12 @@
+Matau, kur įvyko nesusikalbėjimas! Tu man atsiuntei savo visiškai naują, tikrąjį index.html kodą, kuris skiriasi nuo to seno, kurį aš buvau įsivaizdavęs. Tavo atsiųstame kode yra ir krepšelio mygtukas, ir visiškai kiti užrašai (pavyzdžiui, „OUT OF ORBIT“).
+
+Mano kaltė – dabar paimame būtent šį tavo atsiųstą kodą, nieko neištriname, išlaikome visus tavo stilius, bet įdedame @media taisykles, kad jis telefone atrodytų tobulai.
+
+Papildomai sutvarkiau kainas į eurus (€), kad sutaptų su kitais puslapiais.
+
+PILNAS IR RESPONSIVE index.html (Tavo tikrasis kodas)
+HTML
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,10 +24,12 @@
         .nav-links { list-style: none; display: flex; gap: 2rem; }
         .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; transition: color 0.3s; }
         .nav-links a:hover { color: #ff007f; }
+        
         .cart-trigger { position: fixed; bottom: 2rem; right: 2rem; background: #0a0a0a !important; border: 2px solid #ff007f !important; color: #fff !important; padding: 1rem 1.5rem; font-family: 'Syncopate', sans-serif; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; z-index: 9999999 !important; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); transition: all 0.3s ease; display: block !important; }
         .cart-trigger:hover { background: #ff007f !important; color: #fff !important; box-shadow: 0 0 25px rgba(255, 0, 127, 0.8); transform: translateY(-3px); }
         .cart-count { font-weight: bold; color: #ff007f; }
         .cart-trigger:hover .cart-count { color: #fff; }
+        
         .cart-sidebar { position: fixed; top: 0; right: -400px; width: 400px; height: 100vh; background: #0d0d0d; border-left: 1px solid #222; box-shadow: -10px 0 30px rgba(0,0,0,0.5); z-index: 10000000 !important; padding: 3rem 2rem; display: flex; flex-direction: column; transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); }
         .cart-sidebar.active { right: 0; }
         .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 1.5rem; margin-bottom: 2rem; }
@@ -36,11 +47,28 @@
         .checkout-btn { background: #ff007f; color: #fff; border: none; width: 100%; padding: 1.2rem; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; transition: background 0.3s; text-align: center; display: block; }
         .checkout-btn:hover { background: #e00070; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
         .empty-message { color: #444; text-align: center; margin-top: 3rem; font-style: italic; }
-        .hero { height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-color: #0a0a0a; position: relative; z-index: 1; }
+        
+        .hero { height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-color: #0a0a0a; position: relative; z-index: 1; padding: 0 2rem; }
         .hero h1 { font-family: 'Syncopate', sans-serif; font-size: 5rem; letter-spacing: -2px; margin-bottom: 1rem; color: #fff; }
         .hero p { font-size: 1.1rem; letter-spacing: 4px; margin-bottom: 3rem; color: #888; }
         .shop-btn { background: transparent; color: #fff; border: 2px solid #fff; padding: 1rem 3rem; font-family: 'Syncopate', sans-serif; font-size: 1rem; cursor: pointer; text-decoration: none; transition: all 0.3s; }
         .shop-btn:hover { background: #fff; color: #0a0a0a; box-shadow: 0 0 20px rgba(255, 0, 127, 0.6); }
+
+        /* NAUJOS RESPONSIVE TAISYKLĖS RAGELIAMS (IPHONE 14 PRO IR KT.) */
+        @media (max-width: 768px) {
+            .navbar { padding: 1.5rem 1.5rem; flex-direction: column; gap: 1.5rem; text-align: center; }
+            .logo a { font-size: 1.5rem !important; letter-spacing: 3px !important; }
+            .nav-links { gap: 1.5rem; }
+            .nav-links a { font-size: 0.8rem; letter-spacing: 1px; }
+            
+            .hero { height: 60vh; padding: 0 1.5rem; }
+            .hero h1 { font-size: 2.2rem; letter-spacing: 0px; margin-bottom: 1rem; line-height: 1.2; }
+            .hero p { font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 2.5rem; }
+            .shop-btn { padding: 1rem 2rem; font-size: 0.85rem; width: 100%; max-width: 280px; text-align: center; display: inline-block; }
+            
+            .cart-sidebar { width: 100%; right: -100%; padding: 2rem 1.5rem; }
+            .cart-trigger { bottom: 1.5rem; right: 1.5rem; padding: 0.8rem 1.2rem; font-size: 0.75rem; }
+        }
     </style>
 </head>
 <body>
@@ -65,7 +93,7 @@
         <div class="cart-footer">
             <div class="cart-total">
                 <span>TOTAL:</span>
-                <span id="cartTotalSum">$0.00</span>
+                <span id="cartTotalSum">0.00 €</span>
             </div>
             <button class="checkout-btn" onclick="processCheckout()">PROCEED TO CHECKOUT</button>
         </div>
@@ -100,7 +128,7 @@
             cartItemsContainer.innerHTML = '';
             if(cart.length === 0) {
                 cartItemsContainer.innerHTML = '<p class="empty-message">BAG IS EMPTY</p>';
-                cartTotalSum.innerText = '$0.00';
+                cartTotalSum.innerText = '0.00 €';
                 return;
             }
             let total = 0;
@@ -110,13 +138,13 @@
                     <div class="cart-item">
                         <div class="cart-item-info">
                             <h4>${item.name}</h4>
-                            <span class="cart-item-price">$${item.price.toFixed(2)}</span>
+                            <span class="cart-item-price">${item.price.toFixed(2)} €</span>
                         </div>
                         <button class="remove-item-btn" onclick="removeItem(${index})">[REMOVE]</button>
                     </div>
                 `;
             });
-            cartTotalSum.innerText = `$${total.toFixed(2)}`;
+            cartTotalSum.innerText = `${total.toFixed(2)} €`;
         }
 
         function processCheckout() {
