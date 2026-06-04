@@ -7,17 +7,21 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        /* JUDANTIS FONAS (MOVING BACKGROUND) */
         body { 
-            background-color: #050505 !important; 
+            background-color: #0a0a0a !important; 
             color: #f0f0f0; 
             font-family: 'Courier New', Courier, monospace; 
             overflow: hidden; 
             height: 100vh;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4rem 2rem;
         }
 
-        /* Skaitmeninis judantis tinklelis fone */
+        /* JUDANTIS FONAS */
         body::before {
             content: "";
             position: absolute;
@@ -25,113 +29,140 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(rgba(18, 18, 18, 0.3) 2px, transparent 2px),
-                        linear-gradient(90deg, rgba(18, 18, 18, 0.3) 2px, transparent 2px);
-            background-size: 50px 50px;
+            background: linear-gradient(rgba(15, 15, 15, 0.4) 2px, transparent 2px),
+                        linear-gradient(90deg, rgba(15, 15, 15, 0.4) 2px, transparent 2px);
+            background-size: 60px 60px;
             background-position: center;
             transform: perspective(500px) rotateX(60deg);
-            animation: gridMove 20s linear infinite;
+            animation: gridMove 25s linear infinite;
             z-index: 0;
         }
 
-        .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.05; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
+        .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         
-        /* CENTRINIS KONTEINERIS */
-        .hero-container { 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            text-align: center; 
-            position: relative; 
-            z-index: 1;
-            padding: 0 2rem; 
+        /* LOGO VIRŠUJE PER VIDURĮ */
+        .header-logo {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        .header-logo a { 
+            font-family: 'Syncopate', sans-serif;
+            font-size: 2.5rem; 
+            font-weight: 700; 
+            letter-spacing: 8px; 
+            color: #ffffff; 
+            text-decoration: none; 
+            display: inline-block; 
+            font-style: italic; 
         }
         
-        .system-status { 
-            font-size: 0.8rem; 
-            letter-spacing: 5px; 
-            color: #333; 
-            margin-bottom: 3rem; 
-            text-transform: uppercase; 
-        }
-        .system-status span { 
-            color: #666; 
-            animation: pulse 2s infinite;
+        /* ROŽINĖS ŽVAIGŽDĖS BREATHING (KVĖPAVIMO) EFEKTAS */
+        .header-logo a span { 
+            color: #ff007f; 
+            font-style: normal; 
+            display: inline-block;
+            animation: starBreathe 3s ease-in-out infinite;
         }
 
-        /* NEON BLACK MYGTUKAS */
+        /* CENTRINIS KONTEINERIS SU MYGTUKU */
+        .main-content { 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* NEON BLACK ENTRANCE MYGTUKAS */
         .void-btn { 
             background: #000000; 
-            border: 1px solid #222; 
+            border: 1px solid #1a1a1a; 
             color: #ffffff; 
             font-family: 'Syncopate', sans-serif; 
-            font-size: 1.6rem; 
+            font-size: 1.3rem; 
             font-style: italic; 
             font-weight: 700; 
-            letter-spacing: 10px; 
-            padding: 2rem 4.5rem; 
+            letter-spacing: 8px; 
+            padding: 1.8rem 4rem; 
             cursor: pointer; 
             text-decoration: none; 
-            position: relative;
-            outline: none;
-            /* Tamsus, neoninis švytėjimas */
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.02);
-            transition: all 0.5s cubic-bezier(0.15, 0.85, 0.3, 1);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.02);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         
         .void-btn:hover { 
-            color: #ffffff;
             border-color: #ffffff;
             background: #050505;
-            /* Intensyvesnis tamsaus neono (neon black/white) efektas */
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.1);
-            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+            transform: scale(1.03);
         }
 
-        /* TERMINALO DETALĖS APAČIOJE */
-        .terminal-logs { position: absolute; bottom: 3rem; left: 3rem; font-size: 0.7rem; color: #1a1a1a; text-align: left; line-height: 1.6; letter-spacing: 1px; }
-        .live-timer { position: absolute; bottom: 3rem; right: 3rem; font-size: 0.8rem; color: #222; letter-spacing: 3px; }
+        /* APATINĖS TERMINALO DETALĖS */
+        .footer-terminal {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            position: relative;
+            z-index: 10;
+        }
+        .terminal-text { font-size: 0.7rem; color: #222; letter-spacing: 1px; text-transform: uppercase; }
+        .live-timer { font-size: 0.8rem; color: #222; letter-spacing: 2px; }
 
         /* ANIMACIJOS */
         @keyframes gridMove {
             0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
-            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(60px); }
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 0.8; }
+        /* KVĖPAVIMO EFEKTO LOGIKA */
+        @keyframes starBreathe {
+            0%, 100% { 
+                transform: scale(1); 
+                text-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.4);
+            }
+            50% { 
+                transform: scale(1.15); 
+                text-shadow: 0 0 18px rgba(255, 0, 127, 1), 0 0 35px rgba(255, 0, 127, 0.8);
+            }
         }
 
-        /* RESPONSIVE DIZAINAS TELEFONAMS */
+        /* PRITAIKYMAS RAGELIUI (RESPONSIVE) */
         @media (max-width: 768px) {
-            .system-status { font-size: 0.65rem; letter-spacing: 3px; margin-bottom: 2rem; }
-            .void-btn { font-size: 1rem; letter-spacing: 5px; padding: 1.5rem 2.5rem; width: 85%; max-width: 300px; }
-            .terminal-logs { left: 1.5rem; bottom: 2rem; display: none; } /* Paslepiam ant mobilaus, kad nebūtų netvarkos */
-            .live-timer { right: 0; left: 0; text-align: center; bottom: 2rem; font-size: 0.7rem; }
+            body { padding: 3rem 1.5rem 2rem 1.5rem; }
+            
+            .header-logo a { font-size: 1.6rem; letter-spacing: 4px; }
+            
+            .void-btn { font-size: 0.95rem; letter-spacing: 5px; padding: 1.5rem 2.5rem; width: 90%; max-width: 290px; text-align: center; }
+            
+            .footer-terminal { flex-direction: column; gap: 1rem; text-align: center; }
+            .terminal-text { display: none; } /* Paslepiam, kad ant mobilaus ekrano būtų idealus minimalizmas */
+            .live-timer { font-size: 0.75rem; color: #333; }
         }
     </style>
 </head>
 <body>
     <div class="noise-overlay"></div>
 
-    <main class="hero-container">
-        <div class="system-status">STATUS: <span>CONNECTION_RESTRICTED</span></div>
-        
+    <header class="header-logo">
+        <a href="shop.html">N<span>★</span>CTURN</a>
+    </header>
+
+    <main class="main-content">
         <a href="shop.html" class="void-btn">ENTER_VOID</a>
-
-        <div class="terminal-logs">
-            <p>> OVERRIDE SUCCESSFUL.</p>
-            <p>> NOCTURN SERVER ONLINE // PORT_8080</p>
-        </div>
-
-        <div class="live-timer" id="liveTimer">00:00:00:00</div>
     </main>
 
+    <footer class="footer-terminal">
+        <div class="terminal-text">> SYSTEM_READY // ACCESS_GRANTED</div>
+        <div class="live-timer" id="liveTimer">00:00:00:00</div>
+    </footer>
+
     <script>
-        // Laikrodis, kuris sukasi fone realiu laiku
         function updateTimer() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
