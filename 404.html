@@ -1,0 +1,200 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM FAILURE // N★CTURN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: #0a0a0a !important; 
+            color: #f0f0f0; 
+            font-family: 'Syncopate', sans-serif; 
+            font-weight: 700; 
+            overflow: hidden; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            position: relative;
+        }
+        
+        /* CRT scanline ir noise efektai */
+        .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 6px 100%;
+            z-index: 9998;
+            pointer-events: none;
+        }
+
+        /* NAVBAR */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; background-color: #0a0a0a; position: relative; z-index: 10; }
+        .logo a { font-size: 2rem !important; font-weight: 800 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
+        .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
+        .logo a span { 
+            color: #ff007f; 
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); 
+            font-style: normal !important; 
+            display: inline-block;
+            animation: starBreathe 3s ease-in-out infinite;
+        }
+
+        .cart-trigger { background: #0a0a0a !important; border: 2px solid #ff007f !important; color: #fff !important; padding: 0.8rem 1.5rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); transition: all 0.3s ease; }
+        .cart-trigger:hover { background: #ff007f !important; color: #fff !important; box-shadow: 0 0 25px rgba(255, 0, 127, 0.8); }
+
+        /* NAV LINKS KAIRĖJE */
+        .nav-links { position: fixed; bottom: 2rem; left: 4rem; list-style: none; display: flex; flex-direction: column; gap: 1rem; z-index: 9999; text-transform: uppercase; }
+        .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s ease; display: inline-block; }
+        .nav-links a:hover { color: #ff007f; transform: translateX(5px); }
+
+        /* CENTRINIS GLITCH BLOKAS */
+        .error-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            z-index: 5;
+        }
+
+        .glitch-code {
+            font-size: 6rem;
+            font-weight: 800;
+            letter-spacing: 10px;
+            color: #fff;
+            position: relative;
+            animation: glitch 1s linear infinite;
+        }
+        .glitch-code::before, .glitch-code::after {
+            content: '404';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+        }
+        .glitch-code::before {
+            text-shadow: -2px 0 #ff007f;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .glitch-code::after {
+            text-shadow: -2px 0 #00ffff;
+            clip: rect(85px, 450px, 140px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        .error-msg {
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            color: #666;
+            margin-top: 1rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+        }
+        .error-msg span {
+            color: #ff007f;
+            animation: blink 1s infinite;
+        }
+
+        /* GRIEŽTAS MYGTUKAS */
+        .return-btn {
+            background: none;
+            border: 1px dashed #444;
+            color: #fff;
+            padding: 1rem 2rem;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        .return-btn:hover {
+            border-style: solid;
+            border-color: #ff007f;
+            color: #ff007f;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
+        }
+
+        /* FOOTERIS */
+        .shop-footer { background: #0a0a0a; border-top: 1px solid #111; padding: 3rem 4rem; display: flex; justify-content: flex-end; align-items: center; font-size: 0.7rem; color: #444; letter-spacing: 1px; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 10; font-family: 'Syncopate', sans-serif; font-weight: 700; }
+        .footer-left { position: absolute; left: 50%; transform: translateX(-50%); text-align: center; white-space: nowrap; }
+        .footer-left span { color: #555; }
+        .footer-right { display: flex; gap: 2rem; }
+        .footer-right a { color: #444; text-decoration: none; transition: color 0.3s; text-transform: uppercase; }
+        .footer-right a:hover { color: #ff007f; }
+
+        /* ANIMACIJOS */
+        @keyframes starBreathe {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.4); }
+            50% { transform: scale(1.15); text-shadow: 0 0 18px rgba(255, 0, 127, 1), 0 0 35px rgba(255, 0, 127, 0.8); }
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        @keyframes glitch-anim {
+            0% { clip: rect(15px, 9999px, 66px, 0); }
+            100% { clip: rect(34px, 9999px, 55px, 0); }
+        }
+        @keyframes glitch-anim2 {
+            0% { clip: rect(70px, 9999px, 105px, 0); }
+            100% { clip: rect(12px, 9999px, 85px, 0); }
+        }
+
+        /* MOBILUS IŠDĖSTYMAS */
+        @media (max-width: 768px) {
+            body { overflow-y: auto; }
+            .navbar { padding: 1.5rem 1.5rem; }
+            .logo a { font-size: 1.3rem !important; }
+            .nav-links { position: static; flex-direction: row; justify-content: center; width: 100%; background: #0a0a0a; padding: 1.5rem 0; border-top: 1px solid #111; gap: 2rem; margin-top: auto; }
+            .error-container { margin-top: 4rem; margin-bottom: 4rem; }
+            .glitch-code { font-size: 4rem; letter-spacing: 5px; }
+            .error-msg { font-size: 0.65rem; letter-spacing: 2px; }
+            .shop-footer { position: static; flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+            .footer-left { position: static; transform: none; }
+            .footer-right { justify-content: center; flex-wrap: wrap; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    <div class="scanlines"></div>
+    
+    <nav class="navbar">
+        <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
+        <button class="cart-trigger">BAG (0)</button>
+    </nav>
+
+    <ul class="nav-links">
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="subscribe.html">Sign Up</a></li>
+        <li><a href="archive.html">Archive</a></li>
+        <li><a href="about.html">About</a></li>
+    </ul>
+
+    <div class="error-container">
+        <div class="glitch-code">404</div>
+        <div class="error-msg">SYSTEM_ERROR: REQUESTED_LINK_NOT_FOUND <span>_</span></div>
+        <a href="index.html" class="return-btn">RETURN_TO_LOBBY</a>
+    </div>
+
+    <footer class="shop-footer">
+        <div class="footer-left">
+            <span>&copy; 2026 N★CTURN. ALL RIGHTS RESERVED.</span>
+        </div>
+        <div class="footer-right">
+            <a href="https://www.instagram.com/ncturn_n/" target="_blank">Instagram</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
+    </footer>
+</body>
+</html>
