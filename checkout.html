@@ -5,7 +5,7 @@
     <title>CHECKOUT // N★CTURN</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
     
-    <script src="https://www.paypal.com/sdk/js?client-id=AVgqVrJ0kfH1BqeSTXdLxhpD1vGuBZEMsS8Xg3fjJIqaBQ9SopfLdWRdEUhqJCRU4-3YO_vczuPea1Oc&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AVgqVrJ0kfH1BqeSTXdLxhpD1vGuBZEMsS8Xg3fjJIqaBQ9SopfLdWRdEUhqJCRU4-3YO_vczuPea1Oc&currency=EUR"></script>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,17 +13,7 @@
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
         
-        /* INTERAKTYVUS TEKSTINIS LOGOTIPAS (JOKIŲ SULŪŽUSIŲ PAVEIKSLIUKŲ) */
-        .logo a { 
-            font-family: 'Syncopate', sans-serif; 
-            font-size: 1.4rem; 
-            letter-spacing: 3px; 
-            color: #fff; 
-            text-decoration: none; 
-            font-weight: 700;
-            transition: transform 0.3s ease;
-            display: inline-block;
-        }
+        .logo a { font-family: 'Syncopate', sans-serif; font-size: 1.4rem; letter-spacing: 3px; color: #fff; text-decoration: none; font-weight: 700; transition: transform 0.3s ease; display: inline-block; }
         .logo a span { color: #ff007f; transition: color 0.3s ease; }
         .logo a:hover { transform: scale(1.05); }
         .logo a:hover span { color: #fff; text-shadow: 0 0 10px #ff007f; }
@@ -45,7 +35,6 @@
         input { width: 100%; background: #0d0d0d; border: 1px solid #222; padding: 1rem; color: #fff; font-family: 'Courier New', monospace; font-size: 0.9rem; transition: border-color 0.3s; }
         input:focus { outline: none; border-color: #ff007f; }
         
-        /* PAYPAL MYGTUKŲ KONTEINERIS */
         #paypalButtonContainer { display: none; margin-top: 2rem; min-height: 150px; position: relative; z-index: 50; }
 
         .order-summary { background: #0d0d0d; border: 1px solid #151515; padding: 2rem; align-self: start; }
@@ -67,9 +56,7 @@
 <body>
     <div class="noise-overlay"></div>
     <nav class="navbar">
-        <div class="logo">
-            <a href="index.html">N<span>★</span>CTURN</a>
-        </div>
+        <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
         <ul class="nav-links">
             <li><a href="shop.html">Shop</a></li>
             <li><a href="archive.html">Archive</a></li>
@@ -128,7 +115,7 @@
             <div class="summary-items" id="summaryItems"></div>
             <div class="summary-total">
                 <span>TOTAL TO PAY:</span>
-                <span class="total-price" id="summaryTotal">$0.00</span>
+                <span class="total-price" id="summaryTotal">0.00 €</span>
             </div>
         </div>
     </main>
@@ -159,11 +146,11 @@
                 summaryItems.innerHTML += `
                     <div class="summary-item">
                         <h4>${item.name}</h4>
-                        <span>$${item.price.toFixed(2)}</span>
+                        <span>${item.price.toFixed(2)} €</span>
                     </div>
                 `;
             });
-            summaryTotal.innerText = `$${calculateTotal()}`;
+            summaryTotal.innerText = `${calculateTotal()} €`;
         }
 
         function setPaymentMethod(method) {
@@ -206,7 +193,7 @@
             document.getElementById('successScreen').style.display = 'block';
         }
 
-        // TIKRA PAYPAL LOGIKA
+        // INTEGRUOTA TIKRA PAYPAL LOGIKA (VALIUTA: EUR)
         if (typeof paypal !== 'undefined') {
             paypal.Buttons({
                 style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'checkout' },
@@ -222,7 +209,7 @@
                 },
                 createOrder: function(data, actions) {
                     return actions.order.create({
-                        purchase_units: [{ amount: { value: calculateTotal() } }]
+                        purchase_units: [{ amount: { currency_code: 'EUR', value: calculateTotal() } }]
                     });
                 },
                 onApprove: function(data, actions) {
