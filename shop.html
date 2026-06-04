@@ -45,6 +45,7 @@
         .cart-items-container { flex: 1; overflow-y: auto; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid #151515; font-size: 0.9rem; }
         .cart-item-info h4 { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; margin-bottom: 0.3rem;}
+        .cart-item-size { font-size: 0.75rem; color: #666; display: block; margin-bottom: 0.2rem; letter-spacing: 1px; }
         .cart-item-price { color: #ff007f; }
         .remove-item-btn { background: none; border: none; color: #444; cursor: pointer; font-size: 0.8rem;}
         .remove-item-btn:hover { color: #ff007f; }
@@ -61,9 +62,16 @@
         .product-card { background: #0b0b0b; border: 1px solid #151515; padding: 1rem; position: relative; transition: border 0.3s ease; }
         .product-card:hover { border: 1px solid #333; }
         .image-placeholder { width: 100%; height: 400px; background: #121212; display: flex; justify-content: center; align-items: center; color: #444; font-size: 0.8rem; letter-spacing: 2px; border: 1px dashed #222; margin-bottom: 1.5rem; text-transform: uppercase; }
-        .product-info { margin-bottom: 1.5rem; }
+        .product-info { margin-bottom: 1rem; }
         .product-info h3 { font-family: 'Syncopate', sans-serif; font-size: 1rem; letter-spacing: 1px; margin-bottom: 0.5rem; color: #fff; }
         .price { font-weight: bold; letter-spacing: 1px; color: #ff007f; font-size: 1.1rem; }
+        
+        /* DYDŽIŲ PASIRINKIMO STILIUS */
+        .size-selector { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .size-btn { background: transparent; color: #666; border: 1px solid #222; padding: 0.5rem 0.8rem; font-family: monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease; min-width: 40px; text-align: center; }
+        .size-btn:hover { border-color: #fff; color: #fff; }
+        .size-btn.selected { border-color: #ff007f; color: #fff; background: rgba(255, 0, 127, 0.1); text-shadow: 0 0 5px #ff007f; }
+
         .add-to-bag-btn { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 1rem; font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; }
         .add-to-bag-btn:hover { background: #fff; color: #000; border-color: #fff; }
 
@@ -118,41 +126,67 @@
     <section class="products-section">
         <h2 class="section-title">DROP_001 // PROTOTYPES</h2>
         <div class="product-grid">
-            <div class="product-card">
+            
+            <div class="product-card" id="prod-1">
                 <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
                 <div class="product-info">
                     <h3>GRAPHIC TEE</h3>
                     <div class="price">40.00 €</div>
                 </div>
-                <button class="add-to-bag-btn" onclick="addToCart('GRAPHIC TEE', 40.00)">ADD TO BAG</button>
+                <div class="size-selector">
+                    <button class="size-btn" onclick="selectSize(this, 'S')">S</button>
+                    <button class="size-btn" onclick="selectSize(this, 'M')">M</button>
+                    <button class="size-btn" onclick="selectSize(this, 'L')">L</button>
+                    <button class="size-btn" onclick="selectSize(this, 'XL')">XL</button>
+                </div>
+                <button class="add-to-bag-btn" onclick="handleAddToCart('prod-1', 'GRAPHIC TEE', 40.00)">ADD TO BAG</button>
             </div>
             
-            <div class="product-card">
+            <div class="product-card" id="prod-2">
                 <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
                 <div class="product-info">
                     <h3>THERMAL LONG SLEEVE</h3>
                     <div class="price">50.00 €</div>
                 </div>
-                <button class="add-to-bag-btn" onclick="addToCart('THERMAL LONG SLEEVE', 50.00)">ADD TO BAG</button>
+                <div class="size-selector">
+                    <button class="size-btn" onclick="selectSize(this, 'S')">S</button>
+                    <button class="size-btn" onclick="selectSize(this, 'M')">M</button>
+                    <button class="size-btn" onclick="selectSize(this, 'L')">L</button>
+                    <button class="size-btn" onclick="selectSize(this, 'XL')">XL</button>
+                </div>
+                <button class="add-to-bag-btn" onclick="handleAddToCart('prod-2', 'THERMAL LONG SLEEVE', 50.00)">ADD TO BAG</button>
             </div>
 
-            <div class="product-card">
+            <div class="product-card" id="prod-3">
                 <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
                 <div class="product-info">
                     <h3>HEAVYWEIGHT HOODIE</h3>
                     <div class="price">75.00 €</div>
                 </div>
-                <button class="add-to-bag-btn" onclick="addToCart('HEAVYWEIGHT HOODIE', 75.00)">ADD TO BAG</button>
+                <div class="size-selector">
+                    <button class="size-btn" onclick="selectSize(this, 'S')">S</button>
+                    <button class="size-btn" onclick="selectSize(this, 'M')">M</button>
+                    <button class="size-btn" onclick="selectSize(this, 'L')">L</button>
+                    <button class="size-btn" onclick="selectSize(this, 'XL')">XL</button>
+                </div>
+                <button class="add-to-bag-btn" onclick="handleAddToCart('prod-3', 'HEAVYWEIGHT HOODIE', 75.00)">ADD TO BAG</button>
             </div>
 
-            <div class="product-card">
+            <div class="product-card" id="prod-4">
                 <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
                 <div class="product-info">
                     <h3>LOGO BEANIE</h3>
-                    <div class="price">0.17 €</div>
+                    <div class="price">25.00 €</div>
                 </div>
-                <button class="add-to-bag-btn" onclick="addToCart('LOGO BEANIE', 0.17)">ADD TO BAG</button>
+                <div class="size-selector">
+                    <button class="size-btn" onclick="selectSize(this, 'S')">S</button>
+                    <button class="size-btn" onclick="selectSize(this, 'M')">M</button>
+                    <button class="size-btn" onclick="selectSize(this, 'L')">L</button>
+                    <button class="size-btn" onclick="selectSize(this, 'XL')">XL</button>
+                </div>
+                <button class="add-to-bag-btn" onclick="handleAddToCart('prod-4', 'LOGO BEANIE', 25.00)">ADD TO BAG</button>
             </div>
+            
         </div>
     </section>
 
@@ -165,12 +199,46 @@
         const cartCount = document.getElementById('cartCount');
         const cartTotalSum = document.getElementById('cartTotalSum');
 
+        // Laikinai saugomi pasirinkti dydžiai pagal prekės kortelės ID
+        let selectedSizes = {};
+
         cartTrigger.addEventListener('click', () => cartSidebar.classList.add('active'));
         closeCart.addEventListener('click', () => cartSidebar.classList.remove('active'));
 
-        function addToCart(name, price) {
-            cart.push({ name: name, price: price });
+        // Funkcija, kuri vyksta paspaudus ant dydžio raidės
+        function selectSize(buttonElement, size) {
+            const card = buttonElement.closest('.product-card');
+            const cardId = card.id;
+
+            // Nuimam "selected" klasę nuo visų toje kortelėje esančių dydžių mygtukų
+            card.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
+            
+            // Uždedam "selected" ant paspausto mygtuko
+            buttonElement.classList.add('selected');
+            
+            // Įsimenam pasirinkimą
+            selectedSizes[cardId] = size;
+        }
+
+        // Tikrinam ar pasirinktas dydis prieš įdedant į krepšelį
+        function handleAddToCart(cardId, name, price) {
+            const size = selectedSizes[cardId];
+            
+            if (!size) {
+                alert("Prašome pasirinkti dydį prieš įdedant į krepšelį!");
+                return;
+            }
+
+            // Prie pavadinimo prirašom dydį, kad jis keliautų į checkout ir Formspree laišką gražiu formatu
+            let fullNameWithSize = `${name} [SIZE: ${size}]`;
+            
+            cart.push({ name: fullNameWithSize, price: price });
             updateCart();
+            
+            // Nuimam pasirinkimą po sėkmingo įdėjimo, kad pirkėjas matytų resetą
+            document.getElementById(cardId).querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
+            delete selectedSizes[cardId];
+
             cartSidebar.classList.add('active');
         }
 
@@ -211,3 +279,4 @@
         updateCart();
     </script>
 </body>
+</html>
