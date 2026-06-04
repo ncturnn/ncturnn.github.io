@@ -1,0 +1,174 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUBSCRIBE // N★CTURN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background-color: #0a0a0a !important; 
+            color: #f0f0f0; 
+            font-family: 'Syncopate', sans-serif; 
+            font-weight: 700; 
+            overflow: hidden; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
+        
+        /* NAVBAR */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; background-color: #0a0a0a; position: relative; z-index: 10; border-bottom: 1px solid #111; }
+        .logo a { font-size: 2rem !important; font-weight: 800 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
+        .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
+        .logo a span { color: #ff007f; text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); font-style: normal !important; display: inline-block; animation: starBreathe 3s ease-in-out infinite; }
+
+        /* BAG MYGTUKAS */
+        .cart-trigger { background: #0a0a0a !important; border: 2px solid #ff007f !important; color: #fff !important; padding: 0.8rem 1.5rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); transition: all 0.3s ease; }
+        .cart-trigger:hover { background: #ff007f !important; color: #fff !important; box-shadow: 0 0 25px rgba(255, 0, 127, 0.8); }
+
+        /* PAGRINDINISI MAKETAS */
+        .main-layout { display: flex; flex: 1; height: calc(100vh - 80px); position: relative; }
+
+        /* UNIKALI VERTIKALI NAVIGACIJA (Kairysis bortas) */
+        .sidebar-nav { 
+            width: 320px; 
+            border-right: 1px dashed #222; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            padding: 0 4rem; 
+            gap: 1.2rem;
+            text-transform: uppercase;
+            background: #0a0a0a;
+            z-index: 5;
+        }
+        .sidebar-nav a { color: #555; text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; transition: all 0.3s ease; display: block; padding: 0.4rem 0; }
+        .sidebar-nav a:hover { color: #fff; padding-left: 5px; }
+        
+        /* Modifikuotas autorinis aktyvios nuorodos stilius */
+        .sidebar-nav a.active-link { 
+            color: #ff007f !important;
+            font-weight: 800;
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.4);
+        }
+        .sidebar-nav a.active-link::before { content: "[ "; color: #ff007f; }
+        .sidebar-nav a.active-link::after { content: " ]"; color: #ff007f; }
+
+        /* CENTRINIS TURINYS (Gilesnis cyber įvaizdis) */
+        .content-display { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 4rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .form-container { width: 100%; max-width: 600px; }
+        .form-container h1 { font-size: 2.2rem; letter-spacing: 6px; margin-bottom: 0.5rem; color: #fff; text-transform: uppercase; font-weight: 800; }
+        .form-container .system-status { font-size: 0.65rem; color: #ff007f; letter-spacing: 3px; margin-bottom: 2.5rem; display: block; }
+        .form-container p { font-size: 0.7rem; color: #444; letter-spacing: 1px; line-height: 1.8; margin-bottom: 3.5rem; text-transform: uppercase; }
+
+        /* TECH-STILIAUS ĮVEDIMO FORMOS DIZAINAS */
+        .tech-input-field { 
+            position: relative; 
+            border: 1px solid #1a1a1a; 
+            background: #0b0b0b;
+            padding: 0.5rem 1.5rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .tech-input-field:focus-within { 
+            border-color: #ff007f; 
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.1); 
+        }
+        .tech-input-field input { 
+            width: 100%; 
+            background: transparent; 
+            border: none; 
+            padding: 1rem 0; 
+            color: #fff; 
+            font-family: 'Syncopate', sans-serif; 
+            font-size: 0.8rem; 
+            outline: none; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+        }
+        .tech-input-field input::placeholder { color: #222; }
+        
+        .tech-input-field button { 
+            background: transparent; 
+            border: none; 
+            color: #ff007f; 
+            cursor: pointer; 
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 800;
+            font-size: 1rem; 
+            padding-left: 1rem;
+            transition: transform 0.3s;
+        }
+        .tech-input-field button:hover { transform: translateX(3px); }
+
+        /* AUTORINIS FOOTERIS - APREMTAS TIK CENTRE VIRTUALIOJE ERDVĖJE */
+        .shop-footer { position: absolute; bottom: 2rem; right: 4rem; font-size: 0.65rem; color: #222; letter-spacing: 2px; font-family: 'Syncopate', sans-serif; font-weight: 700; }
+
+        @keyframes starBreathe {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 8px rgba(255, 0, 127, 0.6); }
+            50% { transform: scale(1.15); text-shadow: 0 0 18px rgba(255, 0, 127, 1); }
+        }
+
+        /* MOBILUS PRITAIKYMAS */
+        @media (max-width: 868px) {
+            body { overflow-y: auto; height: auto; min-height: 100vh; }
+            .main-layout { flex-direction: column; height: auto; }
+            .sidebar-nav { width: 100%; border-right: none; border-bottom: 1px dashed #222; padding: 3rem 1.5rem; align-items: center; text-align: center; }
+            .sidebar-nav a.active-link::before, .sidebar-nav a.active-link::after { content: ''; }
+            .content-display { padding: 4rem 1.5rem 6rem 1.5rem; }
+            .form-container h1 { font-size: 1.4rem; }
+            .shop-footer { position: relative; bottom: auto; right: auto; margin-top: 2rem; text-align: center; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+
+    <nav class="navbar">
+        <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
+        <button class="cart-trigger">BAG (0)</button>
+    </nav>
+
+    <div class="main-layout">
+        <div class="sidebar-nav">
+            <a href="shop.html">001_Products</a>
+            <a href="subscribe.html" class="active-link">002_Sign_Up</a>
+            <a href="size-guide.html">003_Size_Guide</a>
+            <a href="sustainability.html">004_Eco_Core</a>
+            <a href="terms.html">005_Terms</a>
+        </div>
+
+        <div class="content-display">
+            <div class="form-container">
+                <h1>SYSTEM_UPDATES</h1>
+                <span class="system-status">[STATUS: ACCESS_GRANTED]</span>
+                <p>Subscribe to receive digital entry codes, early hardware drops, and technical specifications directly to your terminal. Opt out at any cycle.</p>
+                
+                <form onsubmit="event.preventDefault(); alert('[TRANSMISSION_SUCCESSFUL]');">
+                    <div class="tech-input-field">
+                        <input type="email" placeholder="// INPUT_EMAIL_ADDRESS" required>
+                        <button type="submit">ENTER</button>
+                    </div>
+                </form>
+            </div>
+            
+            <footer class="shop-footer">
+                <span>&copy; 2026 N★CTURN // ALL_RIGHTS_RESERVED</span>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
