@@ -2,68 +2,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N★CTURN | Welcome to the Void</title>
+    <title>ENTER // N★CTURN</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
+        body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow: hidden; height: 100vh; }
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
+        
+        /* NAVBAR */
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
         .logo a { font-size: 2rem !important; font-weight: 700 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
-        .logo a span { color: #ff007f; text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); font-style: normal !important; display: inline-block; }
+        .logo a span { color: #ff007f; text-shadow: 0 0 12px rgba(255, 0, 127, 1), 0 0 5px rgba(255, 0, 127, 0.8); font-style: normal !important; display: inline-block; }
         .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
-        .nav-links { list-style: none; display: flex; gap: 2rem; }
+        
+        .nav-links { list-style: none; display: flex; gap: 2rem; align-items: center; }
         .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; transition: color 0.3s; }
         .nav-links a:hover { color: #ff007f; }
-        
-        .cart-trigger { position: fixed; bottom: 2rem; right: 2rem; background: #0a0a0a !important; border: 2px solid #ff007f !important; color: #fff !important; padding: 1rem 1.5rem; font-family: 'Syncopate', sans-serif; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; z-index: 9999999 !important; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); transition: all 0.3s ease; display: block !important; }
-        .cart-trigger:hover { background: #ff007f !important; color: #fff !important; box-shadow: 0 0 25px rgba(255, 0, 127, 0.8); transform: translateY(-3px); }
-        .cart-count { font-weight: bold; color: #ff007f; }
-        .cart-trigger:hover .cart-count { color: #fff; }
-        
-        .cart-sidebar { position: fixed; top: 0; right: -400px; width: 400px; height: 100vh; background: #0d0d0d; border-left: 1px solid #222; box-shadow: -10px 0 30px rgba(0,0,0,0.5); z-index: 10000000 !important; padding: 3rem 2rem; display: flex; flex-direction: column; transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); }
-        .cart-sidebar.active { right: 0; }
-        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 1.5rem; margin-bottom: 2rem; }
-        .cart-header h2 { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; letter-spacing: 2px; color: #fff;}
-        .close-cart { background: none; border: none; color: #666; font-size: 1.5rem; cursor: pointer; }
-        .close-cart:hover { color: #ff007f; }
-        .cart-items-container { flex: 1; overflow-y: auto; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid #151515; font-size: 0.9rem; }
-        .cart-item-info h4 { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; margin-bottom: 0.3rem;}
-        .cart-item-price { color: #ff007f; }
-        .remove-item-btn { background: none; border: none; color: #444; cursor: pointer; font-size: 0.8rem;}
-        .remove-item-btn:hover { color: #ff007f; }
-        .cart-footer { border-top: 1px solid #222; padding-top: 2rem; margin-top: 1rem; }
-        .cart-total { display: flex; justify-content: space-between; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; margin-bottom: 1.5rem; }
-        .checkout-btn { background: #ff007f; color: #fff; border: none; width: 100%; padding: 1.2rem; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; transition: background 0.3s; text-align: center; display: block; }
-        .checkout-btn:hover { background: #e00070; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
-        .empty-message { color: #444; text-align: center; margin-top: 3rem; font-style: italic; }
-        
-        .hero { height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-color: #0a0a0a; position: relative; z-index: 1; padding: 0 2rem; }
-        .hero h1 { font-family: 'Syncopate', sans-serif; font-size: 5rem; letter-spacing: -2px; margin-bottom: 1rem; color: #fff; }
-        .hero p { font-size: 1.1rem; letter-spacing: 4px; margin-bottom: 3rem; color: #888; }
-        .shop-btn { background: transparent; color: #fff; border: 2px solid #fff; padding: 1rem 3rem; font-family: 'Syncopate', sans-serif; font-size: 1rem; cursor: pointer; text-decoration: none; transition: all 0.3s; }
-        .shop-btn:hover { background: #fff; color: #0a0a0a; box-shadow: 0 0 20px rgba(255, 0, 127, 0.6); }
 
-        /* NAUJOS RESPONSIVE TAISYKLĖS RAGELIAMS (IPHONE 14 PRO IR KT.) */
+        /* HERO ELEMENTAI */
+        .hero-container { display: flex; flex-direction: column; justify-content: center; align-items: center; height: calc(100vh - 120px); text-align: center; position: relative; padding: 0 2rem; }
+        
+        .system-status { font-size: 0.85rem; letter-spacing: 4px; color: #444; margin-bottom: 2rem; text-transform: uppercase; }
+        .system-status span { color: #ff007f; text-shadow: 0 0 8px rgba(255, 0, 127, 0.5); animation: blink 1.5s infinite; }
+
+        .void-btn { background: transparent; border: 2px solid #ff007f; color: #fff; font-family: 'Syncopate', sans-serif; font-size: 1.8rem; font-style: italic; font-weight: 700; letter-spacing: 8px; padding: 2rem 4rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1); box-shadow: 0 0 20px rgba(255, 0, 127, 0.2); text-decoration: none; position: relative; }
+        .void-btn:hover { background: #ff007f; color: #fff; box-shadow: 0 0 40px rgba(255, 0, 127, 0.8); transform: scale(1.05); }
+
+        /* LIVE TERMINAL LOGS */
+        .terminal-logs { position: absolute; bottom: 4rem; left: 4rem; font-size: 0.75rem; color: #222; text-align: left; line-height: 1.6; letter-spacing: 1px; }
+        .live-timer { position: absolute; bottom: 4rem; right: 4rem; font-size: 0.85rem; color: #555; letter-spacing: 2px; font-weight: bold; }
+
+        /* ANIMACIJOS */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* MOBILIŲJŲ TELEFONŲ RESPONSIVE KLASĖS */
         @media (max-width: 768px) {
             .navbar { padding: 1.5rem 1.5rem; flex-direction: column; gap: 1.5rem; text-align: center; }
             .logo a { font-size: 1.5rem !important; letter-spacing: 3px !important; }
-            .nav-links { gap: 1.5rem; }
-            .nav-links a { font-size: 0.8rem; letter-spacing: 1px; }
+            .nav-links { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
             
-            .hero { height: 60vh; padding: 0 1.5rem; }
-            .hero h1 { font-size: 2.2rem; letter-spacing: 0px; margin-bottom: 1rem; line-height: 1.2; }
-            .hero p { font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 2.5rem; }
-            .shop-btn { padding: 1rem 2rem; font-size: 0.85rem; width: 100%; max-width: 280px; text-align: center; display: inline-block; }
+            .hero-container { height: calc(100vh - 180px); }
+            .system-status { font-size: 0.7rem; letter-spacing: 2px; }
             
-            .cart-sidebar { width: 100%; right: -100%; padding: 2rem 1.5rem; }
-            .cart-trigger { bottom: 1.5rem; right: 1.5rem; padding: 0.8rem 1.2rem; font-size: 0.75rem; }
+            .void-btn { font-size: 1.1rem; letter-spacing: 4px; padding: 1.5rem 2.5rem; width: 90%; max-width: 320px; text-align: center; }
+            
+            .terminal-logs { left: 1.5rem; bottom: 2rem; max-width: 250px; font-size: 0.65rem; }
+            .live-timer { right: 1.5rem; bottom: 2rem; font-size: 0.7rem; }
         }
     </style>
 </head>
 <body>
     <div class="noise-overlay"></div>
+    
     <nav class="navbar">
         <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
         <ul class="nav-links">
@@ -73,76 +66,33 @@
         </ul>
     </nav>
 
-    <button class="cart-trigger" id="cartTrigger">BAG (<span class="cart-count" id="cartCount">0</span>)</button>
+    <main class="hero-container">
+        <div class="system-status">CORE_SERVER_STATUS: <span>SYSTEM_ONLINE</span></div>
+        
+        <a href="shop.html" class="void-btn">ENTER THE VOID</a>
 
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h2>YOUR_BAG</h2>
-            <button class="close-cart" id="closeCart">×</button>
+        <div class="terminal-logs">
+            <p>> INITIALIZING OVERRIDE PROTOCOL...</p>
+            <p>> PROJECT_ID: NTRN-001 LOCKED.</p>
+            <p>> SECURE CONNECTION ESTABLISHED.</p>
         </div>
-        <div class="cart-items-container" id="cartItemsContainer"></div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>TOTAL:</span>
-                <span id="cartTotalSum">0.00 €</span>
-            </div>
-            <button class="checkout-btn" onclick="processCheckout()">PROCEED TO CHECKOUT</button>
-        </div>
-    </div>
 
-    <header class="hero">
-        <h1>OUT OF ORBIT</h1>
-        <p>DROP 001 // ENTER THE NOCTURN</p>
-        <a href="shop.html" class="shop-btn">EXPLORE COLLECTION</a>
-    </header>
+        <div class="live-timer" id="liveTimer">00:00:00:00</div>
+    </main>
 
     <script>
-        let cart = JSON.parse(localStorage.getItem('nocturn_cart')) || [];
-        const cartSidebar = document.getElementById('cartSidebar');
-        const cartTrigger = document.getElementById('cartTrigger');
-        const closeCart = document.getElementById('closeCart');
-        const cartItemsContainer = document.getElementById('cartItemsContainer');
-        const cartCount = document.getElementById('cartCount');
-        const cartTotalSum = document.getElementById('cartTotalSum');
-
-        cartTrigger.addEventListener('click', () => cartSidebar.classList.add('active'));
-        closeCart.addEventListener('click', () => cartSidebar.classList.remove('active'));
-
-        function removeItem(index) {
-            cart.splice(index, 1);
-            updateCart();
+        // GYVAS TERMINALO LAIKRODIS (Suteikia puslapiui dinamiškumo)
+        function updateTimer() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const ms = String(Math.floor(now.getMilliseconds() / 10)).padStart(2, '0');
+            
+            document.getElementById('liveTimer').innerText = `${hours}:${minutes}:${seconds}:${ms}`;
         }
-
-        function updateCart() {
-            localStorage.setItem('nocturn_cart', JSON.stringify(cart));
-            cartCount.innerText = cart.length;
-            cartItemsContainer.innerHTML = '';
-            if(cart.length === 0) {
-                cartItemsContainer.innerHTML = '<p class="empty-message">BAG IS EMPTY</p>';
-                cartTotalSum.innerText = '0.00 €';
-                return;
-            }
-            let total = 0;
-            cart.forEach((item, index) => {
-                total += item.price;
-                cartItemsContainer.innerHTML += `
-                    <div class="cart-item">
-                        <div class="cart-item-info">
-                            <h4>${item.name}</h4>
-                            <span class="cart-item-price">${item.price.toFixed(2)} €</span>
-                        </div>
-                        <button class="remove-item-btn" onclick="removeItem(${index})">[REMOVE]</button>
-                    </div>
-                `;
-            });
-            cartTotalSum.innerText = `${total.toFixed(2)} €`;
-        }
-
-        function processCheckout() {
-            if(cart.length === 0) return;
-            window.location.href = 'checkout.html';
-        }
-        updateCart();
+        setInterval(updateTimer, 10);
+        updateTimer();
     </script>
 </body>
 </html>
