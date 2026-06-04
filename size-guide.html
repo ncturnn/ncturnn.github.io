@@ -41,7 +41,7 @@
         /* KONTEINERIS */
         .size-container {
             flex: 1;
-            max-width: 1100px;
+            max-width: 1200px;
             width: 100%;
             margin: 0 auto;
             padding: 2rem 4rem 10rem 4rem;
@@ -50,17 +50,17 @@
         }
         .size-title { font-size: 2rem; font-weight: 800; letter-spacing: 4px; margin-bottom: 2rem; color: #fff; border-bottom: 1px solid #222; padding-bottom: 1rem; }
         
-        /* SELEKTORIAUS TINKLAS (Horizontalus slinkimas mobiliame, švarus išdėstymas) */
+        /* DRABUŽIŲ SELEKTORIUS */
         .product-selector {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 1rem;
             margin-bottom: 3rem;
         }
         .product-card {
             background: #0d0d0d;
             border: 1px solid #1a1a1a;
-            padding: 1rem;
+            padding: 1.2rem 1rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -75,8 +75,8 @@
             box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
         }
         .product-card svg {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             margin-bottom: 0.8rem;
             fill: none;
             stroke: #444;
@@ -96,12 +96,54 @@
             color: #fff;
         }
 
-        /* UNIT SWITCHER */
+        /* DVIEJŲ STULPELIŲ IŠDĖSTYMAS (Blueprint + Lentelė) */
+        .size-content-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        /* BLUEPRINT VIZUALAS */
+        .blueprint-box {
+            border: 1px dashed #222;
+            background: #0b0b0b;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 380px;
+        }
+        .blueprint-box svg {
+            width: 100%;
+            max-width: 260px;
+            height: auto;
+            fill: none;
+            stroke: #333;
+            stroke-width: 1.5;
+        }
+        .blueprint-box svg .measuring-line {
+            stroke: #ff007f;
+            stroke-dasharray: 4 4;
+            stroke-width: 1.5;
+        }
+        .blueprint-box svg .line-text {
+            fill: #ff007f;
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 800;
+            font-size: 7px;
+        }
+
+        /* UNIT SWITCHER & LENTELĖ */
+        .table-area {
+            display: flex;
+            flex-direction: column;
+        }
         .unit-switcher {
             display: flex;
             gap: 1rem;
-            margin-bottom: 2rem;
-            justify-content: flex-start;
+            margin-bottom: 1.5rem;
         }
         .unit-btn {
             background: none;
@@ -122,7 +164,6 @@
             text-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
         }
 
-        /* LENTELĖ */
         .table-wrapper {
             width: 100%;
             overflow-x: auto;
@@ -137,36 +178,26 @@
             text-align: left;
         }
         th {
-            font-size: 0.75rem;
-            letter-spacing: 2px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
             color: #666;
-            padding: 1.2rem;
+            padding: 1.2rem 1rem;
             border-bottom: 1px solid #222;
             text-transform: uppercase;
+            white-space: nowrap;
         }
         td {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             letter-spacing: 1px;
             color: #fff;
             font-weight: 400;
-            padding: 1.5rem 1.2rem;
+            padding: 1.4rem 1rem;
             border-bottom: 1px solid #151515;
         }
-        tr:last-child td {
-            border-bottom: none;
-        }
-        tr:hover td {
-            color: #ff007f;
-        }
-        .size-cell {
-            font-weight: 800;
-            color: #ff007f;
-        }
-        .unit-label {
-            font-size: 0.65rem;
-            color: #444;
-            margin-left: 0.3rem;
-        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { color: #ff007f; }
+        .size-cell { font-weight: 800; color: #ff007f; }
+        .unit-label { font-size: 0.6rem; color: #444; margin-left: 0.2rem; }
 
         /* FOOTERIS */
         .shop-footer { background: #0a0a0a; border-top: 1px solid #111; padding: 3rem 4rem; display: flex; justify-content: flex-end; align-items: center; font-size: 0.7rem; color: #444; letter-spacing: 1px; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 10; font-family: 'Syncopate', sans-serif; font-weight: 700; }
@@ -182,6 +213,10 @@
         }
 
         /* MOBILUS */
+        @media (max-width: 900px) {
+            .size-content-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .blueprint-box { min-height: 280px; padding: 1rem; }
+        }
         @media (max-width: 768px) {
             .navbar { padding: 1.5rem 1.5rem; }
             .logo a { font-size: 1.3rem !important; }
@@ -189,11 +224,11 @@
             .size-container { padding: 2rem 1.5rem 6rem 1.5rem; }
             .size-title { font-size: 1.4rem; text-align: center; }
             .product-selector { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 2rem; }
-            .product-card { padding: 0.6rem 0.3rem; }
-            .product-card svg { width: 40px; height: 40px; margin-bottom: 0.4rem; }
-            .product-card .prod-title { font-size: 0.45rem; letter-spacing: 0px; }
+            .product-card { padding: 0.8rem 0.4rem; }
+            .product-card svg { width: 35px; height: 35px; margin-bottom: 0.4rem; }
+            .product-card .prod-title { font-size: 0.45rem; }
             .unit-switcher { justify-content: center; }
-            th, td { padding: 1rem 0.6rem; font-size: 0.65rem; }
+            th, td { padding: 1rem 0.5rem; font-size: 0.65rem; }
             .shop-footer { position: static; flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
             .footer-left { position: static; transform: none; }
             .footer-right { justify-content: center; flex-wrap: wrap; gap: 1rem; }
@@ -245,24 +280,33 @@
             </div>
         </div>
         
-        <div class="unit-switcher">
-            <button class="unit-btn active" id="metricBtn" onclick="setUnit('metric')">METRIC (CM)</button>
-            <button class="unit-btn" id="imperialBtn" onclick="setUnit('imperial')">IMPERIAL (IN)</button>
-        </div>
+        <div class="size-content-grid">
+            
+            <div class="blueprint-box" id="blueprintContainer">
+                </div>
+            
+            <div class="table-area">
+                <div class="unit-switcher">
+                    <button class="unit-btn active" id="metricBtn" onclick="setUnit('metric')">METRIC (CM)</button>
+                    <button class="unit-btn" id="imperialBtn" onclick="setUnit('imperial')">IMPERIAL (IN)</button>
+                </div>
 
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Size</th>
-                        <th id="param1">Chest <span class="unit-label" id="unit1">(CM)</span></th>
-                        <th id="param2">Length <span class="unit-label" id="unit2">(CM)</span></th>
-                        <th id="param3">Sleeve <span class="unit-label" id="unit3">(CM)</span></th>
-                    </tr>
-                </thead>
-                <tbody id="sizeTableBody">
-                    </tbody>
-            </table>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Size</th>
+                                <th id="param1">Chest [A] <span class="unit-label" id="unit1">(CM)</span></th>
+                                <th id="param2">Length [B] <span class="unit-label" id="unit2">(CM)</span></th>
+                                <th id="param3">Sleeve [C] <span class="unit-label" id="unit3">(CM)</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="sizeTableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -278,61 +322,115 @@
     </footer>
 
     <script>
-        // Tikslūs Broken Planet / Streetwear išmatavimai iš tavo nuotraukų
+        // Tikslūs streetwear išmatavimai ir atitinkami SVG brėžiniai kiekvienam tipui
         const sizeData = {
             jersey: {
-                headers: ["Chest", "Length", "Sleeve"],
+                headers: ["Chest [A]", "Length [B]", "Sleeve [C]"],
                 sizes: [
                     { name: "S", vals: [58, 69, 42] },
                     { name: "M", vals: [60, 71, 42.5] },
                     { name: "L", vals: [62, 73, 43] },
                     { name: "XL", vals: [64, 75, 43.5] }
-                ]
+                ],
+                svg: `<svg viewBox="0 0 100 100">
+                    <path d="M20 30 L35 15 L50 24 L65 15 L80 30 L75 48 L75 85 L25 85 L25 48 Z" />
+                    <line x1="25" y1="45" x2="75" y2="45" class="measuring-line" />
+                    <text x="46" y="42" class="line-text">A</text>
+                    <line x1="50" y1="24" x2="50" y2="85" class="measuring-line" />
+                    <text x="53" y="55" class="line-text">B</text>
+                    <line x1="35" y1="15" x2="20" y2="30" class="measuring-line" />
+                    <text x="23" y="20" class="line-text">C</text>
+                </svg>`
             },
             zipup: {
-                headers: ["Chest", "Length", "Sleeve"],
+                headers: ["Chest [A]", "Length [B]", "Sleeve [C]"],
                 sizes: [
                     { name: "S", vals: [60, 68, 61] },
                     { name: "M", vals: [63, 70, 62.5] },
                     { name: "L", vals: [66, 72, 64] },
                     { name: "XL", vals: [69, 74, 65.5] }
-                ]
+                ],
+                svg: `<svg viewBox="0 0 100 100">
+                    <path d="M25 32 L35 15 L65 15 L75 32 L70 85 L30 85 Z M50 15 L50 85 M25 32 L13 65 M75 32 L87 65" />
+                    <line x1="28" y1="45" x2="72" y2="45" class="measuring-line" />
+                    <text x="46" y="41" class="line-text">A</text>
+                    <line x1="50" y1="15" x2="50" y2="85" class="measuring-line" />
+                    <text x="54" y="55" class="line-text">B</text>
+                    <line x1="25" y1="32" x2="13" y2="65" class="measuring-line" />
+                    <text x="13" y="45" class="line-text">C</text>
+                </svg>`
             },
             hoodie: {
-                headers: ["Chest", "Length", "Sleeve"],
+                headers: ["Chest [A]", "Length [B]", "Sleeve [C]"],
                 sizes: [
                     { name: "S", vals: [61, 69, 60] },
                     { name: "M", vals: [64, 71, 61.5] },
                     { name: "L", vals: [67, 73, 63] },
                     { name: "XL", vals: [70, 75, 64.5] }
-                ]
+                ],
+                svg: `<svg viewBox="0 0 100 100">
+                    <path d="M25 35 L35 15 L65 15 L75 35 L70 85 L30 85 Z M35 62 L65 62 L60 75 L40 75 Z M25 35 L12 68 M75 35 L88 68" />
+                    <line x1="28" y1="48" x2="72" y2="48" class="measuring-line" />
+                    <text x="46" y="44" class="line-text">A</text>
+                    <line x1="50" y1="20" x2="50" y2="85" class="measuring-line" />
+                    <text x="54" y="55" class="line-text">B</text>
+                    <line x1="25" y1="35" x2="12" y2="68" class="measuring-line" />
+                    <text x="13" y="48" class="line-text">C</text>
+                </svg>`
             },
             crewneck: {
-                headers: ["Chest", "Length", "Sleeve"],
+                headers: ["Chest [A]", "Length [B]", "Sleeve [C]"],
                 sizes: [
                     { name: "S", vals: [59, 67, 59] },
                     { name: "M", vals: [62, 69, 60.5] },
                     { name: "L", vals: [65, 71, 62] },
                     { name: "XL", vals: [68, 73, 63.5] }
-                ]
+                ],
+                svg: `<svg viewBox="0 0 100 100">
+                    <path d="M25 30 L40 18 L60 18 L75 30 L70 85 L30 85 Z M25 30 L12 65 M75 30 L88 65" />
+                    <line x1="28" y1="45" x2="72" y2="45" class="measuring-line" />
+                    <text x="46" y="41" class="line-text">A</text>
+                    <line x1="50" y1="18" x2="50" y2="85" class="measuring-line" />
+                    <text x="54" y="55" class="line-text">B</text>
+                    <line x1="25" y1="30" x2="12" y2="65" class="measuring-line" />
+                    <text x="13" y="45" class="line-text">C</text>
+                </svg>`
             },
             tshirt: {
-                headers: ["Chest", "Length", "Sleeve"],
+                headers: ["Chest [A]", "Length [B]", "Sleeve [C]"],
                 sizes: [
                     { name: "S", vals: [56, 70, 22] },
                     { name: "M", vals: [58, 72, 23] },
                     { name: "L", vals: [60, 74, 24] },
                     { name: "XL", vals: [62, 76, 25] }
-                ]
+                ],
+                svg: `<svg viewBox="0 0 100 100">
+                    <path d="M20 32 L35 20 L65 20 L80 32 L75 85 L25 85 Z M25 42 L15 40 M75 42 L85 40" />
+                    <line x1="24" y1="46" x2="76" y2="46" class="measuring-line" />
+                    <text x="46" y="42" class="line-text">A</text>
+                    <line x1="50" y1="20" x2="50" y2="85" class="measuring-line" />
+                    <text x="54" y="55" class="line-text">B</text>
+                    <line x1="65" y1="20" x2="80" y2="32" class="measuring-line" />
+                    <text x="73" y="23" class="line-text">C</text>
+                </svg>`
             },
             pants: {
-                headers: ["Waist", "Length", "Inseam"],
+                headers: ["Waist [A]", "Length [B]", "Inseam [C]"],
                 sizes: [
                     { name: "S", vals: [38, 104, 74] },
                     { name: "M", vals: [40, 106, 75] },
                     { name: "L", vals: [42, 108, 76] },
                     { name: "XL", vals: [44, 110, 77] }
-                ]
+                ],
+                svg: `<svg viewBox="0 0 100 100">
+                    <path d="M28 15 L72 15 L78 85 L53 85 L50 42 L47 85 L22 85 Z" />
+                    <line x1="28" y1="15" x2="72" y2="15" class="measuring-line" />
+                    <text x="47" y="11" class="line-text">A</text>
+                    <line x1="75" y1="15" x2="78" y2="85" class="measuring-line" />
+                    <text x="81" y="50" class="line-text">B</text>
+                    <line x1="50" y1="42" x2="48" y2="85" class="measuring-line" />
+                    <text x="41" y="65" class="line-text">C</text>
+                </svg>`
             }
         };
 
@@ -342,13 +440,16 @@
         function renderTable() {
             const prod = sizeData[currentProduct];
             const tbody = document.getElementById('sizeTableBody');
+            const blueprintContainer = document.getElementById('blueprintContainer');
             
-            // Atnaujinam stulpelių pavadinimus (pvz., kelnėms reikia Waist vietoj Chest)
+            // Atnaujinam brėžinį kairėje
+            blueprintContainer.innerHTML = prod.svg;
+
+            // Atnaujinam stulpelių viršūnes
             document.getElementById('param1').firstChild.textContent = prod.headers[0] + " ";
             document.getElementById('param2').firstChild.textContent = prod.headers[1] + " ";
             document.getElementById('param3').firstChild.textContent = prod.headers[2] + " ";
 
-            // Atnaujinam matavimo vienetų tekstus viršūnėse
             const unitTxt = currentUnit === 'metric' ? '(CM)' : '(IN)';
             document.getElementById('unit1').innerText = unitTxt;
             document.getElementById('unit2').innerText = unitTxt;
@@ -388,7 +489,6 @@
             renderTable();
         }
 
-        // Pirmas užkrovimas
         renderTable();
     </script>
 </body>
