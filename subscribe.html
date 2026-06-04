@@ -31,20 +31,20 @@
         /* MAIN MAKETAS */
         .main-layout { display: flex; flex: 1; position: relative; width: 100%; padding: 0 4rem 4rem 4rem; align-items: flex-end; }
 
-        /* TOBULAS, ŠVARUS MENIU KAIRĖJE APAČIOJE */
+        /* KAIRYSIS MENIU (Sumažintas iki tavo tikrojo dizaino dydžio) */
         .main-navigation { 
             display: flex; 
             flex-direction: column; 
-            gap: 1.2rem; 
+            gap: 1.1rem; 
             z-index: 10; 
-            min-width: 320px; 
+            min-width: 400px; 
             text-transform: uppercase; 
         }
         .main-navigation a { 
             color: #fff; 
             text-decoration: none; 
-            font-size: 1.1rem; 
-            letter-spacing: 3px; 
+            font-size: 0.95rem; /* Sumažinta, kad idealiai atitiktų tavo šriftą */
+            letter-spacing: 2px; 
             transition: color 0.3s ease; 
             display: inline-block; 
         }
@@ -52,15 +52,15 @@
             color: #ff007f; 
         }
 
-        /* COPYRIGHT PAREMTAS TIESIAI TARP MYGTUKŲ, KAIP SCREENSHOTE */
+        /* IDEALUS COPYRIGHT FINIŠAS (Tiksliai kaip image_efd2bb.png) */
         .menu-copyright {
-            font-size: 0.55rem;
-            color: #3a3a3a;
+            font-size: 0.48rem; /* Labai smulkus, tech stiliaus */
+            color: #2a2a2a; /* Tamsus, pranykstantis fone */
             letter-spacing: 1px;
             text-transform: uppercase;
             padding: 0.1rem 0;
             pointer-events: none;
-            line-height: 1.2;
+            white-space: nowrap; /* Neleidžia persikelt į kitą eilutę */
         }
 
         /* CENTRINIS SUBSCRIBE BLOKAS */
