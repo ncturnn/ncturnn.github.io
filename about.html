@@ -6,17 +6,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
+        body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; min-height: 100vh; }
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         
-        /* NAVBAR & LOGO */
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
         .logo a { font-size: 2rem !important; font-weight: 700 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
-        
-        /* HOVER EFEKTAS VISAM LOGO */
         .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
         
-        /* BREATHING ŽVAIGŽDĖ */
         .logo a span { 
             color: #ff007f; 
             text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); 
@@ -25,20 +21,16 @@
             animation: starBreathe 3s ease-in-out infinite;
             transition: all 0.3s ease;
         }
-        
-        /* Kai hoverina ant viso logo, žvaigždė gauna dar stipresnį švytėjimą */
-        .logo a:hover span {
-            text-shadow: 0 0 20px rgba(255, 0, 127, 1), 0 0 30px rgba(255, 0, 127, 0.8);
-        }
-        
-        .nav-links { list-style: none; display: flex; gap: 2rem; align-items: center; }
-        .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; transition: color 0.3s; }
-        .nav-links a:hover { color: #ff007f; }
-        
-        .cart-trigger { position: fixed; bottom: 2rem; right: 2rem; background: #0a0a0a !important; border: 2px solid #ff007f !important; color: #fff !important; padding: 1rem 1.5rem; font-family: 'Syncopate', sans-serif; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; z-index: 9999999 !important; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); transition: all 0.3s ease; display: block !important; }
-        .cart-trigger:hover { background: #ff007f !important; color: #fff !important; box-shadow: 0 0 25px rgba(255, 0, 127, 0.8); transform: translateY(-3px); }
+        .logo a:hover span { text-shadow: 0 0 20px rgba(255, 0, 127, 1), 0 0 30px rgba(255, 0, 127, 0.8); }
+
+        .cart-trigger { background: #0a0a0a !important; border: 2px solid #ff007f !important; color: #fff !important; padding: 0.8rem 1.5rem; font-family: 'Syncopate', sans-serif; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); transition: all 0.3s ease; }
+        .cart-trigger:hover { background: #ff007f !important; color: #fff !important; box-shadow: 0 0 25px rgba(255, 0, 127, 0.8); }
         .cart-count { font-weight: bold; color: #ff007f; }
         .cart-trigger:hover .cart-count { color: #fff; }
+
+        .nav-links { position: fixed; bottom: 2rem; left: 4rem; list-style: none; display: flex; flex-direction: column; gap: 1rem; z-index: 9999; font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
+        .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s ease; display: inline-block; }
+        .nav-links a:hover { color: #ff007f; transform: translateX(5px); }
         
         .cart-sidebar { position: fixed; top: 0; right: -450px; width: 450px; height: 100vh; background: #0d0d0d; border-left: 1px solid #222; box-shadow: -10px 0 30px rgba(0,0,0,0.5); z-index: 10000000 !important; padding: 3rem 2rem; display: flex; flex-direction: column; transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); }
         .cart-sidebar.active { right: 0; }
@@ -58,7 +50,7 @@
         .checkout-btn:hover { background: #e00070; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
         .empty-message { color: #444; text-align: center; margin-top: 3rem; font-style: italic; }
         
-        .about-container { max-width: 1200px; margin: 0 auto; padding: 5rem 4rem; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 5rem; align-items: center; min-height: 80vh; position: relative; z-index: 1; }
+        .about-container { max-width: 1200px; margin: 0 auto; padding: 2rem 4rem 8rem 4rem; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 5rem; align-items: center; min-height: 70vh; position: relative; z-index: 1; }
         .about-text h1 { font-family: 'Syncopate', sans-serif; font-size: 2.8rem; letter-spacing: -1px; line-height: 1.1; margin-bottom: 2.5rem; color: #fff; }
         .glow-text { color: #ff007f; text-shadow: 0 0 8px rgba(255, 0, 127, 0.6); font-weight: bold; }
         .censored { background: #222; color: #222; padding: 0 4px; transition: all 0.3s ease; cursor: help; }
@@ -67,38 +59,38 @@
         .meta-data { font-size: 0.8rem; color: #444; margin-top: 3rem; border-top: 1px solid #222; padding-top: 1.5rem; }
         .about-image { width: 100%; height: 550px; background: #0f0f0f; border: 1px dashed #333; display: flex; justify-content: center; align-items: center; color: #333; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; }
 
-        /* KVĖPAVIMO ANIMACIJA */
         @keyframes starBreathe {
             0%, 100% { transform: scale(1); text-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.4); }
             50% { transform: scale(1.15); text-shadow: 0 0 18px rgba(255, 0, 127, 1), 0 0 35px rgba(255, 0, 127, 0.8); }
         }
 
         @media (max-width: 768px) {
-            .navbar { padding: 1.5rem 1.5rem; flex-direction: column; gap: 1.5rem; text-align: center; }
-            .logo a { font-size: 1.5rem !important; letter-spacing: 3px !important; }
-            .nav-links { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
-            .about-container { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.5rem; min-height: auto; }
+            .navbar { padding: 1.5rem 1.5rem; flex-direction: row; justify-content: space-between; align-items: center; }
+            .logo a { font-size: 1.3rem !important; letter-spacing: 2px !important; }
+            .cart-trigger { padding: 0.6rem 1rem; font-size: 0.75rem; }
+            .nav-links { position: static; flex-direction: row; justify-content: center; width: 100%; background: #0a0a0a; padding: 1.5rem 0; border-top: 1px solid #111; gap: 2rem; margin-top: 2rem; }
+            .about-container { grid-template-columns: 1fr; gap: 3rem; padding: 2rem 1.5rem 4rem 1.5rem; min-height: auto; }
             .about-text h1 { font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center; }
             .about-text p { font-size: 0.85rem; line-height: 1.7; margin-bottom: 1.2rem; text-align: justify; }
             .meta-data { margin-top: 2rem; padding-top: 1rem; text-align: center; }
             .about-image { height: 350px; }
             .cart-sidebar { width: 100%; right: -100%; padding: 2rem 1.5rem; }
-            .cart-trigger { bottom: 1.5rem; right: 1.5rem; padding: 0.8rem 1.2rem; font-size: 0.75rem; }
         }
     </style>
 </head>
 <body>
     <div class="noise-overlay"></div>
+    
     <nav class="navbar">
         <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
-        <ul class="nav-links">
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="archive.html">Archive</a></li>
-            <li><a href="about.html">About</a></li>
-        </ul>
+        <button class="cart-trigger" id="cartTrigger">BAG (<span class="cart-count" id="cartCount">0</span>)</button>
     </nav>
 
-    <button class="cart-trigger" id="cartTrigger">BAG (<span class="cart-count" id="cartCount">0</span>)</button>
+    <ul class="nav-links">
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="archive.html">Archive</a></li>
+        <li><a href="about.html">About</a></li>
+    </ul>
 
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
