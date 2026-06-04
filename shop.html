@@ -30,7 +30,7 @@
         .cart-count { font-weight: 800; color: #ff007f; }
         .cart-trigger:hover .cart-count { color: #fff; }
 
-        /* NUORODOS KAIRĖJE APAČIOJE (Visiškai originali vieta ir z-index) */
+        /* NUORODOS KAIRĖJE APAČIOJE */
         .nav-links { position: fixed; bottom: 2rem; left: 4rem; list-style: none; display: flex; flex-direction: column; gap: 1rem; z-index: 9999; font-family: 'Syncopate', sans-serif; font-weight: 700; text-transform: uppercase; }
         .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s ease; display: inline-block; }
         .nav-links a:hover { color: #ff007f; transform: translateX(5px); }
@@ -56,40 +56,45 @@
         .empty-message { color: #444; text-align: center; margin-top: 3rem; font-size: 0.8rem; letter-spacing: 1px; }
         
         /* PRODUKTAI */
-        .products-section { padding: 3rem 4rem 8rem 4rem; max-width: 1100px; margin: 0 auto; background-color: #0a0a0a; position: relative; z-index: 1; flex: 1; }
-        .section-title { font-family: 'Syncopate', sans-serif; font-weight: 800; font-size: 1.8rem; letter-spacing: 4px; margin-bottom: 3rem; border-bottom: 1px solid #222; padding-bottom: 1rem; color: #fff; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
+        .products-section { padding: 3rem 4rem 8rem 4rem; max-width: 1200px; margin: 0 auto; background-color: #0a0a0a; position: relative; z-index: 1; flex: 1; width: 100%; }
+        .section-title { font-family: 'Syncopate', sans-serif; font-weight: 800; font-size: 1.6rem; letter-spacing: 4px; margin-bottom: 3rem; border-bottom: 1px dashed #222; padding-bottom: 1rem; color: #fff; }
         
-        .product-card { background: #0b0b0b; border: 1px solid #151515; padding: 0.8rem; position: relative; transition: border 0.3s ease; display: flex; flex-direction: column; }
-        .product-card:hover { border: 1px solid #ff007f; box-shadow: 0 0 15px rgba(255, 0, 127, 0.05); }
+        /* Griežtas 3 stulpelių tinklelis tavo drop'ui */
+        .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
         
-        .image-container { width: 100%; height: 280px; overflow: hidden; position: relative; margin-bottom: 1rem; border: 1px dashed #222; }
-        .image-placeholder { width: 100%; height: 100%; background: #121212; display: flex; justify-content: center; align-items: center; color: #444; font-size: 0.7rem; letter-spacing: 2px; transition: transform 0.4s ease, filter 0.4s ease; font-family: 'Syncopate', sans-serif; font-weight: 700; text-transform: uppercase; }
+        .product-card { background: #0b0b0b; border: 1px dashed #222; padding: 1.2rem; position: relative; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); display: flex; flex-direction: column; }
+        .product-card:hover { border: 1px solid #ff007f; box-shadow: 0 0 20px rgba(255, 0, 127, 0.15); transform: translateY(-4px); }
         
-        .product-card:hover .image-placeholder { transform: scale(1.05); color: #ff007f; background: #151515; }
+        /* Viršutinė info eilutė kortelėje */
+        .card-meta { display: flex; justify-content: space-between; font-size: 0.6rem; color: #444; letter-spacing: 1px; margin-bottom: 1rem; text-transform: uppercase; }
+        .product-card:hover .card-meta { color: #ff007f; }
 
-        .product-info { margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
-        .product-info h3 { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; color: #fff; line-height: 1.3; }
+        .image-container { width: 100%; height: 320px; overflow: hidden; position: relative; margin-bottom: 1.2rem; border: 1px solid #141414; background: #121212; }
+        .image-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; opacity: 0.8; }
+        .product-card:hover .image-container img { transform: scale(1.03); opacity: 1; }
+        
+        .product-info { margin-bottom: 1.2rem; display: flex; flex-direction: column; gap: 0.4rem; }
+        .product-info h3 { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; color: #fff; line-height: 1.4; }
         .price { font-family: 'Syncopate', sans-serif; font-weight: 800; letter-spacing: 1px; color: #ff007f; font-size: 0.9rem; }
         
         /* DYDŽIŲ PASIRINKIMAS */
-        .size-selector { display: flex; gap: 0.4rem; margin-bottom: 1rem; }
-        .size-btn { background: transparent; color: #666; border: 1px solid #222; padding: 0.4rem 0.6rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease; min-width: 35px; text-align: center; }
+        .size-selector { display: flex; gap: 0.4rem; margin-bottom: 1.2rem; }
+        .size-btn { background: transparent; color: #666; border: 1px solid #222; padding: 0.5rem 0.6rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.75rem; cursor: pointer; transition: all 0.2s ease; flex: 1; text-align: center; }
         .size-btn:hover { border-color: #fff; color: #fff; }
         .size-btn.selected { border-color: #ff007f; color: #fff; background: rgba(255, 0, 127, 0.1); text-shadow: 0 0 5px #ff007f; }
 
-        .add-to-bag-btn { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 0.8rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; }
+        .add-to-bag-btn { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 0.9rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; }
         .add-to-bag-btn:hover { background: #fff; color: #000; border-color: #fff; }
 
         /* PRANEŠIMAS */
         .custom-notification { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: #0d0d0d; border: 1px solid #ff007f; color: #fff; padding: 1rem 2rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; z-index: 99999999; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: top 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); pointer-events: none; text-transform: uppercase; }
         .custom-notification.show { top: 2rem; }
 
-        /* FOOTER (Copyright išcentruotas absoliučiame viduryje, kad nesidubliuotų) */
-        .shop-footer { background: #0a0a0a; border-top: 1px solid #111; padding: 3rem 4rem; display: flex; justify-content: flex-end; align-items: center; font-size: 0.7rem; color: #444; letter-spacing: 1px; position: relative; z-index: 10; margin-top: auto; font-family: 'Syncopate', sans-serif; font-weight: 700; }
+        /* FOOTER */
+        .shop-footer { background: #0a0a0a; border-top: 1px solid #111; padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: #444; letter-spacing: 1px; position: relative; z-index: 10; margin-top: auto; font-family: 'Syncopate', sans-serif; font-weight: 700; }
         .footer-left { position: absolute; left: 50%; transform: translateX(-50%); text-align: center; white-space: nowrap; }
         .footer-left span { color: #555; }
-        .footer-right { display: flex; gap: 2rem; }
+        .footer-right { display: flex; gap: 2rem; margin-left: auto; }
         .footer-right a { color: #444; text-decoration: none; transition: color 0.3s; text-transform: uppercase; }
         .footer-right a:hover { color: #ff007f; }
 
@@ -99,19 +104,19 @@
         }
 
         /* MOBILUS PRITAIKYMAS */
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
+            .product-grid { grid-template-columns: 1fr; gap: 1.5rem; }
             .navbar { padding: 1.5rem 1.5rem; }
             .logo a { font-size: 1.3rem !important; letter-spacing: 2px !important; }
             .cart-trigger { padding: 0.6rem 1rem; font-size: 0.75rem; }
             .nav-links { position: static; flex-direction: row; justify-content: center; width: 100%; background: #0a0a0a; padding: 1.5rem 0; border-top: 1px solid #111; gap: 2rem; margin-top: 2rem; }
             .products-section { padding: 2rem 1.5rem 4rem 1.5rem; }
-            .section-title { font-size: 1.2rem; text-align: center; }
-            .product-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
-            .image-container { height: 240px; }
+            .section-title { font-size: 1.1rem; text-align: center; }
+            .image-container { height: 280px; }
             .cart-sidebar { width: 100%; right: -100%; padding: 2rem 1.5rem; }
             .shop-footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
             .footer-left { position: static; transform: none; }
-            .footer-right { justify-content: center; flex-wrap: wrap; gap: 1rem; }
+            .footer-right { justify-content: center; flex-wrap: wrap; gap: 1rem; margin: 0; }
         }
     </style>
 </head>
@@ -126,7 +131,7 @@
     </nav>
 
     <ul class="nav-links">
-        <li><a href="shop.html">Shop</a></li>
+        <li><a href="shop.html" style="color: #ff007f;">Shop</a></li>
         <li><a href="archive.html">Archive</a></li>
         <li><a href="subscribe.html">Sign Up</a></li>
         <li><a href="size-guide.html">Size Guide</a></li>
@@ -149,16 +154,20 @@
     </div>
 
     <section class="products-section">
-        <h2 class="section-title">DROP_001 // PROTOTYPES</h2>
+        <h2 class="section-title">SYSTEM_CATALOG // DROP_001 [LIMITED ISSUE]</h2>
         <div class="product-grid">
             
             <div class="product-card" id="prod-1">
+                <div class="card-meta">
+                    <span>[ BATCH: 001 / UNISEX ]</span>
+                    <span style="color: #ff007f;">LIMITED EDITION</span>
+                </div>
                 <div class="image-container">
-                    <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
+                    <img src="https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=600" alt="N★CTURN 001 Logo Jersey">
                 </div>
                 <div class="product-info">
-                    <h3>GRAPHIC TEE</h3>
-                    <div class="price">40.00 €</div>
+                    <h3>N★CTURN "001" LOGO JERSEY</h3>
+                    <div class="price">85.00 €</div>
                 </div>
                 <div class="size-selector">
                     <button class="size-btn" onclick="selectSize(this, 'S')">S</button>
@@ -166,16 +175,20 @@
                     <button class="size-btn" onclick="selectSize(this, 'L')">L</button>
                     <button class="size-btn" onclick="selectSize(this, 'XL')">XL</button>
                 </div>
-                <button class="add-to-bag-btn" onclick="handleAddToCart('prod-1', 'GRAPHIC TEE', 40.00)">ADD TO BAG</button>
+                <button class="add-to-bag-btn" onclick="handleAddToCart('prod-1', 'N★CTURN 001 LOGO JERSEY', 85.00)">ADD TO BAG</button>
             </div>
             
             <div class="product-card" id="prod-2">
+                <div class="card-meta">
+                    <span>[ BATCH: 001 / UNISEX ]</span>
+                    <span>BATCH_01</span>
+                </div>
                 <div class="image-container">
-                    <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
+                    <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600" alt="N★CTURN Signature Star Tee">
                 </div>
                 <div class="product-info">
-                    <h3>THERMAL LONG SLEEVE</h3>
-                    <div class="price">50.00 €</div>
+                    <h3>N★CTURN SIGNATURE STAR TEE</h3>
+                    <div class="price">45.00 €</div>
                 </div>
                 <div class="size-selector">
                     <button class="size-btn" onclick="selectSize(this, 'S')">S</button>
@@ -183,16 +196,20 @@
                     <button class="size-btn" onclick="selectSize(this, 'L')">L</button>
                     <button class="size-btn" onclick="selectSize(this, 'XL')">XL</button>
                 </div>
-                <button class="add-to-bag-btn" onclick="handleAddToCart('prod-2', 'THERMAL LONG SLEEVE', 50.00)">ADD TO BAG</button>
+                <button class="add-to-bag-btn" onclick="handleAddToCart('prod-2', 'N★CTURN SIGNATURE STAR TEE', 45.00)">ADD TO BAG</button>
             </div>
 
             <div class="product-card" id="prod-3">
+                <div class="card-meta">
+                    <span>[ BATCH: 001 / UNISEX ]</span>
+                    <span style="color: #ff007f;">LIMITED EDITION</span>
+                </div>
                 <div class="image-container">
-                    <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
+                    <img src="https://images.unsplash.com/photo-1516257984-b1b4d707412e?w=600" alt="N★CTURN Logo Shorts">
                 </div>
                 <div class="product-info">
-                    <h3>HEAVYWEIGHT HOODIE</h3>
-                    <div class="price">75.00 €</div>
+                    <h3>N★CTURN LOGO SHORTS</h3>
+                    <div class="price">65.00 €</div>
                 </div>
                 <div class="size-selector">
                     <button class="size-btn" onclick="selectSize(this, 'S')">S</button>
@@ -200,24 +217,7 @@
                     <button class="size-btn" onclick="selectSize(this, 'L')">L</button>
                     <button class="size-btn" onclick="selectSize(this, 'XL')">XL</button>
                 </div>
-                <button class="add-to-bag-btn" onclick="handleAddToCart('prod-3', 'HEAVYWEIGHT HOODIE', 75.00)">ADD TO BAG</button>
-            </div>
-
-            <div class="product-card" id="prod-4">
-                <div class="image-container">
-                    <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
-                </div>
-                <div class="product-info">
-                    <h3>LOGO BEANIE</h3>
-                    <div class="price">25.00 €</div>
-                </div>
-                <div class="size-selector">
-                    <button class="size-btn" onclick="selectSize(this, 'S')">S</button>
-                    <button class="size-btn" onclick="selectSize(this, 'M')">M</button>
-                    <button class="size-btn" onclick="selectSize(this, 'L')">L</button>
-                    <button class="size-btn" onclick="selectSize(this, 'XL')">XL</button>
-                </div>
-                <button class="add-to-bag-btn" onclick="handleAddToCart('prod-4', 'LOGO BEANIE', 25.00)">ADD TO BAG</button>
+                <button class="add-to-bag-btn" onclick="handleAddToCart('prod-3', 'N★CTURN LOGO SHORTS', 65.00)">ADD TO BAG</button>
             </div>
             
         </div>
