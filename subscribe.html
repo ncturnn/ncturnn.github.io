@@ -11,74 +11,57 @@
             color: #f0f0f0; 
             font-family: 'Syncopate', sans-serif; 
             font-weight: 700; 
-            overflow: hidden; 
-            height: 100vh; 
+            overflow-x: hidden; 
+            min-height: 100vh; 
             display: flex; 
             flex-direction: column; 
         }
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         
         /* NAVBAR */
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; background-color: #0a0a0a; position: relative; z-index: 10; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
         .logo a { font-size: 2rem !important; font-weight: 800 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
         .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
-        .logo a span { color: #ff007f; text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); font-style: normal !important; display: inline-block; animation: starBreathe 3s ease-in-out infinite; }
+        
+        .logo a span { 
+            color: #ff007f; 
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); 
+            font-style: normal !important; 
+            display: inline-block;
+            animation: starBreathe 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+        .logo a:hover span { text-shadow: 0 0 20px rgba(255, 0, 127, 1), 0 0 30px rgba(255, 0, 127, 0.8); }
 
         /* BAG MYGTUKAS */
         .cart-trigger { background: #0a0a0a !important; border: 2px solid #ff007f !important; color: #fff !important; padding: 0.8rem 1.5rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); transition: all 0.3s ease; }
         .cart-trigger:hover { background: #ff007f !important; color: #fff !important; box-shadow: 0 0 25px rgba(255, 0, 127, 0.8); }
+        .cart-count { font-weight: 800; color: #ff007f; }
+        .cart-trigger:hover .cart-count { color: #fff; }
 
-        /* MAIN MAKETAS */
-        .main-layout { display: flex; flex: 1; position: relative; width: 100%; padding: 0 4rem 4rem 4rem; align-items: flex-end; }
-
-        /* ULTRA CLEAN MENIU (Tiksliai toks tarpas ir šriftas kaip tavo pradinėse fotkėse) */
-        .main-navigation { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 1.5rem; 
-            z-index: 10; 
-            min-width: 320px; 
-            text-transform: uppercase; 
-        }
-        .main-navigation a { 
-            color: #fff; 
-            text-decoration: none; 
-            font-size: 0.95rem; 
-            letter-spacing: 2px; 
-            transition: color 0.3s ease; 
-            display: inline-block; 
-        }
-        .main-navigation a:hover { 
-            color: #ff007f; 
-        }
-
-        /* NAUJA KOPIJAVIMO TEISIŲ VIETA (Kampe apačioje, visiškai netrukdo meniu) */
-        .shop-footer {
-            position: fixed;
-            bottom: 4rem;
-            right: 4rem;
-            font-size: 0.48rem;
-            color: #2a2a2a;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            z-index: 5;
-        }
+        /* IDENTIŠKOS NUORODOS KAIRĖJE APAČIOJE (Paimta tiesiai iš tavo kodo) */
+        .nav-links { position: fixed; bottom: 2rem; left: 4rem; list-style: none; display: flex; flex-direction: column; gap: 1rem; z-index: 9999; font-family: 'Syncopate', sans-serif; font-weight: 700; text-transform: uppercase; }
+        .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s ease; display: inline-block; }
+        .nav-links a:hover { color: #ff007f; transform: translateX(5px); }
 
         /* CENTRINIS SUBSCRIBE BLOKAS */
+        .center-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 2rem;
+            margin-top: -4rem; /* Pakelia visą formą šiek tiek aukščiau, kad subalansuotų vaizdą */
+        }
         .center-content { 
-            position: absolute;
-            top: 45%;
-            left: 55%;
-            transform: translate(-50%, -50%);
             width: 100%;
             max-width: 650px;
             text-align: center;
-            padding: 0 2rem;
         }
-        .center-content h1 { font-size: 2.2rem; letter-spacing: 5px; margin-bottom: 1.5rem; color: #fff; text-transform: uppercase; font-weight: 800; }
+        .center-content h1 { font-family: 'Syncopate', sans-serif; font-weight: 800; font-size: 2rem; letter-spacing: 5px; margin-bottom: 1.5rem; color: #fff; text-transform: uppercase; }
         .center-content p { font-size: 0.7rem; color: #444; letter-spacing: 1px; line-height: 1.8; max-width: 500px; margin: 0 auto 3.5rem auto; text-transform: uppercase; }
 
-        /* MINIMALISTINĖ ĮVEDIMO LINIJA */
+        /* ULTRA CLEAN ĮVEDIMO LINIJA SU STRĖLE */
         .input-container { 
             position: relative; 
             max-width: 450px;
@@ -96,6 +79,7 @@
             padding: 1rem 0; 
             color: #fff; 
             font-family: 'Syncopate', sans-serif; 
+            font-weight: 700;
             font-size: 0.85rem; 
             outline: none; 
             text-align: left;
@@ -118,43 +102,54 @@
         }
         .input-container button:hover { color: #ff007f; }
 
+        /* IDENTIŠKAS FOOTERIS */
+        .shop-footer { background: #0a0a0a; border-top: 1px solid #111; padding: 3rem 4rem; display: flex; justify-content: flex-end; align-items: center; font-size: 0.7rem; color: #444; letter-spacing: 1px; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 10; font-family: 'Syncopate', sans-serif; font-weight: 700; }
+        .footer-left { position: absolute; left: 50%; transform: translateX(-50%); text-align: center; white-space: nowrap; }
+        .footer-left span { color: #555; }
+        .footer-right { display: flex; gap: 2rem; }
+        .footer-right a { color: #444; text-decoration: none; transition: color 0.3s; text-transform: uppercase; }
+        .footer-right a:hover { color: #ff007f; }
+
         @keyframes starBreathe {
-            0%, 100% { transform: scale(1); text-shadow: 0 0 8px rgba(255, 0, 127, 0.6); }
-            50% { transform: scale(1.15); text-shadow: 0 0 18px rgba(255, 0, 127, 1); }
+            0%, 100% { transform: scale(1); text-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.4); }
+            50% { transform: scale(1.15); text-shadow: 0 0 18px rgba(255, 0, 127, 1), 0 0 35px rgba(255, 0, 127, 0.8); }
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 900px) {
-            body { overflow-y: auto; height: auto; min-height: 100vh; }
-            .main-layout { flex-direction: column; align-items: center; padding: 2rem 1.5rem; gap: 4rem; }
-            .center-content { position: static; transform: none; margin: 6rem 0; order: 1; }
-            .main-navigation { order: 2; width: 100%; align-items: center; text-align: center; margin-bottom: 4rem; gap: 1.5rem; }
-            .shop-footer { position: static; text-align: center; margin-bottom: 2rem; order: 3; width: 100%; }
-            .center-content h1 { font-size: 1.5rem; }
+        /* MOBILUS PRITAIKYMAS (Tiksliai iš tavo šablono) */
+        @media (max-width: 768px) {
+            .navbar { padding: 1.5rem 1.5rem; }
+            .logo a { font-size: 1.3rem !important; letter-spacing: 2px !important; }
+            .cart-trigger { padding: 0.6rem 1rem; font-size: 0.75rem; }
+            .nav-links { position: static; flex-direction: row; justify-content: center; width: 100%; background: #0a0a0a; padding: 1.5rem 0; border-top: 1px solid #111; gap: 2rem; margin-top: auto; }
+            .center-container { margin-top: 4rem; margin-bottom: 4rem; }
+            .center-content h1 { font-size: 1.4rem; }
+            .shop-footer { position: static; flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+            .footer-left { position: static; transform: none; }
+            .footer-right { justify-content: center; flex-wrap: wrap; gap: 1rem; }
         }
     </style>
 </head>
 <body>
     <div class="noise-overlay"></div>
-
+    
     <nav class="navbar">
         <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
-        <button class="cart-trigger">BAG (0)</button>
+        <button class="cart-trigger">BAG (<span class="cart-count">0</span>)</button>
     </nav>
 
-    <div class="main-layout">
-        <div class="main-navigation">
-            <a href="shop.html">Shop</a>
-            <a href="subscribe.html">Sign Up</a>
-            <a href="archive.html">Archive</a>
-            <a href="about.html">About</a>
-        </div>
+    <ul class="nav-links">
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="subscribe.html">Sign Up</a></li>
+        <li><a href="archive.html">Archive</a></li>
+        <li><a href="about.html">About</a></li>
+    </ul>
 
+    <div class="center-container">
         <div class="center-content">
             <h1>SIGN UP FOR UPDATES</h1>
             <p>By subscribing, you agree to receive technical updates from N★CTURN. You can opt out of the system at any time cycle.</p>
             
-            <form onsubmit="event.preventDefault(); alert('[SYSTEM: RECOGNIZED]');">
+            <form onsubmit="event.preventDefault(); text-shadow: 0 0 5px #ff007f;">
                 <div class="input-container">
                     <input type="email" placeholder="ENTER YOUR EMAIL" required>
                     <button type="submit">→</button>
@@ -164,7 +159,14 @@
     </div>
 
     <footer class="shop-footer">
-        <span>&copy; 2026 N★CTURN. ALL RIGHTS RESERVED.</span>
+        <div class="footer-left">
+            <span>&copy; 2026 N★CTURN. ALL RIGHTS RESERVED.</span>
+        </div>
+        <div class="footer-right">
+            <a href="https://www.instagram.com/ncturn_n/" target="_blank">Instagram</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
     </footer>
 </body>
 </html>
