@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABOUT // NOCTURN</title>
+    <title>ABOUT // N★CTURN</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -32,6 +32,8 @@
             position: relative;
             z-index: 10;
         }
+        
+        /* LOGOTIPAS: ŽVAIGŽDUTĖ + PAKREIPTAS Į DEŠINĘ */
         .logo a {
             font-size: 2rem !important; 
             font-weight: 700 !important; 
@@ -40,11 +42,19 @@
             text-decoration: none !important;
             transition: all 0.3s ease !important;
             display: inline-block !important;
+            font-style: italic !important;
+        }
+        .logo a span {
+            color: #ff007f;
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.8);
+            font-style: normal !important;
+            display: inline-block;
         }
         .logo a:hover {
             color: #ff007f !important;
             text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important;
         }
+        
         .nav-links { 
             list-style: none; 
             display: flex; 
@@ -61,7 +71,7 @@
             color: #ff007f; 
         }
 
-        /* SKLANDANTIS KREPŠELIO MYGTUKAS APATINĖJE DEŠINĖJE (SUTVARKYTAS) */
+        /* SKLANDANTIS KREPŠELIO MYGTUKAS APATINĖJE DEŠINĖJE */
         .cart-trigger {
             position: fixed;
             bottom: 2rem;
@@ -74,7 +84,7 @@
             font-size: 0.85rem;
             letter-spacing: 2px;
             cursor: pointer;
-            z-index: 9999999 !important; /* Maksimalus prioritetas, kad iššoktų į patį priekį */
+            z-index: 9999999 !important;
             box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
             transition: all 0.3s ease;
             display: block !important;
@@ -99,7 +109,7 @@
             top: 0; right: -400px; width: 400px; height: 100vh;
             background: #0d0d0d; border-left: 1px solid #222;
             box-shadow: -10px 0 30px rgba(0,0,0,0.5); 
-            z-index: 10000000 !important; /* Dar aukščiau už patį mygtuką */
+            z-index: 10000000 !important;
             padding: 3rem 2rem; display: flex; flex-direction: column;
             transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99);
         }
@@ -139,7 +149,7 @@
     <div class="noise-overlay"></div>
     
     <nav class="navbar">
-        <div class="logo"><a href="index.html">NOCTURN</a></div>
+        <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
         <ul class="nav-links">
             <li><a href="shop.html">Shop</a></li>
             <li><a href="archive.html">Archive</a></li>
@@ -226,7 +236,7 @@
 
         function processCheckout() {
             if(cart.length === 0) return;
-            alert("Sujungiama su mokėjimo sistema... Užsakymas priimtas!");
+            alert("Connecting to payment gateway... Order processed!");
             cart = [];
             updateCart();
             cartSidebar.classList.remove('active');
