@@ -32,7 +32,6 @@
             position: relative;
             z-index: 10;
         }
-        
         .logo a {
             font-size: 2rem !important; 
             font-weight: 700 !important; 
@@ -45,12 +44,6 @@
         .logo a:hover {
             color: #ff007f !important;
             text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important;
-        }
-
-        .nav-container {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
         }
         .nav-links { 
             list-style: none; 
@@ -68,32 +61,76 @@
             color: #ff007f; 
         }
 
-        /* BAG (KREPŠELIO) MYGTUKAS MENIU DEŠINĖJE */
+        /* SKLANDANTIS KREPŠELIO MYGTUKAS APATINĖJE DEŠINĖJE */
         .cart-trigger {
-            background: none;
-            border: none;
-            color: #fff;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #0a0a0a !important;
+            border: 2px solid #ff007f !important;
+            color: #fff !important;
+            padding: 1rem 1.5rem;
             font-family: 'Syncopate', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 2px;
             cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
+            z-index: 9999999 !important;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
+            transition: all 0.3s ease;
+            display: block !important;
         }
         .cart-trigger:hover {
-            color: #ff007f;
-            text-shadow: 0 0 8px rgba(255, 0, 127, 0.6);
+            background: #ff007f !important;
+            color: #fff !important;
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.8);
+            transform: translateY(-3px);
         }
         .cart-count {
-            color: #ff007f;
             font-weight: bold;
+            color: #ff007f;
         }
+        .cart-trigger:hover .cart-count {
+            color: #fff;
+        }
+
+        /* ŠONINIS KREPŠELIO LANGAZ */
+        .cart-sidebar {
+            position: fixed;
+            top: 0; right: -400px; width: 400px; height: 100vh;
+            background: #0d0d0d; border-left: 1px solid #222;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5); 
+            z-index: 10000000 !important;
+            padding: 3rem 2rem; display: flex; flex-direction: column;
+            transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99);
+        }
+        .cart-sidebar.active { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 1.5rem; margin-bottom: 2rem; }
+        .cart-header h2 { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; letter-spacing: 2px; color: #fff;}
+        .close-cart { background: none; border: none; color: #666; font-size: 1.5rem; cursor: pointer; }
+        .close-cart:hover { color: #ff007f; }
+        .cart-items-container { flex: 1; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid #151515; font-size: 0.9rem; }
+        .cart-item-info h4 { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; margin-bottom: 0.3rem;}
+        .cart-item-price { color: #ff007f; }
+        .remove-item-btn { background: none; border: none; color: #444; cursor: pointer; font-size: 0.8rem;}
+        .remove-item-btn:hover { color: #ff007f; }
+        .cart-footer { border-top: 1px solid #222; padding-top: 2rem; margin-top: 1rem; }
+        .cart-total { display: flex; justify-content: space-between; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .checkout-btn {
+            background: #ff007f; color: #fff; border: none; width: 100%; padding: 1.2rem;
+            font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer;
+            transition: background 0.3s; text-align: center; display: block;
+        }
+        .checkout-btn:hover { background: #e00070; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
+        .empty-message { color: #444; text-align: center; margin-top: 3rem; font-style: italic; }
 
         .products-section {
             padding: 5rem 4rem;
             max-width: 1200px;
             margin: 0 auto;
             background-color: #0a0a0a;
+            position: relative;
+            z-index: 1;
         }
         .section-title {
             font-family: 'Syncopate', sans-serif;
@@ -134,9 +171,7 @@
             border: 1px dashed #333;
             margin-bottom: 1.5rem;
         }
-        .product-info {
-            margin-bottom: 1.5rem;
-        }
+        .product-info { margin-bottom: 1.5rem; }
         .product-info h3 {
             font-family: 'Syncopate', sans-serif;
             font-size: 1rem;
@@ -149,8 +184,6 @@
             font-weight: bold;
             letter-spacing: 1px;
         }
-
-        /* ADD TO BAG MYGTUKAS */
         .add-to-cart-btn {
             background: transparent;
             border: 1px solid #333;
@@ -170,111 +203,6 @@
             color: #fff;
             background: rgba(255, 0, 127, 0.05);
         }
-
-        /* IŠŠOKANTIS KREPŠELIO ŠONINIS LANGAZ (SLIDER) */
-        .cart-sidebar {
-            position: fixed;
-            top: 0; right: -400px; width: 400px; height: 100vh;
-            background: #0d0d0d;
-            border-left: 1px solid #222;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-            z-index: 999;
-            padding: 3rem 2rem;
-            display: flex;
-            flex-direction: column;
-            transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99);
-        }
-        .cart-sidebar.active {
-            right: 0;
-        }
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #222;
-            padding-bottom: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .cart-header h2 {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-        }
-        .close-cart {
-            background: none;
-            border: none;
-            color: #666;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        .close-cart:hover { color: #ff007f; }
-
-        /* KREPŠELIO ELEMENTAI */
-        .cart-items-container {
-            flex: 1;
-            overflow-y: auto;
-        }
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid #151515;
-            font-size: 0.9rem;
-        }
-        .cart-item-info h4 {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 0.8rem;
-            margin-bottom: 0.3rem;
-        }
-        .cart-item-price { color: #ff007f; }
-        .remove-item-btn {
-            background: none;
-            border: none;
-            color: #444;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-        .remove-item-btn:hover { color: #ff007f; }
-
-        /* KREPŠELIO APAČIA IR CHECKOUT */
-        .cart-footer {
-            border-top: 1px solid #222;
-            padding-top: 2rem;
-            margin-top: 1rem;
-        }
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'Syncopate', sans-serif;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-        .checkout-btn {
-            background: #ff007f;
-            color: #fff;
-            border: none;
-            width: 100%;
-            padding: 1.2rem;
-            font-family: 'Syncopate', sans-serif;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            text-align: center;
-            text-decoration: none;
-            display: block;
-        }
-        .checkout-btn:hover {
-            background: #e00070;
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
-        }
-        .empty-message {
-            color: #444;
-            text-align: center;
-            margin-top: 3rem;
-            font-style: italic;
-        }
     </style>
 </head>
 <body>
@@ -282,23 +210,21 @@
     
     <nav class="navbar">
         <div class="logo"><a href="index.html">NOCTURN</a></div>
-        <div class="nav-container">
-            <ul class="nav-links">
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="archive.html">Archive</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-            <button class="cart-trigger" id="cartTrigger">BAG (<span class="cart-count" id="cartCount">0</span>)</button>
-        </div>
+        <ul class="nav-links">
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="archive.html">Archive</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
     </nav>
+
+    <button class="cart-trigger" id="cartTrigger">BAG (<span class="cart-count" id="cartCount">0</span>)</button>
 
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
             <h2>YOUR_BAG</h2>
             <button class="close-cart" id="closeCart">×</button>
         </div>
-        <div class="cart-items-container" id="cartItemsContainer">
-            </div>
+        <div class="cart-items-container" id="cartItemsContainer"></div>
         <div class="cart-footer">
             <div class="cart-total">
                 <span>TOTAL:</span>
@@ -311,7 +237,6 @@
     <section class="products-section">
         <h2 class="section-title">CURRENT_DROP</h2>
         <div class="product-grid">
-            
             <div class="product-card">
                 <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
                 <div class="product-info">
@@ -320,7 +245,6 @@
                 </div>
                 <button class="add-to-cart-btn" onclick="addToCart('HEAVYWEIGHT HOODIE', 75.00)">ADD TO BAG</button>
             </div>
-
             <div class="product-card">
                 <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
                 <div class="product-info">
@@ -329,7 +253,6 @@
                 </div>
                 <button class="add-to-cart-btn" onclick="addToCart('GRAPHIC TEE', 40.00)">ADD TO BAG</button>
             </div>
-
             <div class="product-card">
                 <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
                 <div class="product-info">
@@ -338,13 +261,11 @@
                 </div>
                 <button class="add-to-cart-btn" onclick="addToCart('THERMAL LONG SLEEVE', 50.00)">ADD TO BAG</button>
             </div>
-
         </div>
     </section>
 
     <script>
         let cart = JSON.parse(localStorage.getItem('nocturn_cart')) || [];
-
         const cartSidebar = document.getElementById('cartSidebar');
         const cartTrigger = document.getElementById('cartTrigger');
         const closeCart = document.getElementById('closeCart');
@@ -352,28 +273,23 @@
         const cartCount = document.getElementById('cartCount');
         const cartTotalSum = document.getElementById('cartTotalSum');
 
-        // Atidaryti/Uždaryti krepšelį
         cartTrigger.addEventListener('click', () => cartSidebar.classList.add('active'));
         closeCart.addEventListener('click', () => cartSidebar.classList.remove('active'));
 
-        // Pridėti prekę
         function addToCart(name, price) {
             cart.push({ name, price });
             updateCart();
-            cartSidebar.classList.add('active'); // Automatiškai išskleidžia krepšelį įdėjus daiktą
+            cartSidebar.classList.add('active');
         }
 
-        // Ištrinti prekę
         function removeItem(index) {
             cart.splice(index, 1);
             updateCart();
         }
 
-        // Atnaujinti krepšelio išvaizdą ir duomenis
         function updateCart() {
             localStorage.setItem('nocturn_cart', JSON.stringify(cart));
             cartCount.innerText = cart.length;
-            
             cartItemsContainer.innerHTML = '';
             
             if(cart.length === 0) {
@@ -385,7 +301,7 @@
             let total = 0;
             cart.forEach((item, index) => {
                 total += item.price;
-                const itemHTML = `
+                cartItemsContainer.innerHTML += `
                     <div class="cart-item">
                         <div class="cart-item-info">
                             <h4>${item.name}</h4>
@@ -394,25 +310,18 @@
                         <button class="remove-item-btn" onclick="removeItem(${index})">[REMOVE]</button>
                     </div>
                 `;
-                cartItemsContainer.innerHTML += itemHTML;
             });
-
             cartTotalSum.innerText = `$${total.toFixed(2)}`;
         }
 
-        // Užsakymo/Apmokėjimo imitacija
         function processCheckout() {
-            if(cart.length === 0) {
-                alert("Tavo krepšelis tuščias!");
-                return;
-            }
+            if(cart.length === 0) return;
             alert("Sujungiama su mokėjimo sistema... Užsakymas priimtas!");
             cart = [];
             updateCart();
             cartSidebar.classList.remove('active');
         }
 
-        // Užkrauti esamus krepšelio duomenis atidarius puslapį
         updateCart();
     </script>
 </body>
