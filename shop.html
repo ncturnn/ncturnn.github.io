@@ -10,7 +10,7 @@
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         
         /* NAVBAR */
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; background-color: #0a0a0a; position: relative; z-index: 10; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
         .logo a { font-size: 2rem !important; font-weight: 800 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
         .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
         
@@ -30,14 +30,13 @@
         .cart-count { font-weight: 800; color: #ff007f; }
         .cart-trigger:hover .cart-count { color: #fff; }
 
-        /* SUTVARKYTOS NUORODOS (Nebėra fixed, todėl nesikerta su footeriu) */
-        .nav-links-container { padding: 0 4rem; max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
-        .nav-links { list-style: none; display: flex; flex-direction: column; gap: 1rem; text-transform: uppercase; margin-bottom: 3rem; }
+        /* NUORODOS KAIRĖJE APAČIOJE */
+        .nav-links { position: fixed; bottom: 2rem; left: 4rem; list-style: none; display: flex; flex-direction: column; gap: 1rem; z-index: 9999; font-family: 'Syncopate', sans-serif; font-weight: 700; text-transform: uppercase; }
         .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s ease; display: inline-block; }
         .nav-links a:hover { color: #ff007f; transform: translateX(5px); }
         
         /* SIDEBAR KREPŠELIS */
-        .cart-sidebar { position: fixed; top: 0; right: -450px; width: 450px; height: 100vh; background: #0d0d0d; border-left: 1px solid #222; box-shadow: -10px 0 30px rgba(0,0,0,0.5); z-index: 10000000 !important; padding: 3rem 2rem; display: flex; flex-direction: column; transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); }
+        .cart-sidebar { position: fixed; top: 0; right: -450px; width: 450px; height: 100vh; background: #0d0d0d; border-left: 1px solid #222; box-shadow: -10px 0 30px rgba(0,0,0,0.5); z-index: 10000000 !important; padding: 3rem 2rem; display: flex; flex-direction: column; transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); font-family: 'Syncopate', sans-serif; }
         .cart-sidebar.active { right: 0; }
         .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 1.5rem; margin-bottom: 2rem; }
         .cart-header h2 { font-size: 1.2rem; letter-spacing: 2px; color: #fff; font-weight: 700; }
@@ -56,22 +55,26 @@
         .checkout-btn:hover { background: #e00070; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
         .empty-message { color: #444; text-align: center; margin-top: 3rem; font-size: 0.8rem; letter-spacing: 1px; }
         
-        /* PRODUKTAI */
-        .products-section { padding: 3rem 4rem 4rem 4rem; max-width: 1100px; margin: 0 auto; background-color: #0a0a0a; position: relative; z-index: 1; flex: 1; width: 100%; }
-        .section-title { font-weight: 800; font-size: 1.8rem; letter-spacing: 4px; margin-bottom: 3rem; border-bottom: 1px solid #222; padding-bottom: 1rem; color: #fff; }
+        /* PRODUKTAI (SUMAŽINTI LANGAI IR SUTVARKYTAS MAŽESNIS TINKLELIS) */
+        .products-section { padding: 3rem 4rem 8rem 4rem; max-width: 1100px; margin: 0 auto; background-color: #0a0a0a; position: relative; z-index: 1; flex: 1; }
+        .section-title { font-family: 'Syncopate', sans-serif; font-weight: 800; font-size: 1.8rem; letter-spacing: 4px; margin-bottom: 3rem; border-bottom: 1px solid #222; padding-bottom: 1rem; color: #fff; }
+        
+        /* Pakeistas minimalus lango dydis iš 300px į 240px, kad tilptų daugiau ir mažesnių objektų */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
         
+        /* Mažesni card tarpai ir rėmeliai */
         .product-card { background: #0b0b0b; border: 1px solid #151515; padding: 0.8rem; position: relative; transition: border 0.3s ease; display: flex; flex-direction: column; }
         .product-card:hover { border: 1px solid #ff007f; box-shadow: 0 0 15px rgba(255, 0, 127, 0.05); }
         
+        /* Sumažintas nuotraukos konteinerio aukštis nuo 400px iki 280px */
         .image-container { width: 100%; height: 280px; overflow: hidden; position: relative; margin-bottom: 1rem; border: 1px dashed #222; }
-        .image-placeholder { width: 100%; height: 100%; background: #121212; display: flex; justify-content: center; align-items: center; color: #444; font-size: 0.7rem; letter-spacing: 2px; transition: transform 0.4s ease, filter 0.4s ease; font-weight: 700; text-transform: uppercase; }
+        .image-placeholder { width: 100%; height: 100%; background: #121212; display: flex; justify-content: center; align-items: center; color: #444; font-size: 0.7rem; letter-spacing: 2px; transition: transform 0.4s ease, filter 0.4s ease; font-family: 'Syncopate', sans-serif; font-weight: 700; text-transform: uppercase; }
         
         .product-card:hover .image-placeholder { transform: scale(1.05); color: #ff007f; background: #151515; }
 
         .product-info { margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
-        .product-info h3 { font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; color: #fff; line-height: 1.3; }
-        .price { font-weight: 800; letter-spacing: 1px; color: #ff007f; font-size: 0.9rem; }
+        .product-info h3 { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; color: #fff; line-height: 1.3; }
+        .price { font-family: 'Syncopate', sans-serif; font-weight: 800; letter-spacing: 1px; color: #ff007f; font-size: 0.9rem; }
         
         /* DYDŽIŲ PASIRINKIMAS */
         .size-selector { display: flex; gap: 0.4rem; margin-bottom: 1rem; }
@@ -83,11 +86,11 @@
         .add-to-bag-btn:hover { background: #fff; color: #000; border-color: #fff; }
 
         /* PRANEŠIMAS */
-        .custom-notification { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: #0d0d0d; border: 1px solid #ff007f; color: #fff; padding: 1rem 2rem; font-size: 0.8rem; letter-spacing: 2px; z-index: 99999999; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: top 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); pointer-events: none; text-transform: uppercase; }
+        .custom-notification { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: #0d0d0d; border: 1px solid #ff007f; color: #fff; padding: 1rem 2rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; z-index: 99999999; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: top 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); pointer-events: none; text-transform: uppercase; }
         .custom-notification.show { top: 2rem; }
 
         /* FOOTER */
-        .shop-footer { background: #0a0a0a; border-top: 1px solid #111; padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: #444; letter-spacing: 1px; position: relative; z-index: 10; margin-top: auto; }
+        .shop-footer { background: #0a0a0a; border-top: 1px solid #111; padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: #444; letter-spacing: 1px; position: relative; z-index: 10; margin-top: auto; font-family: 'Syncopate', sans-serif; font-weight: 700; }
         .footer-left span { color: #555; }
         .footer-right { display: flex; gap: 2rem; }
         .footer-right a { color: #444; text-decoration: none; transition: color 0.3s; text-transform: uppercase; }
@@ -103,9 +106,8 @@
             .navbar { padding: 1.5rem 1.5rem; }
             .logo a { font-size: 1.3rem !important; letter-spacing: 2px !important; }
             .cart-trigger { padding: 0.6rem 1rem; font-size: 0.75rem; }
-            .nav-links-container { padding: 0 1.5rem; }
-            .nav-links { flex-direction: row; justify-content: center; width: 100%; gap: 2rem; margin-bottom: 2rem; }
-            .products-section { padding: 2rem 1.5rem 2rem 1.5rem; }
+            .nav-links { position: static; flex-direction: row; justify-content: center; width: 100%; background: #0a0a0a; padding: 1.5rem 0; border-top: 1px solid #111; gap: 2rem; margin-top: 2rem; }
+            .products-section { padding: 2rem 1.5rem 4rem 1.5rem; }
             .section-title { font-size: 1.2rem; text-align: center; }
             .product-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
             .image-container { height: 240px; }
@@ -124,6 +126,27 @@
         <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
         <button class="cart-trigger" id="cartTrigger">BAG (<span class="cart-count" id="cartCount">0</span>)</button>
     </nav>
+
+    <ul class="nav-links">
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="archive.html">Archive</a></li>
+        <li><a href="about.html">About</a></li>
+    </ul>
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>YOUR_BAG</h2>
+            <button class="close-cart" id="closeCart">×</button>
+        </div>
+        <div class="cart-items-container" id="cartItemsContainer"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>TOTAL:</span>
+                <span id="cartTotalSum">0.00 €</span>
+            </div>
+            <button class="checkout-btn" onclick="processCheckout()">PROCEED TO CHECKOUT</button>
+        </div>
+    </div>
 
     <section class="products-section">
         <h2 class="section-title">DROP_001 // PROTOTYPES</h2>
@@ -199,29 +222,6 @@
             
         </div>
     </section>
-
-    <div class="nav-links-container">
-        <ul class="nav-links">
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="archive.html">Archive</a></li>
-            <li><a href="about.html">About</a></li>
-        </ul>
-    </div>
-
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h2>YOUR_BAG</h2>
-            <button class="close-cart" id="closeCart">×</button>
-        </div>
-        <div class="cart-items-container" id="cartItemsContainer"></div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>TOTAL:</span>
-                <span id="cartTotalSum">0.00 €</span>
-            </div>
-            <button class="checkout-btn" onclick="processCheckout()">PROCEED TO CHECKOUT</button>
-        </div>
-    </div>
 
     <footer class="shop-footer">
         <div class="footer-left">
