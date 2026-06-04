@@ -3,16 +3,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHECKOUT // N★CTURN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght=700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700;800&display=swap" rel="stylesheet">
     <script src="https://www.paypal.com/sdk/js?client-id=AVgqVrJ0kfH1BqeSTXdLxhpD1vGuBZEMsS8Xg3fjJIqaBQ9SopfLdWRdEUhqJCRU4-3YO_vczuPea1Oc&currency=EUR&components=buttons,card-fields"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; min-height: 100vh; }
+        body { 
+            background-color: #0a0a0a !important; 
+            color: #f0f0f0; 
+            font-family: 'Syncopate', sans-serif; 
+            font-weight: 700; 
+            overflow-x: hidden; 
+            min-height: 100vh; 
+        }
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         
         /* NAVBAR LOGO */
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
-        .logo a { font-size: 2rem !important; font-weight: 700 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; background-color: #0a0a0a; position: relative; z-index: 10; }
+        .logo a { font-size: 2rem !important; font-weight: 800 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
         .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
         
         .logo a span { 
@@ -24,43 +31,58 @@
             transition: all 0.3s ease;
         }
         @keyframes starBreathe {
-            0%, 100% { transform: scale(1); text-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.4); }
+            0%, 100 { transform: scale(1); text-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.4); }
             50% { transform: scale(1.15); text-shadow: 0 0 18px rgba(255, 0, 127, 1), 0 0 35px rgba(255, 0, 127, 0.8); }
         }
 
         /* NUORODOS KAIRĖJE APAČIOJE */
-        .nav-links { position: fixed; bottom: 2rem; left: 4rem; list-style: none; display: flex; flex-direction: column; gap: 1rem; z-index: 9999; font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
+        .nav-links { position: fixed; bottom: 2rem; left: 4rem; list-style: none; display: flex; flex-direction: column; gap: 1rem; z-index: 9999; text-transform: uppercase; }
         .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s ease; display: inline-block; }
         .nav-links a:hover { color: #ff007f; transform: translateX(5px); }
 
         /* CHECKOUT KONTEINERIS */
         .checkout-container { max-width: 1100px; margin: 0 auto; padding: 2rem 4rem 8rem 4rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; position: relative; z-index: 1; }
-        .checkout-title { font-family: 'Syncopate', sans-serif; font-size: 2rem; letter-spacing: 4px; margin-bottom: 2rem; color: #fff; grid-column: span 2; border-bottom: 1px solid #222; padding-bottom: 1rem; }
+        .checkout-title { font-size: 2rem; font-weight: 800; letter-spacing: 4px; margin-bottom: 2rem; color: #fff; grid-column: span 2; border-bottom: 1px solid #222; padding-bottom: 1rem; }
         
         /* FORMA */
-        .order-form h3, .summary-box h3 { font-family: 'Syncopate', sans-serif; font-size: 1rem; letter-spacing: 2px; margin-bottom: 1.5rem; color: #fff; }
+        .order-form h3, .summary-box h3 { font-size: 1rem; font-weight: 700; letter-spacing: 2px; margin-bottom: 1.5rem; color: #fff; }
         .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; color: #666; }
-        .form-group input { width: 100%; background: #0d0d0d; border: 1px solid #222; padding: 1rem; color: #fff; font-family: monospace; font-size: 0.9rem; transition: border 0.3s; }
+        .form-group label { display: block; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; color: #666; font-weight: 700; }
+        
+        /* INPUT LAUKELIAI (Pakeisti į Syncopate, pridėtas didžiųjų raidžių force) */
+        .form-group input { 
+            width: 100%; 
+            background: #0d0d0d; 
+            border: 1px solid #222; 
+            padding: 1rem; 
+            color: #fff; 
+            font-family: 'Syncopate', sans-serif; 
+            font-weight: 400; /* Kad nebūtų per stambus tekstas vedant */
+            font-size: 0.8rem; 
+            letter-spacing: 1px;
+            text-transform: uppercase; 
+            transition: border 0.3s; 
+        }
         .form-group input:focus { outline: none; border-color: #ff007f; }
+        .form-group input::placeholder { color: #252525; font-weight: 700; }
 
         /* TABŲ STILIUS */
         .payment-tabs { display: flex; gap: 1rem; margin-top: 2rem; margin-bottom: 1.5rem; border-bottom: 1px solid #222; padding-bottom: 1rem; }
-        .tab-btn { background: none; border: 1px solid #222; color: #666; padding: 0.8rem 1.5rem; font-family: 'Syncopate', sans-serif; font-size: 0.75rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; width: 50%; text-align: center; }
+        .tab-btn { background: none; border: 1px solid #222; color: #666; padding: 0.8rem 1.5rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; width: 50%; text-align: center; }
         .tab-btn.active { border-color: #ff007f; color: #fff; background: rgba(255, 0, 127, 0.05); text-shadow: 0 0 8px rgba(255, 0, 127, 0.5); }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
         /* UŽSAKYMO SUVESTINĖ */
         .summary-box { background: #0b0b0b; border: 1px solid #151515; padding: 2rem; height: fit-content; }
-        .summary-item { display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid #151515; font-size: 0.9rem; color: #888; }
+        .summary-item { display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid #151515; font-size: 0.75rem; letter-spacing: 1px; color: #888; text-transform: uppercase; }
         .summary-item .item-name { max-width: 70%; }
-        .summary-total { display: flex; justify-content: space-between; font-family: 'Syncopate', sans-serif; font-size: 1rem; color: #fff; padding-top: 1.5rem; margin-top: 1rem; border-top: 1px solid #222; }
+        .summary-total { display: flex; justify-content: space-between; font-size: 1rem; font-weight: 800; color: #fff; padding-top: 1.5rem; margin-top: 1rem; border-top: 1px solid #222; }
         
         /* SĖKMĖS PRANEŠIMAS */
         .success-message { text-align: center; padding: 5rem 0; grid-column: span 2; display: none; }
-        .success-message h2 { font-family: 'Syncopate', sans-serif; font-size: 2rem; color: #ff007f; margin-bottom: 1rem; text-shadow: 0 0 10px rgba(255, 0, 127, 0.5); }
-        .success-message p { color: #888; font-size: 1rem; letter-spacing: 1px; }
+        .success-message h2 { font-size: 2rem; font-weight: 800; color: #ff007f; margin-bottom: 1rem; text-shadow: 0 0 10px rgba(255, 0, 127, 0.5); }
+        .success-message p { color: #888; font-size: 0.8rem; letter-spacing: 1px; font-weight: 700; }
 
         /* MOBILUS */
         @media (max-width: 768px) {
@@ -95,19 +117,19 @@
             <form id="orderForm">
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name" required placeholder="John Doe">
+                    <input type="text" id="name" required placeholder="JOHN DOE">
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" required placeholder="john@example.com">
+                    <input type="email" id="email" required placeholder="JOHN@EXAMPLE.COM">
                 </div>
                 <div class="form-group">
                     <label for="address">Shipping Address</label>
-                    <input type="text" id="address" required placeholder="Vilniaus g. 10-2">
+                    <input type="text" id="address" required placeholder="VILNIAUS G. 10-2">
                 </div>
                 <div class="form-group">
                     <label for="city">City</label>
-                    <input type="text" id="city" required placeholder="Vilnius">
+                    <input type="text" id="city" required placeholder="VILNIUS">
                 </div>
                 <div class="form-group">
                     <label for="zip">Zip / Postal Code</label>
@@ -146,7 +168,7 @@
     <div class="success-message" id="successScreen">
         <h2>ORDER_RECEIVED</h2>
         <p>THANK YOU. PAYMENT CONFIRMED AND ORDER DETAILS LOGGED INTO THE SYSTEM.</p>
-        <p style="margin-top: 1rem;"><a href="shop.html" style="color: #fff; text-decoration: underline;">RETURN TO SHOP</a></p>
+        <p style="margin-top: 1rem;"><a href="shop.html" style="color: #fff; text-decoration: underline; letter-spacing: 1px;">RETURN TO SHOP</a></p>
     </div>
 
     <script>
@@ -156,7 +178,6 @@
         const checkoutContainer = document.getElementById('checkoutContainer');
         const successScreen = document.getElementById('successScreen');
 
-        // Tabų perjungimo funkcija
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
@@ -165,9 +186,8 @@
             event.target.classList.add('active');
         }
 
-        // Užkraunam krepšelio suvestinę
         if(cart.length === 0) {
-            summaryItemsContainer.innerHTML = '<p style="color:#444; font-style:italic;">Bag is empty.</p>';
+            summaryItemsContainer.innerHTML = '<p style="color:#444; letter-spacing: 1px;">BAG IS EMPTY.</p>';
         } else {
             let total = 0;
             summaryItemsContainer.innerHTML = '';
@@ -183,7 +203,6 @@
             summaryTotalSum.innerText = `${total.toFixed(2)} €`;
         }
 
-        // Bendros funkcija formos duomenų surinkimui
         function validateAndGetOrder(detailsId) {
             let itemsText = cart.map(item => `${item.name} (${item.price.toFixed(2)}€)`).join(', ');
             return {
@@ -200,7 +219,6 @@
             };
         }
 
-        // Čia jau yra tavo gautas Formspree ID
         function sendOrderToFormspree(orderData) {
             return fetch('https://formspree.io/f/xbdejewz', {
                 method: 'POST',
@@ -237,7 +255,6 @@
             });
         }
 
-        // 1 TABAS: RENDERINAM TIK KORTELIŲ MYGTUKĄ
         paypal.Buttons({
             style: { layout: 'vertical', fundingicons: false },
             fundingSource: paypal.FUNDING.CARD, 
@@ -253,7 +270,6 @@
             onError: function(err) { alert('Apmokėjimo klaida. Bandykite dar kartą.'); }
         }).render('#paypal-card-container');
 
-        // 2 TABAS: RENDERINAM TIK PAYPAL MYGTUKĄ
         paypal.Buttons({
             style: { layout: 'vertical' },
             fundingSource: paypal.FUNDING.PAYPAL, 
