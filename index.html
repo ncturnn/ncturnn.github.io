@@ -6,82 +6,132 @@
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow: hidden; height: 100vh; }
-        .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         
-        /* NAVBAR */
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
-        .logo a { font-size: 2rem !important; font-weight: 700 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
-        .logo a span { color: #ff007f; text-shadow: 0 0 12px rgba(255, 0, 127, 1), 0 0 5px rgba(255, 0, 127, 0.8); font-style: normal !important; display: inline-block; }
-        .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
-        
-        .nav-links { list-style: none; display: flex; gap: 2rem; align-items: center; }
-        .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; transition: color 0.3s; }
-        .nav-links a:hover { color: #ff007f; }
-
-        /* HERO ELEMENTAI */
-        .hero-container { display: flex; flex-direction: column; justify-content: center; align-items: center; height: calc(100vh - 120px); text-align: center; position: relative; padding: 0 2rem; }
-        
-        .system-status { font-size: 0.85rem; letter-spacing: 4px; color: #444; margin-bottom: 2rem; text-transform: uppercase; }
-        .system-status span { color: #ff007f; text-shadow: 0 0 8px rgba(255, 0, 127, 0.5); animation: blink 1.5s infinite; }
-
-        .void-btn { background: transparent; border: 2px solid #ff007f; color: #fff; font-family: 'Syncopate', sans-serif; font-size: 1.8rem; font-style: italic; font-weight: 700; letter-spacing: 8px; padding: 2rem 4rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1); box-shadow: 0 0 20px rgba(255, 0, 127, 0.2); text-decoration: none; position: relative; }
-        .void-btn:hover { background: #ff007f; color: #fff; box-shadow: 0 0 40px rgba(255, 0, 127, 0.8); transform: scale(1.05); }
-
-        /* LIVE TERMINAL LOGS */
-        .terminal-logs { position: absolute; bottom: 4rem; left: 4rem; font-size: 0.75rem; color: #222; text-align: left; line-height: 1.6; letter-spacing: 1px; }
-        .live-timer { position: absolute; bottom: 4rem; right: 4rem; font-size: 0.85rem; color: #555; letter-spacing: 2px; font-weight: bold; }
-
-        /* ANIMACIJOS */
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+        /* JUDANTIS FONAS (MOVING BACKGROUND) */
+        body { 
+            background-color: #050505 !important; 
+            color: #f0f0f0; 
+            font-family: 'Courier New', Courier, monospace; 
+            overflow: hidden; 
+            height: 100vh;
+            position: relative;
         }
 
-        /* MOBILIŲJŲ TELEFONŲ RESPONSIVE KLASĖS */
+        /* Skaitmeninis judantis tinklelis fone */
+        body::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(rgba(18, 18, 18, 0.3) 2px, transparent 2px),
+                        linear-gradient(90deg, rgba(18, 18, 18, 0.3) 2px, transparent 2px);
+            background-size: 50px 50px;
+            background-position: center;
+            transform: perspective(500px) rotateX(60deg);
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.05; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
+        
+        /* CENTRINIS KONTEINERIS */
+        .hero-container { 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            text-align: center; 
+            position: relative; 
+            z-index: 1;
+            padding: 0 2rem; 
+        }
+        
+        .system-status { 
+            font-size: 0.8rem; 
+            letter-spacing: 5px; 
+            color: #333; 
+            margin-bottom: 3rem; 
+            text-transform: uppercase; 
+        }
+        .system-status span { 
+            color: #666; 
+            animation: pulse 2s infinite;
+        }
+
+        /* NEON BLACK MYGTUKAS */
+        .void-btn { 
+            background: #000000; 
+            border: 1px solid #222; 
+            color: #ffffff; 
+            font-family: 'Syncopate', sans-serif; 
+            font-size: 1.6rem; 
+            font-style: italic; 
+            font-weight: 700; 
+            letter-spacing: 10px; 
+            padding: 2rem 4.5rem; 
+            cursor: pointer; 
+            text-decoration: none; 
+            position: relative;
+            outline: none;
+            /* Tamsus, neoninis švytėjimas */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.02);
+            transition: all 0.5s cubic-bezier(0.15, 0.85, 0.3, 1);
+        }
+        
+        .void-btn:hover { 
+            color: #ffffff;
+            border-color: #ffffff;
+            background: #050505;
+            /* Intensyvesnis tamsaus neono (neon black/white) efektas */
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.1);
+            transform: scale(1.02) translateY(-2px);
+        }
+
+        /* TERMINALO DETALĖS APAČIOJE */
+        .terminal-logs { position: absolute; bottom: 3rem; left: 3rem; font-size: 0.7rem; color: #1a1a1a; text-align: left; line-height: 1.6; letter-spacing: 1px; }
+        .live-timer { position: absolute; bottom: 3rem; right: 3rem; font-size: 0.8rem; color: #222; letter-spacing: 3px; }
+
+        /* ANIMACIJOS */
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.8; }
+        }
+
+        /* RESPONSIVE DIZAINAS TELEFONAMS */
         @media (max-width: 768px) {
-            .navbar { padding: 1.5rem 1.5rem; flex-direction: column; gap: 1.5rem; text-align: center; }
-            .logo a { font-size: 1.5rem !important; letter-spacing: 3px !important; }
-            .nav-links { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
-            
-            .hero-container { height: calc(100vh - 180px); }
-            .system-status { font-size: 0.7rem; letter-spacing: 2px; }
-            
-            .void-btn { font-size: 1.1rem; letter-spacing: 4px; padding: 1.5rem 2.5rem; width: 90%; max-width: 320px; text-align: center; }
-            
-            .terminal-logs { left: 1.5rem; bottom: 2rem; max-width: 250px; font-size: 0.65rem; }
-            .live-timer { right: 1.5rem; bottom: 2rem; font-size: 0.7rem; }
+            .system-status { font-size: 0.65rem; letter-spacing: 3px; margin-bottom: 2rem; }
+            .void-btn { font-size: 1rem; letter-spacing: 5px; padding: 1.5rem 2.5rem; width: 85%; max-width: 300px; }
+            .terminal-logs { left: 1.5rem; bottom: 2rem; display: none; } /* Paslepiam ant mobilaus, kad nebūtų netvarkos */
+            .live-timer { right: 0; left: 0; text-align: center; bottom: 2rem; font-size: 0.7rem; }
         }
     </style>
 </head>
 <body>
     <div class="noise-overlay"></div>
-    
-    <nav class="navbar">
-        <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
-        <ul class="nav-links">
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="archive.html">Archive</a></li>
-            <li><a href="about.html">About</a></li>
-        </ul>
-    </nav>
 
     <main class="hero-container">
-        <div class="system-status">CORE_SERVER_STATUS: <span>SYSTEM_ONLINE</span></div>
+        <div class="system-status">STATUS: <span>CONNECTION_RESTRICTED</span></div>
         
-        <a href="shop.html" class="void-btn">ENTER THE VOID</a>
+        <a href="shop.html" class="void-btn">ENTER_VOID</a>
 
         <div class="terminal-logs">
-            <p>> INITIALIZING OVERRIDE PROTOCOL...</p>
-            <p>> PROJECT_ID: NTRN-001 LOCKED.</p>
-            <p>> SECURE CONNECTION ESTABLISHED.</p>
+            <p>> OVERRIDE SUCCESSFUL.</p>
+            <p>> NOCTURN SERVER ONLINE // PORT_8080</p>
         </div>
 
         <div class="live-timer" id="liveTimer">00:00:00:00</div>
     </main>
 
     <script>
-        // GYVAS TERMINALO LAIKRODIS (Suteikia puslapiui dinamiškumo)
+        // Laikrodis, kuris sukasi fone realiu laiku
         function updateTimer() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
