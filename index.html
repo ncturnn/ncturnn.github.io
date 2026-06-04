@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ENTER // N★CTURN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -21,7 +21,7 @@
             padding: 5rem 2rem 4rem 2rem;
         }
 
-        /* JUDANTIS FONAS */
+        /* JUDANTIS FONAS (Tavo originalus 3D tinklelis) */
         body::before {
             content: "";
             position: absolute;
@@ -40,7 +40,86 @@
 
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         
-        /* MILŽINIŠKAS LOGO VIRŠUJE PER VIDURĮ */
+        /* ==========================================
+           INTEGRUOTA: 5 SEKUNDŽIŲ PRE-LOADER SISTEMA
+        ========================================== */
+        #preloader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: #050505;
+            z-index: 99999; /* Virš visko, kol kraunasi */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), pointer-events 0.6s;
+            padding: 2rem;
+        }
+        
+        .loader-container {
+            max-width: 500px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .loader-logo {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 6px;
+            color: #fff;
+            text-align: center;
+            font-style: italic;
+            font-weight: 700;
+        }
+        .loader-logo span { color: #ff007f; text-shadow: 0 0 10px rgba(255, 0, 127, 0.6); font-style: normal; }
+
+        .terminal-box {
+            border: 1px dashed #222;
+            background: #090909;
+            padding: 1.2rem;
+            height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 0.4rem;
+            overflow: hidden;
+        }
+        .terminal-line {
+            font-size: 0.55rem;
+            letter-spacing: 1px;
+            color: #555;
+            text-transform: uppercase;
+        }
+        .terminal-line.active { color: #fff; }
+        .terminal-line.success { color: #ff007f; text-shadow: 0 0 5px rgba(255, 0, 127, 0.3); }
+
+        .progress-bar {
+            width: 100%;
+            height: 2px;
+            background: #111;
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: #ff007f;
+            box-shadow: 0 0 10px #ff007f;
+            animation: fillProgress 4.8s forwards linear;
+        }
+
+        /* Kai pasikrauna, paslepiam pre-loaderį */
+        body.loaded #preloader {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* ==========================================
+           TAVO ORIGINALŪS ELEMENTAI & STILIAI
+        ========================================== */
         .header-logo {
             text-align: center;
             position: relative;
@@ -49,7 +128,7 @@
         }
         .header-logo a { 
             font-family: 'Syncopate', sans-serif;
-            font-size: 5.5rem; /* Žymiai didesnis dydis kompiuteryje */
+            font-size: 5.5rem; 
             font-weight: 700; 
             letter-spacing: 15px; 
             color: #ffffff; 
@@ -59,7 +138,6 @@
             line-height: 1;
         }
         
-        /* ROŽINĖS ŽVAIGŽDĖS BREATHING (KVĖPAVIMO) EFEKTAS */
         .header-logo a span { 
             color: #ff007f; 
             font-style: normal; 
@@ -67,7 +145,6 @@
             animation: starBreathe 3s ease-in-out infinite;
         }
 
-        /* CENTRINIS KONTEINERIS SU MYGTUKU */
         .main-content { 
             display: flex;
             flex-direction: column;
@@ -79,7 +156,6 @@
             z-index: 10;
         }
 
-        /* MINIMALISTINIS VOID MYGTUKAS */
         .void-btn { 
             background: #000000; 
             border: 1px solid #1a1a1a; 
@@ -103,7 +179,6 @@
             transform: scale(1.03);
         }
 
-        /* APATINĖ ZONA */
         .footer-terminal {
             width: 100%;
             display: flex;
@@ -117,6 +192,11 @@
         .live-timer { font-size: 0.8rem; color: #222; letter-spacing: 2px; }
 
         /* ANIMACIJOS */
+        @keyframes fillProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
         @keyframes gridMove {
             0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
             100% { transform: perspective(500px) rotateX(60deg) translateY(60px); }
@@ -133,12 +213,12 @@
             }
         }
 
-        /* AUTOMATINIS LOGO SUMAŽINIMAS TELEFONAMS (RAGELIAMS) */
+        /* RESPONSIŪVUMAS TELEFONAMS */
         @media (max-width: 768px) {
             body { padding: 4rem 1.5rem 2rem 1.5rem; }
             
             .header-logo a { 
-                font-size: 2.6rem; /* Idealiai telpa į bet kurį telefoną, bet išlieka didelis */
+                font-size: 2.6rem; 
                 letter-spacing: 6px; 
             }
             
@@ -160,6 +240,19 @@
 <body>
     <div class="noise-overlay"></div>
 
+    <div id="preloader">
+        <div class="loader-container">
+            <div class="loader-logo">N<span>★</span>CTURN</div>
+            
+            <div class="terminal-box" id="terminal">
+                </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
     <header class="header-logo">
         <a href="shop.html">N<span>★</span>CTURN</a>
     </header>
@@ -174,6 +267,7 @@
     </footer>
 
     <script>
+        // JS INTEGRACIJA VARTOTOJO LAIKMAČIUI
         function updateTimer() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
@@ -185,6 +279,34 @@
         }
         setInterval(updateTimer, 10);
         updateTimer();
+
+        // JS INTEGRACIJA TERMINALO LOGAMS (Išdalinta per 5s laiko tarpus)
+        const bootLogs = [
+            { text: "LAUNCHING_NCTURN_CORE...", delay: 200 },
+            { text: "LOADING UNRELEASED BLUEPRINTS...", delay: 1000 },
+            { text: "ESTABLISHING SECURE GATEWAY...", delay: 1800 },
+            { text: "STABILIZING 3D GEOMETRIC GRID...", delay: 2600 },
+            { text: "OVERRIDE STATUS: ACCESS_GRANTED", delay: 3800, type: "success" },
+            { text: "BOOT SEQUENCE COMPLETE.", delay: 4400, type: "success" }
+        ];
+
+        const terminal = document.getElementById('terminal');
+
+        bootLogs.forEach(log => {
+            setTimeout(() => {
+                const p = document.createElement('p');
+                p.className = 'terminal-line active';
+                if (log.type === 'success') p.classList.add('success');
+                p.innerText = `> ${log.text}`;
+                terminal.appendChild(p);
+                terminal.scrollTop = terminal.scrollHeight;
+            }, log.delay);
+        });
+
+        // Tiksliai po 5 sekundžių (5000ms) išjungiam loaderį
+        setTimeout(() => {
+            document.body.classList.add('loaded');
+        }, 5000);
     </script>
 </body>
 </html>
