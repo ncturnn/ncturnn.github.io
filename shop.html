@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHOP | NOCTURN</title>
+    <title>SHOP | N★CTURN</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -32,6 +32,8 @@
             position: relative;
             z-index: 10;
         }
+        
+        /* LOGOTIPAS: ŽVAIGŽDUTĖ + PAKREIPTAS Į DEŠINĘ */
         .logo a {
             font-size: 2rem !important; 
             font-weight: 700 !important; 
@@ -40,11 +42,19 @@
             text-decoration: none !important;
             transition: all 0.3s ease !important;
             display: inline-block !important;
+            font-style: italic !important;
+        }
+        .logo a span {
+            color: #ff007f;
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.8);
+            font-style: normal !important;
+            display: inline-block;
         }
         .logo a:hover {
             color: #ff007f !important;
             text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important;
         }
+        
         .nav-links { 
             list-style: none; 
             display: flex; 
@@ -59,6 +69,48 @@
         }
         .nav-links a:hover { 
             color: #ff007f; 
+        }
+
+        /* MINIMALISTINIS MUZIKOS GROTUVAS KAIRIAJAME KAMPE */
+        .audio-player-container {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 9999999 !important;
+            background: #0a0a0a;
+            border: 1px dashed #333;
+            padding: 0.8rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            transition: border-color 0.3s;
+        }
+        .audio-player-container:hover {
+            border-color: #ff007f;
+        }
+        .player-btn {
+            background: none;
+            border: none;
+            color: #ff007f;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: text-shadow 0.3s;
+        }
+        .player-btn:hover {
+            text-shadow: 0 0 8px rgba(255, 0, 127, 0.8);
+        }
+        .track-info {
+            font-size: 0.75rem;
+            color: #666;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            max-width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         /* SKLANDANTIS KREPŠELIO MYGTUKAS APATINĖJE DEŠINĖJE */
@@ -209,13 +261,19 @@
     <div class="noise-overlay"></div>
     
     <nav class="navbar">
-        <div class="logo"><a href="index.html">NOCTURN</a></div>
+        <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
         <ul class="nav-links">
             <li><a href="shop.html">Shop</a></li>
             <li><a href="archive.html">Archive</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
     </nav>
+
+    <div class="audio-player-container">
+        <button class="player-btn" id="playAudioBtn">[PLAY_RADIO]</button>
+        <span class="track-info" id="trackInfo">NOCTURN_FM // OFF</span>
+    </div>
+    <audio id="bgAudio" loop src="https://codesandbox.io/api/v1/sandboxes/wz877/assets/ambient.mp3"></audio>
 
     <button class="cart-trigger" id="cartTrigger">BAG (<span class="cart-count" id="cartCount">0</span>)</button>
 
@@ -265,6 +323,24 @@
     </section>
 
     <script>
+        const bgAudio = document.getElementById('bgAudio');
+        const playAudioBtn = document.getElementById('playAudioBtn');
+        const trackInfo = document.getElementById('trackInfo');
+
+        playAudioBtn.addEventListener('click', () => {
+            if (bgAudio.paused) {
+                bgAudio.play().catch(e => console.log("Naršyklė reikalauja paspaudimo"));
+                playAudioBtn.innerText = "[MUTE_RADIO]";
+                trackInfo.innerText = "NOCTURN_FM // ON";
+                trackInfo.style.color = "#ff007f";
+            } else {
+                bgAudio.pause();
+                playAudioBtn.innerText = "[PLAY_RADIO]";
+                trackInfo.innerText = "NOCTURN_FM // OFF";
+                trackInfo.style.color = "#666";
+            }
+        });
+
         let cart = JSON.parse(localStorage.getItem('nocturn_cart')) || [];
         const cartSidebar = document.getElementById('cartSidebar');
         const cartTrigger = document.getElementById('cartTrigger');
@@ -316,7 +392,7 @@
 
         function processCheckout() {
             if(cart.length === 0) return;
-            alert("Sujungiama su mokėjimo sistema... Užsakymas priimtas!");
+            alert("Connecting to payment gateway... Order processed!");
             cart = [];
             updateCart();
             cartSidebar.classList.remove('active');
