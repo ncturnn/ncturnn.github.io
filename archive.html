@@ -45,11 +45,6 @@
             color: #ff007f !important;
             text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important;
         }
-        .nav-container {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-        }
         .nav-links { 
             list-style: none; 
             display: flex; 
@@ -65,34 +60,52 @@
         .nav-links a:hover { 
             color: #ff007f; 
         }
+
+        /* SKLANDANTIS KREPŠELIO MYGTUKAS APATINĖJE DEŠINĖJE */
         .cart-trigger {
-            background: none;
-            border: none;
-            color: #fff;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #0a0a0a !important;
+            border: 2px solid #ff007f !important;
+            color: #fff !important;
+            padding: 1rem 1.5rem;
             font-family: 'Syncopate', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 2px;
             cursor: pointer;
-            transition: all 0.3s;
+            z-index: 9999999 !important;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
+            transition: all 0.3s ease;
+            display: block !important;
         }
         .cart-trigger:hover {
-            color: #ff007f;
-            text-shadow: 0 0 8px rgba(255, 0, 127, 0.6);
+            background: #ff007f !important;
+            color: #fff !important;
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.8);
+            transform: translateY(-3px);
         }
-        .cart-count { color: #ff007f; font-weight: bold; }
+        .cart-count {
+            font-weight: bold;
+            color: #ff007f;
+        }
+        .cart-trigger:hover .cart-count {
+            color: #fff;
+        }
 
-        /* KREPŠELIO DIZAINAS */
+        /* ŠONINIS KREPŠELIO LANGAZ */
         .cart-sidebar {
             position: fixed;
             top: 0; right: -400px; width: 400px; height: 100vh;
             background: #0d0d0d; border-left: 1px solid #222;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.5); z-index: 999;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5); 
+            z-index: 10000000 !important;
             padding: 3rem 2rem; display: flex; flex-direction: column;
             transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99);
         }
         .cart-sidebar.active { right: 0; }
         .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 1.5rem; margin-bottom: 2rem; }
-        .cart-header h2 { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; letter-spacing: 2px;}
+        .cart-header h2 { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; letter-spacing: 2px; color: #fff;}
         .close-cart { background: none; border: none; color: #666; font-size: 1.5rem; cursor: pointer; }
         .close-cart:hover { color: #ff007f; }
         .cart-items-container { flex: 1; overflow-y: auto; }
@@ -111,7 +124,7 @@
         .checkout-btn:hover { background: #e00070; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
         .empty-message { color: #444; text-align: center; margin-top: 3rem; font-style: italic; }
 
-        .products-section { padding: 5rem 4rem; max-width: 1200px; margin: 0 auto; background-color: #0a0a0a; }
+        .products-section { padding: 5rem 4rem; max-width: 1200px; margin: 0 auto; background-color: #0a0a0a; position: relative; z-index: 1; }
         .section-title { font-family: 'Syncopate', sans-serif; font-size: 2rem; letter-spacing: 4px; margin-bottom: 3rem; border-bottom: 1px solid #222; padding-bottom: 1rem; color: #555; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
         .product-card { background: #0b0b0b; border: 1px solid #151515; padding: 1rem; opacity: 0.6; position: relative; }
@@ -127,15 +140,14 @@
     
     <nav class="navbar">
         <div class="logo"><a href="index.html">NOCTURN</a></div>
-        <div class="nav-container">
-            <ul class="nav-links">
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="archive.html">Archive</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-            <button class="cart-trigger" id="cartTrigger">BAG (<span class="cart-count" id="cartCount">0</span>)</button>
-        </div>
+        <ul class="nav-links">
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="archive.html">Archive</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
     </nav>
+
+    <button class="cart-trigger" id="cartTrigger">BAG (<span class="cart-count" id="cartCount">0</span>)</button>
 
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
