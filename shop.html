@@ -6,72 +6,71 @@
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #0a0a0a; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
+        body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
-        .logo a { font-family: 'Syncopate', sans-serif; font-size: 1.4rem; letter-spacing: 3px; color: #fff; text-decoration: none; font-weight: 700; transition: transform 0.3s ease; display: inline-block; }
-        .logo a span { color: #ff007f; transition: color 0.3s ease; }
-        .logo a:hover { transform: scale(1.05); }
-        .logo a:hover span { color: #fff; text-shadow: 0 0 10px #ff007f; }
+        /* INTEGRUOTAS TEISINGAS LOGO STILIUS IŠ NUOTRAUKOS */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
+        .logo a { font-size: 2rem !important; font-weight: 700 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
+        .logo a span { color: #ff007f; text-shadow: 0 0 12px rgba(255, 0, 127, 1), 0 0 5px rgba(255, 0, 127, 0.8); font-style: normal !important; display: inline-block; }
+        .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
         
         .nav-links { list-style: none; display: flex; gap: 2rem; align-items: center; }
         .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; transition: color 0.3s; }
         .nav-links a:hover { color: #ff007f; }
-        .cart-icon { cursor: pointer; font-size: 0.9rem; letter-spacing: 2px; transition: color 0.3s; color: #f0f0f0; font-family: 'Syncopate', sans-serif; }
-        .cart-icon:hover { color: #ff007f; }
-
-        .shop-container { max-width: 1200px; margin: 4rem auto; padding: 0 4rem; }
-        .section-title { font-family: 'Syncopate', sans-serif; font-size: 1.8rem; letter-spacing: 4px; margin-bottom: 3rem; border-bottom: 1px solid #111; padding-bottom: 1rem; }
         
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; }
-        .product-card { background: #0d0d0d; border: 1px solid #151515; padding: 1.5rem; transition: border-color 0.3s, transform 0.3s; }
-        .product-card:hover { border-color: #ff007f; transform: translateY(-5px); }
-        .product-image-placeholder { width: 100%; height: 350px; background: #111; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: #444; letter-spacing: 2px; text-transform: uppercase; border: 1px solid #1a1a1a; }
-        .product-info { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
-        .product-name { font-family: 'Syncopate', sans-serif; font-size: 0.85rem; letter-spacing: 1px; color: #fff; }
-        .product-price { color: #ff007f; font-weight: bold; }
+        /* KREPŠELIO ELEMENTAI */
+        .cart-trigger { position: fixed; bottom: 2rem; right: 2rem; background: #0a0a0a !important; border: 2px solid #ff007f !important; color: #fff !important; padding: 1rem 1.5rem; font-family: 'Syncopate', sans-serif; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; z-index: 9999999 !important; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); transition: all 0.3s ease; display: block !important; }
+        .cart-trigger:hover { background: #ff007f !important; color: #fff !important; box-shadow: 0 0 25px rgba(255, 0, 127, 0.8); transform: translateY(-3px); }
+        .cart-count { font-weight: bold; color: #ff007f; }
+        .cart-trigger:hover .cart-count { color: #fff; }
         
-        .add-to-bag-btn { width: 100%; background: transparent; border: 1px solid #333; color: #fff; padding: 1rem; font-family: 'Syncopate', sans-serif; font-size: 0.75rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; }
-        .add-to-bag-btn:hover { background: #fff; color: #0a0a0a; border-color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
-
-        /* KREPŠELIO ŠONINIS LANGAI */
-        .cart-sidebar { position: fixed; top: 0; right: -450px; width: 450px; height: 100vh; background: #0d0d0d; border-left: 1px solid #151515; z-index: 1000; padding: 3rem; transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); display: flex; flex-direction: column; }
-        .cart-sidebar.open { right: 0; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
-        .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
-        .cart-header h2 { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; letter-spacing: 2px; }
-        .close-cart { cursor: pointer; font-size: 1.2rem; color: #666; transition: color 0.3s; }
+        .cart-sidebar { position: fixed; top: 0; right: -450px; width: 450px; height: 100vh; background: #0d0d0d; border-left: 1px solid #222; box-shadow: -10px 0 30px rgba(0,0,0,0.5); z-index: 10000000 !important; padding: 3rem 2rem; display: flex; flex-direction: column; transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); }
+        .cart-sidebar.active { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 1.5rem; margin-bottom: 2rem; }
+        .cart-header h2 { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; letter-spacing: 2px; color: #fff;}
+        .close-cart { background: none; border: none; color: #666; font-size: 1.5rem; cursor: pointer; }
         .close-cart:hover { color: #ff007f; }
-        
-        .cart-items-container { flex: 1; overflow-y: auto; margin-bottom: 2rem; }
+        .cart-items-container { flex: 1; overflow-y: auto; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid #151515; font-size: 0.9rem; }
-        .cart-item-info h4 { font-family: 'Syncopate', sans-serif; font-size: 0.75rem; margin-bottom: 0.3rem; }
-        .cart-item-info span { color: #ff007f; }
-        .remove-item-btn { background: transparent; border: none; color: #444; cursor: pointer; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; transition: color 0.3s; }
+        .cart-item-info h4 { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; margin-bottom: 0.3rem;}
+        .cart-item-price { color: #ff007f; }
+        .remove-item-btn { background: none; border: none; color: #444; cursor: pointer; font-size: 0.8rem;}
         .remove-item-btn:hover { color: #ff007f; }
+        .cart-footer { border-top: 1px solid #222; padding-top: 2rem; margin-top: 1rem; }
+        .cart-total { display: flex; justify-content: space-between; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .checkout-btn { background: #ff007f; color: #fff; border: none; width: 100%; padding: 1.2rem; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; transition: background 0.3s; text-align: center; display: block; }
+        .checkout-btn:hover { background: #e00070; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
+        .empty-message { color: #444; text-align: center; margin-top: 3rem; font-style: italic; }
         
-        .cart-footer { border-top: 1px solid #222; padding-top: 2rem; }
-        .cart-total-row { display: flex; justify-content: space-between; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; margin-bottom: 2rem; }
-        .cart-total-price { color: #ff007f; text-shadow: 0 0 5px rgba(255, 0, 127, 0.3); }
-        .checkout-btn { width: 100%; background: #ff007f; border: none; color: #fff; padding: 1.2rem; font-family: 'Syncopate', sans-serif; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; }
-        .checkout-btn:hover { background: #e00070; box-shadow: 0 0 20px rgba(255, 0, 127, 0.5); }
+        /* PRODUKTŲ TINKLELIS */
+        .products-section { padding: 5rem 4rem; max-width: 1200px; margin: 0 auto; background-color: #0a0a0a; position: relative; z-index: 1; }
+        .section-title { font-family: 'Syncopate', sans-serif; font-size: 2rem; letter-spacing: 4px; margin-bottom: 3rem; border-bottom: 1px solid #222; padding-bottom: 1rem; color: #fff; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
+        .product-card { background: #0b0b0b; border: 1px solid #151515; padding: 1rem; position: relative; transition: border 0.3s ease; }
+        .product-card:hover { border: 1px solid #333; }
+        .image-placeholder { width: 100%; height: 400px; background: #121212; display: flex; justify-content: center; align-items: center; color: #444; font-size: 0.8rem; letter-spacing: 2px; border: 1px dashed #222; margin-bottom: 1.5rem; text-transform: uppercase; }
+        .product-info { margin-bottom: 1.5rem; }
+        .product-info h3 { font-family: 'Syncopate', sans-serif; font-size: 1rem; letter-spacing: 1px; margin-bottom: 0.5rem; color: #fff; }
+        .price { font-weight: bold; letter-spacing: 1px; color: #ff007f; font-size: 1.1rem; }
+        
+        .add-to-bag-btn { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 1rem; font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; }
+        .add-to-bag-btn:hover { background: #fff; color: #000; border-color: #fff; }
 
-        /* MOBILAUS TELEFONO RESPONSIVE KLASĖS */
+        /* MOBILIŲJŲ TELEFONŲ RESPONSIVE KLASĖS */
         @media (max-width: 768px) {
             .navbar { padding: 1.5rem 1.5rem; flex-direction: column; gap: 1.5rem; text-align: center; }
-            .logo a { font-size: 1.3rem; letter-spacing: 2px; }
-            .nav-links { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
-            .nav-links a, .cart-icon { font-size: 0.8rem; letter-spacing: 1px; }
+            .logo a { font-size: 1.5rem !important; letter-spacing: 3px !important; }
+            .nav-links { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
             
-            .shop-container { padding: 0 1.5rem; margin: 2rem auto; }
+            .products-section { padding: 3rem 1.5rem; }
             .section-title { font-size: 1.2rem; letter-spacing: 2px; text-align: center; margin-bottom: 2rem; }
             
-            .products-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .product-card { padding: 1rem; }
-            .product-image-placeholder { height: 300px; }
+            .product-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .image-placeholder { height: 320px; }
             
             .cart-sidebar { width: 100%; right: -100%; padding: 2rem 1.5rem; }
-            .cart-header { margin-bottom: 2rem; }
+            .cart-trigger { bottom: 1.5rem; right: 1.5rem; padding: 0.8rem 1.2rem; font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -83,110 +82,103 @@
             <li><a href="shop.html">Shop</a></li>
             <li><a href="archive.html">Archive</a></li>
             <li><a href="about.html">About</a></li>
-            <li><div class="cart-icon" onclick="toggleCart()">BAG (<span id="cartCount">0</span>)</div></li>
         </ul>
     </nav>
 
-    <main class="shop-container">
-        <h1 class="section-title">DROP_001 // PROTOTYPES</h1>
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-image-placeholder">Image_Unavailable</div>
-                <div class="product-info">
-                    <h3 class="product-name">GRAPHIC TEE</h3>
-                    <span class="product-price">40.00 €</span>
-                </div>
-                <button class="add-to-bag-btn" onclick="addToCart('GRAPHIC TEE', 40.00)">ADD TO BAG</button>
-            </div>
-            <div class="product-card">
-                <div class="product-image-placeholder">Image_Unavailable</div>
-                <div class="product-info">
-                    <h3 class="product-name">THERMAL LONG SLEEVE</h3>
-                    <span class="product-price">50.00 €</span>
-                </div>
-                <button class="add-to-bag-btn" onclick="addToCart('THERMAL LONG SLEEVE', 50.00)">ADD TO BAG</button>
-            </div>
-        </div>
-    </main>
+    <button class="cart-trigger" id="cartTrigger">BAG (<span class="cart-count" id="cartCount">0</span>)</button>
 
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
             <h2>YOUR_BAG</h2>
-            <div class="close-cart" onclick="toggleCart()">×</div>
+            <button class="close-cart" id="closeCart">×</button>
         </div>
         <div class="cart-items-container" id="cartItemsContainer"></div>
         <div class="cart-footer">
-            <div class="cart-total-row">
+            <div class="cart-total">
                 <span>TOTAL:</span>
-                <span class="cart-total-price" id="cartTotalPrice">0.00 €</span>
+                <span id="cartTotalSum">0.00 €</span>
             </div>
-            <button class="checkout-btn" onclick="checkoutCart()">Proceed to Checkout</button>
+            <button class="checkout-btn" onclick="processCheckout()">PROCEED TO CHECKOUT</button>
         </div>
     </div>
 
+    <section class="products-section">
+        <h2 class="section-title">DROP_001 // PROTOTYPES</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
+                <div class="product-info">
+                    <h3>GRAPHIC TEE</h3>
+                    <div class="price">40.00 €</div>
+                </div>
+                <button class="add-to-bag-btn" onclick="addToCart('GRAPHIC TEE', 40.00)">ADD TO BAG</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="image-placeholder">IMAGE_UNAVAILABLE</div>
+                <div class="product-info">
+                    <h3>THERMAL LONG SLEEVE</h3>
+                    <div class="price">50.00 €</div>
+                </div>
+                <button class="add-to-bag-btn" onclick="addToCart('THERMAL LONG SLEEVE', 50.00)">ADD TO BAG</button>
+            </div>
+        </div>
+    </section>
+
     <script>
         let cart = JSON.parse(localStorage.getItem('nocturn_cart')) || [];
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartTrigger = document.getElementById('cartTrigger');
+        const closeCart = document.getElementById('closeCart');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartCount = document.getElementById('cartCount');
+        const cartTotalSum = document.getElementById('cartTotalSum');
 
-        function toggleCart() {
-            document.getElementById('cartSidebar').classList.toggle('open');
-            renderCart();
-        }
+        cartTrigger.addEventListener('click', () => cartSidebar.classList.add('active'));
+        closeCart.addEventListener('click', () => cartSidebar.classList.remove('active'));
 
         function addToCart(name, price) {
-            cart.push({ name, price });
-            localStorage.setItem('nocturn_cart', JSON.stringify(cart));
-            updateCartCount();
-            toggleCart();
+            cart.push({ name: name, price: price });
+            updateCart();
+            cartSidebar.classList.add('active'); // Automatiškai atidaro krepšelį įdėjus prekę
         }
 
-        function removeFromCart(index) {
+        function removeItem(index) {
             cart.splice(index, 1);
+            updateCart();
+        }
+
+        function updateCart() {
             localStorage.setItem('nocturn_cart', JSON.stringify(cart));
-            updateCartCount();
-            renderCart();
-        }
-
-        function updateCartCount() {
-            document.getElementById('cartCount').innerText = cart.length;
-        }
-
-        function renderCart() {
-            const container = document.getElementById('cartItemsContainer');
-            const totalElement = document.getElementById('cartTotalPrice');
-            
-            if (cart.length === 0) {
-                container.innerHTML = '<div style="color:#444; font-size:0.85rem; text-align:center; margin-top:2rem;">BAG_IS_EMPTY</div>';
-                totalElement.innerText = '0.00 €';
+            cartCount.innerText = cart.length;
+            cartItemsContainer.innerHTML = '';
+            if(cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-message">BAG IS EMPTY</p>';
+                cartTotalSum.innerText = '0.00 €';
                 return;
             }
-
-            container.innerHTML = '';
             let total = 0;
-            
             cart.forEach((item, index) => {
                 total += item.price;
-                container.innerHTML += `
+                cartItemsContainer.innerHTML += `
                     <div class="cart-item">
                         <div class="cart-item-info">
                             <h4>${item.name}</h4>
-                            <span>${item.price.toFixed(2)} €</span>
+                            <span class="cart-item-price">${item.price.toFixed(2)} €</span>
                         </div>
-                        <button class="remove-item-btn" onclick="removeFromCart(${index})">[Remove]</button>
+                        <button class="remove-item-btn" onclick="removeItem(${index})">[REMOVE]</button>
                     </div>
                 `;
             });
-            totalElement.innerText = `${total.toFixed(2)} €`;
+            cartTotalSum.innerText = `${total.toFixed(2)} €`;
         }
 
-        function checkoutCart() {
-            if (cart.length === 0) {
-                alert("Your bag is empty.");
-                return;
-            }
+        function processCheckout() {
+            if(cart.length === 0) return;
             window.location.href = 'checkout.html';
         }
-
-        updateCartCount();
+        
+        updateCart();
     </script>
 </body>
 </html>
