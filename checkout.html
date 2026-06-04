@@ -158,14 +158,22 @@
             summaryTotalSum.innerText = `${total.toFixed(2)} €`;
         }
 
-        // PAYPAL INTEGRACIJA SU FORMSPREE
+        // PAYPAL + KORTELIŲ INTEGRACIJA SU FORMSPREE
         paypal.Buttons({
-            // 1. Patikrinam ar užpildyti formos laukai prieš atidarant PayPal langą
+            // ŠITAS STILIUS GRĄŽINA ATSKIRĄ KORTELĖS MYGTUKĄ APAČIOJE
+            style: {
+                layout: 'vertical',
+                color: 'gold',
+                shape: 'rect',
+                label: 'paypal'
+            },
+
+            // 1. Patikrinam laukus prieš atidarant mokėjimą
             onClick: function(data, actions) {
                 const form = document.getElementById('orderForm');
                 if (!form.checkValidity()) {
-                    form.reportValidity(); // Parodo standartinius HTML pranešimus
-                    return actions.reject(); // Neleidžia atidaryti PayPal lango
+                    form.reportValidity(); 
+                    return actions.reject(); 
                 }
                 if (cart.length === 0) {
                     alert("Jūsų krepšelis tuščias!");
@@ -173,7 +181,7 @@
                 }
             },
 
-            // 2. Sukuriam užsakymą su teisinga krepšelio suma
+            // 2. Sukuriam užsakymą
             createOrder: function(data, actions) {
                 let totalAmount = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
                 return actions.order.create({
@@ -185,14 +193,13 @@
                 });
             },
 
-            // 3. Jei mokėjimas sėkmingas -> siunčiam info į Formspree (tavo Gmail)
+            // 3. Po sėkmingo apmokėjimo (nesvarbu ar PayPal, ar kortele) siunčiam info į Gmail
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
                     
                     let itemsText = cart.map(item => `${item.name} (${item.price.toFixed(2)}€)`).join(', ');
                     let finalTotal = summaryTotalSum.innerText;
 
-                    // Duomenų struktūra tavo laiškui
                     let orderData = {
                         Pirkėjas: document.getElementById('name').value,
                         Email: document.getElementById('email').value,
@@ -200,11 +207,10 @@
                         Miestas: document.getElementById('city').value,
                         Pastas_Kodas: document.getElementById('zip').value,
                         Telefonas: document.getElementById('phone').value,
-                        PayPal_Mokejimo_ID: details.id,
-                        PayPal_Pirkėjo_Vardas: details.payer.name.given_name + ' ' + details.payer.name.surname,
+                        Mokejimo_ID: details.id,
                         UŽSAKYTOS_PREKĖS: itemsText,
                         BENDRA_SUMA: finalTotal,
-                        Mokejimo_Statusas: "SĖKMINGAI APMOKĖTA PER PAYPAL"
+                        Mokejimo_Statusas: "SĖKMINGAI APMOKĖTA"
                     };
 
                     // !!! ČIA ĮRAŠYK SAVO FORMSPREE ID VIETOJ "TAVO_FORMSPREE_ID" !!!
@@ -216,7 +222,6 @@
                         },
                         body: JSON.stringify(orderData)
                     }).then(response => {
-                        // Išvalom krepšelį, paslepiam formą ir parodom sėkmę
                         localStorage.removeItem('nocturn_cart');
                         checkoutContainer.style.display = 'none';
                         successScreen.style.display = 'block';
@@ -226,7 +231,7 @@
 
             onError: function(err) {
                 console.error(err);
-                alert('Apmokėjimo klaida arba procesas buvo atšauktas. Bandykite dar kartą.');
+                alert('Apmokėjimo klaida. Bandykite dar kartą.');
             }
         }).render('#paypal-button-container');
     </script>
