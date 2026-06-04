@@ -9,15 +9,28 @@
         body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
-        .logo a { display: inline-block; text-decoration: none; }
-        .logo img { height: 60px; width: auto; display: block; mix-blend-mode: screen; }
+        
+        /* INTERAKTYVUS TEKSTINIS LOGOTIPAS */
+        .logo a { 
+            font-family: 'Syncopate', sans-serif; 
+            font-size: 1.4rem; 
+            letter-spacing: 3px; 
+            color: #fff; 
+            text-decoration: none; 
+            font-weight: 700;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .logo a span { color: #ff007f; transition: color 0.3s ease; }
+        .logo a:hover { transform: scale(1.05); }
+        .logo a:hover span { color: #fff; text-shadow: 0 0 10px #ff007f; }
+
         .nav-links { list-style: none; display: flex; gap: 2rem; }
         .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; transition: color 0.3s; }
         .nav-links a:hover { color: #ff007f; }
         .checkout-container { max-width: 1100px; margin: 0 auto; padding: 3rem 4rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; position: relative; z-index: 1; }
         .checkout-section h2 { font-family: 'Syncopate', sans-serif; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 2rem; border-bottom: 1px solid #222; padding-bottom: 0.5rem; color: #fff; }
         
-        /* MOKĖJIMO BŪDO PASIRINKIMAS */
         .payment-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2.5rem; }
         .method-btn { background: #0d0d0d; border: 1px solid #222; color: #888; padding: 1rem; font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 1px; cursor: pointer; transition: all 0.3s; text-align: center; }
         .method-btn:hover { border-color: #ff007f; color: #fff; }
@@ -29,9 +42,8 @@
         input { width: 100%; background: #0d0d0d; border: 1px solid #222; padding: 1rem; color: #fff; font-family: 'Courier New', monospace; font-size: 0.9rem; transition: border-color 0.3s; }
         input:focus { outline: none; border-color: #ff007f; }
         
-        /* PAYPAL SPECIFINIS MYGTUKAS */
-        .paypal-submit-btn { background: #ffc439; color: #012169; font-weight: bold; font-style: italic; }
-        .paypal-submit-btn:hover { background: #f4b41a; box-shadow: 0 0 20px rgba(255, 196, 57, 0.4); }
+        .paypal-submit-btn { background: #ffc439 !important; color: #012169 !important; font-weight: bold; font-style: italic; }
+        .paypal-submit-btn:hover { background: #f4b41a !important; box-shadow: 0 0 20px rgba(255, 196, 57, 0.4) !important; }
 
         .order-summary { background: #0d0d0d; border: 1px solid #151515; padding: 2rem; align-self: start; }
         .summary-items { margin-bottom: 2rem; max-height: 250px; overflow-y: auto; }
@@ -51,7 +63,9 @@
 <body>
     <div class="noise-overlay"></div>
     <nav class="navbar">
-        <div class="logo"><a href="index.html"><img src="nxturn.png" alt="N★CTURN"></a></div>
+        <div class="logo">
+            <a href="index.html">N<span>★</span>CTURN</a>
+        </div>
         <ul class="nav-links">
             <li><a href="shop.html">Shop</a></li>
             <li><a href="archive.html">Archive</a></li>
@@ -146,7 +160,6 @@
             summaryTotal.innerText = `$${total.toFixed(2)}`;
         }
 
-        // PERJUNGIMAS TARP KORTELĖS IR PAYPAL
         function setPaymentMethod(method) {
             currentMethod = method;
             const cardBtn = document.getElementById('methodCard');
@@ -159,22 +172,14 @@
                 cardBtn.classList.add('active');
                 paypalBtn.classList.remove('active');
                 cardZone.style.display = 'block';
-                
-                // Padarom korteles laukus privalomus
                 cardInputs.forEach(input => input.required = true);
-                
-                // Atstatom mygtuko stilių
                 submitBtn.innerText = "AUTHORIZE_PAYMENT";
                 submitBtn.className = "pay-btn";
             } else {
                 paypalBtn.classList.add('active');
                 cardBtn.classList.remove('active');
                 cardZone.style.display = 'none';
-                
-                // Nuimam reikalavimą kortelės laukams
                 cardInputs.forEach(input => input.required = false);
-                
-                // Pakeičiam mygtuką į geltoną PayPal stilių
                 submitBtn.innerText = "PayPal Checkout";
                 submitBtn.className = "pay-btn paypal-submit-btn";
             }
@@ -206,7 +211,6 @@
             e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{2})/, '$1/').trim();
         });
 
-        // Pradiniai nustatymai
         setPaymentMethod('card');
         renderSummary();
     </script>
