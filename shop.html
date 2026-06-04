@@ -64,6 +64,9 @@
         .product-card { background: #0b0b0b; border: 1px dashed #222; padding: 1.2rem; position: relative; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); display: flex; flex-direction: column; }
         .product-card:hover { border: 1px solid #ff007f; box-shadow: 0 0 20px rgba(255, 0, 127, 0.15); transform: translateY(-4px); }
         
+        /* Stilius nuorodai produkto viduje */
+        .product-page-link { text-decoration: none; color: inherit; display: block; }
+
         .card-meta { display: flex; justify-content: space-between; font-size: 0.6rem; color: #444; letter-spacing: 1px; margin-bottom: 1rem; text-transform: uppercase; }
         .product-card:hover .card-meta { color: #ff007f; }
 
@@ -71,7 +74,6 @@
         .image-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; opacity: 0.8; }
         .product-card:hover .image-container img { transform: scale(1.03); opacity: 1; }
         
-        /* Jei nuotraukos nėra, rodys šitą stilių */
         .img-fallback { color: #333; font-size: 0.65rem; letter-spacing: 2px; position: absolute; z-index: 1; }
         .product-card:hover .img-fallback { color: #ff007f; }
         
@@ -160,18 +162,20 @@
         <div class="product-grid">
             
             <div class="product-card" id="prod-1">
-                <div class="card-meta">
-                    <span>[ BATCH: 001 / UNISEX ]</span>
-                    <span style="color: #ff007f;">LIMITED EDITION</span>
-                </div>
-                <div class="image-container">
-                    <span class="img-fallback">[IMAGE_PLACEHOLDER_001]</span>
-                    <img src="" alt="N★CTURN 001 Logo Jersey">
-                </div>
-                <div class="product-info">
-                    <h3>N★CTURN "001" LOGO JERSEY</h3>
-                    <div class="price">85.00 €</div>
-                </div>
+                <a href="jersey.html" class="product-page-link">
+                    <div class="card-meta">
+                        <span>[ BATCH: 001 / UNISEX ]</span>
+                        <span style="color: #ff007f;">LIMITED EDITION</span>
+                    </div>
+                    <div class="image-container">
+                        <span class="img-fallback">[IMAGE_PLACEHOLDER_001]</span>
+                        <img src="" alt="N★CTURN 001 Logo Jersey">
+                    </div>
+                    <div class="product-info">
+                        <h3>N★CTURN "001" LOGO JERSEY</h3>
+                        <div class="price">85.00 €</div>
+                    </div>
+                </a>
                 <div class="size-selector">
                     <button class="size-btn" onclick="selectSize(this, 'S')">S</button>
                     <button class="size-btn" onclick="selectSize(this, 'M')">M</button>
@@ -182,18 +186,20 @@
             </div>
             
             <div class="product-card" id="prod-2">
-                <div class="card-meta">
-                    <span>[ BATCH: 001 / UNISEX ]</span>
-                    <span>BATCH_01</span>
-                </div>
-                <div class="image-container">
-                    <span class="img-fallback">[IMAGE_PLACEHOLDER_002]</span>
-                    <img src="" alt="N★CTURN Signature Star Tee">
-                </div>
-                <div class="product-info">
-                    <h3>N★CTURN SIGNATURE STAR TEE</h3>
-                    <div class="price">45.00 €</div>
-                </div>
+                <a href="tee.html" class="product-page-link">
+                    <div class="card-meta">
+                        <span>[ BATCH: 001 / UNISEX ]</span>
+                        <span>BATCH_01</span>
+                    </div>
+                    <div class="image-container">
+                        <span class="img-fallback">[IMAGE_PLACEHOLDER_002]</span>
+                        <img src="" alt="N★CTURN Signature Star Tee">
+                    </div>
+                    <div class="product-info">
+                        <h3>N★CTURN SIGNATURE STAR TEE</h3>
+                        <div class="price">45.00 €</div>
+                    </div>
+                </a>
                 <div class="size-selector">
                     <button class="size-btn" onclick="selectSize(this, 'S')">S</button>
                     <button class="size-btn" onclick="selectSize(this, 'M')">M</button>
@@ -204,18 +210,20 @@
             </div>
 
             <div class="product-card" id="prod-3">
-                <div class="card-meta">
-                    <span>[ BATCH: 001 / UNISEX ]</span>
-                    <span style="color: #ff007f;">LIMITED EDITION</span>
-                </div>
-                <div class="image-container">
-                    <span class="img-fallback">[IMAGE_PLACEHOLDER_003]</span>
-                    <img src="" alt="N★CTURN Logo Shorts">
-                </div>
-                <div class="product-info">
-                    <h3>N★CTURN LOGO SHORTS</h3>
-                    <div class="price">65.00 €</div>
-                </div>
+                <a href="shorts.html" class="product-page-link">
+                    <div class="card-meta">
+                        <span>[ BATCH: 001 / UNISEX ]</span>
+                        <span style="color: #ff007f;">LIMITED EDITION</span>
+                    </div>
+                    <div class="image-container">
+                        <span class="img-fallback">[IMAGE_PLACEHOLDER_003]</span>
+                        <img src="" alt="N★CTURN Logo Shorts">
+                    </div>
+                    <div class="product-info">
+                        <h3>N★CTURN LOGO SHORTS</h3>
+                        <div class="price">65.00 €</div>
+                    </div>
+                </a>
                 <div class="size-selector">
                     <button class="size-btn" onclick="selectSize(this, 'S')">S</button>
                     <button class="size-btn" onclick="selectSize(this, 'M')">M</button>
