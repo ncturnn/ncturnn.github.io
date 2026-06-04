@@ -9,16 +9,26 @@
         body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         
+        /* NAVBAR & LOGO */
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
         .logo a { font-size: 2rem !important; font-weight: 700 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
         
-        /* BREATHING LOGO */
+        /* HOVER EFEKTAS VISAM LOGO */
+        .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
+        
+        /* BREATHING ŽVAIGŽDĖ */
         .logo a span { 
             color: #ff007f; 
             text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); 
             font-style: normal !important; 
             display: inline-block;
             animation: starBreathe 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+        
+        /* Kai hoverina ant viso logo, žvaigždė gauna dar stipresnį švytėjimą */
+        .logo a:hover span {
+            text-shadow: 0 0 20px rgba(255, 0, 127, 1), 0 0 30px rgba(255, 0, 127, 0.8);
         }
         
         .nav-links { list-style: none; display: flex; gap: 2rem; align-items: center; }
@@ -61,6 +71,7 @@
         .add-to-bag-btn { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 1rem; font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; }
         .add-to-bag-btn:hover { background: #fff; color: #000; border-color: #fff; }
 
+        /* KVĖPAVIMO ANIMACIJA */
         @keyframes starBreathe {
             0%, 100% { transform: scale(1); text-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.4); }
             50% { transform: scale(1.15); text-shadow: 0 0 18px rgba(255, 0, 127, 1), 0 0 35px rgba(255, 0, 127, 0.8); }
