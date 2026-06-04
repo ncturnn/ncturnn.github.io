@@ -46,8 +46,8 @@
         .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid #151515; font-size: 0.9rem; }
         .cart-item-info h4 { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; margin-bottom: 0.3rem;}
         .cart-item-size { font-size: 0.75rem; color: #666; display: block; margin-bottom: 0.2rem; letter-spacing: 1px; }
-        .cart-item-price { color: #ff007f; }
-        .remove-item-btn { background: none; border: none; color: #444; cursor: pointer; font-size: 0.8rem;}
+        .cart-item-price { color: #ff007f; font-family: 'Courier New', Courier, monospace; }
+        .remove-item-btn { background: none; border: none; color: #444; cursor: pointer; font-size: 0.8rem; font-family: 'Courier New', Courier, monospace;}
         .remove-item-btn:hover { color: #ff007f; }
         .cart-footer { border-top: 1px solid #222; padding-top: 2rem; margin-top: 1rem; }
         .cart-total { display: flex; justify-content: space-between; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; margin-bottom: 1.5rem; }
@@ -60,37 +60,35 @@
         .section-title { font-family: 'Syncopate', sans-serif; font-size: 2rem; letter-spacing: 4px; margin-bottom: 3rem; border-bottom: 1px solid #222; padding-bottom: 1rem; color: #fff; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
         
-        /* 1 PUNKTAS: HOVER EFEKTAS KONTEINERIUI IR FOTO LAIKIKLIUI */
         .product-card { background: #0b0b0b; border: 1px solid #151515; padding: 1rem; position: relative; transition: border 0.3s ease; display: flex; flex-direction: column; }
         .product-card:hover { border: 1px solid #ff007f; box-shadow: 0 0 15px rgba(255, 0, 127, 0.05); }
         
         .image-container { width: 100%; height: 400px; overflow: hidden; position: relative; margin-bottom: 1.5rem; border: 1px dashed #222; }
-        .image-placeholder { width: 100%; height: 100%; background: #121212; display: flex; justify-content: center; align-items: center; color: #444; font-size: 0.8rem; letter-spacing: 2px; transition: transform 0.4s ease, filter 0.4s ease; text-transform: uppercase; }
+        .image-placeholder { width: 100%; height: 100%; background: #121212; display: flex; justify-content: center; align-items: center; color: #444; font-size: 0.8rem; letter-spacing: 2px; transition: transform 0.4s ease, filter 0.4s ease; font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
         
-        /* Kai užvedama pelė, nuotraukos vieta švelniai pritraukiama ir pašviesėja */
         .product-card:hover .image-placeholder { transform: scale(1.05); color: #ff007f; background: #151515; }
 
         .product-info { margin-bottom: 1rem; }
         .product-info h3 { font-family: 'Syncopate', sans-serif; font-size: 1rem; letter-spacing: 1px; margin-bottom: 0.5rem; color: #fff; }
-        .price { font-weight: bold; letter-spacing: 1px; color: #ff007f; font-size: 1.1rem; }
+        .price { font-family: 'Courier New', Courier, monospace; font-weight: bold; letter-spacing: 1px; color: #ff007f; font-size: 1.1rem; }
         
         /* DYDŽIŲ PASIRINKIMAS */
         .size-selector { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
-        .size-btn { background: transparent; color: #666; border: 1px solid #222; padding: 0.5rem 0.8rem; font-family: monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease; min-width: 40px; text-align: center; }
+        .size-btn { background: transparent; color: #666; border: 1px solid #222; padding: 0.5rem 0.8rem; font-family: 'Courier New', Courier, monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease; min-width: 40px; text-align: center; }
         .size-btn:hover { border-color: #fff; color: #fff; }
         .size-btn.selected { border-color: #ff007f; color: #fff; background: rgba(255, 0, 127, 0.1); text-shadow: 0 0 5px #ff007f; }
 
         .add-to-bag-btn { background: transparent; color: #fff; border: 1px solid #333; width: 100%; padding: 1rem; font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; }
         .add-to-bag-btn:hover { background: #fff; color: #000; border-color: #fff; }
 
-        /* 2 PUNKTAS: CUSTOM NOTIFICATION (PRANEŠIMAS) */
+        /* CUSTOM NOTIFICATION (PRANEŠIMAS) */
         .custom-notification { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: #0d0d0d; border: 1px solid #ff007f; color: #fff; padding: 1rem 2rem; font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 2px; z-index: 99999999; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: top 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); pointer-events: none; text-transform: uppercase; }
         .custom-notification.show { top: 2rem; }
 
-        /* 3 PUNKTAS: FOOTER (PUSLAPIO APAČIA) */
-        .shop-footer { background: #0a0a0a; border-top: 1px solid #111; padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #444; letter-spacing: 1px; position: relative; z-index: 10; margin-top: auto; }
+        /* FOOTER (PUSLAPIO APAČIA) */
+        .shop-footer { background: #0a0a0a; border-top: 1px solid #111; padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #444; letter-spacing: 1px; position: relative; z-index: 10; margin-top: auto; font-family: 'Courier New', Courier, monospace; }
         .footer-left span { color: #555; }
-        .footer-right { display: flex; gap: 2rem; }
+        .footer-right { display: flex; gap: 2rem; font-family: 'Syncopate', sans-serif; }
         .footer-right a { color: #444; text-decoration: none; transition: color 0.3s; text-transform: uppercase; }
         .footer-right a:hover { color: #ff007f; }
 
@@ -255,12 +253,10 @@
             selectedSizes[cardId] = size;
         }
 
-        // 2 PUNKTAS: Nauja funkcija, parodanti stilingą pranešimą ekrane
         function showNotification(text) {
             customNotification.innerText = text;
             customNotification.classList.add('show');
             
-            // Po 2.5 sekundės pranešimas pasislepia
             setTimeout(() => {
                 customNotification.classList.remove('show');
             }, 2500);
@@ -270,7 +266,7 @@
             const size = selectedSizes[cardId];
             
             if (!size) {
-                showNotification("[ERROR: SELECT_SIZE]"); // Vietoj alert iškviečiam pranešimą
+                showNotification("[ERROR: SELECT_SIZE]");
                 return;
             }
 
@@ -281,7 +277,6 @@
             document.getElementById(cardId).querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
             delete selectedSizes[cardId];
 
-            // Parodom sėkmingo pridėjimo pranešimą ir atidarom krepšelį
             showNotification(`[ADDED: ${name} - ${size}]`);
             cartSidebar.classList.add('active');
         }
