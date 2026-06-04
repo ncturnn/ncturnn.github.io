@@ -5,114 +5,21 @@
     <title>N★CTURN | Welcome to the Void</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background-color: #0a0a0a !important;
-            color: #f0f0f0;
-            font-family: 'Courier New', Courier, monospace;
-            overflow-x: hidden;
-        }
-        .noise-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 9999; opacity: 0.04;
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png');
-        }
-        .navbar {
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            padding: 2rem 4rem; 
-            font-family: 'Syncopate', sans-serif;
-            background-color: #0a0a0a;
-            position: relative;
-            z-index: 10;
-        }
-        
-        /* LOGOTIPAS: ŽVAIGŽDUTĖ + PAKREIPTAS Į DEŠINĘ */
-        .logo a {
-            font-size: 2rem !important; 
-            font-weight: 700 !important; 
-            letter-spacing: 5px !important;
-            color: #ffffff !important;
-            text-decoration: none !important;
-            transition: all 0.3s ease !important;
-            display: inline-block !important;
-            font-style: italic !important;
-        }
-        .logo a span {
-            color: #ff007f;
-            text-shadow: 0 0 10px rgba(255, 0, 127, 0.8);
-            font-style: normal !important;
-            display: inline-block;
-        }
-        .logo a:hover {
-            color: #ff007f !important;
-            text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important;
-        }
-        
-        .nav-links { 
-            list-style: none; 
-            display: flex; 
-            gap: 2rem; 
-        }
-        .nav-links a {
-            color: #f0f0f0; 
-            text-decoration: none; 
-            font-size: 0.9rem;
-            letter-spacing: 2px; 
-            transition: color 0.3s;
-        }
-        .nav-links a:hover { 
-            color: #ff007f; 
-        }
-
-        /* SKLANDANTIS KREPŠELIO MYGTUKAS APATINĖJE DEŠINĖJE */
-        .cart-trigger {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: #0a0a0a !important;
-            border: 2px solid #ff007f !important;
-            color: #fff !important;
-            padding: 1rem 1.5rem;
-            font-family: 'Syncopate', sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            cursor: pointer;
-            z-index: 9999999 !important;
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
-            transition: all 0.3s ease;
-            display: block !important;
-        }
-        .cart-trigger:hover {
-            background: #ff007f !important;
-            color: #fff !important;
-            box-shadow: 0 0 25px rgba(255, 0, 127, 0.8);
-            transform: translateY(-3px);
-        }
-        .cart-count {
-            font-weight: bold;
-            color: #ff007f;
-        }
-        .cart-trigger:hover .cart-count {
-            color: #fff;
-        }
-
-        /* ŠONINIS KREPŠELIO LANGAZ */
-        .cart-sidebar {
-            position: fixed;
-            top: 0; right: -400px; width: 400px; height: 100vh;
-            background: #0d0d0d; border-left: 1px solid #222;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.5); 
-            z-index: 10000000 !important;
-            padding: 3rem 2rem; display: flex; flex-direction: column;
-            transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
+        .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
+        .logo a { font-size: 2rem !important; font-weight: 700 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
+        .logo a span { color: #ff007f; text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); font-style: normal !important; display: inline-block; }
+        .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
+        .nav-links { list-style: none; display: flex; gap: 2rem; }
+        .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; transition: color 0.3s; }
+        .nav-links a:hover { color: #ff007f; }
+        .cart-trigger { position: fixed; bottom: 2rem; right: 2rem; background: #0a0a0a !important; border: 2px solid #ff007f !important; color: #fff !important; padding: 1rem 1.5rem; font-family: 'Syncopate', sans-serif; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; z-index: 9999999 !important; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); transition: all 0.3s ease; display: block !important; }
+        .cart-trigger:hover { background: #ff007f !important; color: #fff !important; box-shadow: 0 0 25px rgba(255, 0, 127, 0.8); transform: translateY(-3px); }
+        .cart-count { font-weight: bold; color: #ff007f; }
+        .cart-trigger:hover .cart-count { color: #fff; }
+        .cart-sidebar { position: fixed; top: 0; right: -400px; width: 400px; height: 100vh; background: #0d0d0d; border-left: 1px solid #222; box-shadow: -10px 0 30px rgba(0,0,0,0.5); z-index: 10000000 !important; padding: 3rem 2rem; display: flex; flex-direction: column; transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); }
         .cart-sidebar.active { right: 0; }
         .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 1.5rem; margin-bottom: 2rem; }
         .cart-header h2 { font-family: 'Syncopate', sans-serif; font-size: 1.2rem; letter-spacing: 2px; color: #fff;}
@@ -126,59 +33,18 @@
         .remove-item-btn:hover { color: #ff007f; }
         .cart-footer { border-top: 1px solid #222; padding-top: 2rem; margin-top: 1rem; }
         .cart-total { display: flex; justify-content: space-between; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; margin-bottom: 1.5rem; }
-        .checkout-btn {
-            background: #ff007f; color: #fff; border: none; width: 100%; padding: 1.2rem;
-            font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer;
-            transition: background 0.3s; text-align: center; display: block;
-        }
+        .checkout-btn { background: #ff007f; color: #fff; border: none; width: 100%; padding: 1.2rem; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; transition: background 0.3s; text-align: center; display: block; }
         .checkout-btn:hover { background: #e00070; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
         .empty-message { color: #444; text-align: center; margin-top: 3rem; font-style: italic; }
-
-        .hero {
-            height: 75vh; 
-            display: flex; 
-            flex-direction: column;
-            justify-content: center; 
-            align-items: center; 
-            text-align: center;
-            background-color: #0a0a0a;
-            position: relative;
-            z-index: 1;
-        }
-        .hero h1 {
-            font-family: 'Syncopate', sans-serif; 
-            font-size: 5rem;
-            letter-spacing: -2px; 
-            margin-bottom: 1rem; 
-            color: #fff;
-        }
-        .hero p { 
-            font-size: 1.1rem; 
-            letter-spacing: 4px; 
-            margin-bottom: 3rem; 
-            color: #888; 
-        }
-        .shop-btn {
-            background: transparent; 
-            color: #fff; 
-            border: 2px solid #fff;
-            padding: 1rem 3rem; 
-            font-family: 'Syncopate', sans-serif;
-            font-size: 1rem; 
-            cursor: pointer; 
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        .shop-btn:hover {
-            background: #fff; 
-            color: #0a0a0a;
-            box-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
-        }
+        .hero { height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-color: #0a0a0a; position: relative; z-index: 1; }
+        .hero h1 { font-family: 'Syncopate', sans-serif; font-size: 5rem; letter-spacing: -2px; margin-bottom: 1rem; color: #fff; }
+        .hero p { font-size: 1.1rem; letter-spacing: 4px; margin-bottom: 3rem; color: #888; }
+        .shop-btn { background: transparent; color: #fff; border: 2px solid #fff; padding: 1rem 3rem; font-family: 'Syncopate', sans-serif; font-size: 1rem; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+        .shop-btn:hover { background: #fff; color: #0a0a0a; box-shadow: 0 0 20px rgba(255, 0, 127, 0.6); }
     </style>
 </head>
 <body>
     <div class="noise-overlay"></div>
-    
     <nav class="navbar">
         <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
         <ul class="nav-links">
@@ -232,13 +98,11 @@
             localStorage.setItem('nocturn_cart', JSON.stringify(cart));
             cartCount.innerText = cart.length;
             cartItemsContainer.innerHTML = '';
-            
             if(cart.length === 0) {
                 cartItemsContainer.innerHTML = '<p class="empty-message">BAG IS EMPTY</p>';
                 cartTotalSum.innerText = '$0.00';
                 return;
             }
-
             let total = 0;
             cart.forEach((item, index) => {
                 total += item.price;
@@ -257,12 +121,8 @@
 
         function processCheckout() {
             if(cart.length === 0) return;
-            alert("Connecting to payment gateway... Order processed!");
-            cart = [];
-            updateCart();
-            cartSidebar.classList.remove('active');
+            window.location.href = 'checkout.html';
         }
-
         updateCart();
     </script>
 </body>
