@@ -5,44 +5,84 @@
     <title>N★CTURN SIGNATURE STAR TEE</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght=700;800&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Syncopate', sans-serif; font-weight: 700; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+        * { margin: 0; padding: 0; box-sizing: border-box; text-transform: uppercase; }
+        
+        body { 
+            background-color: #0a0a0a !important; 
+            color: #f0f0f0; 
+            font-family: 'Syncopate', sans-serif !important; 
+            font-weight: 700; 
+            overflow-x: hidden; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         
+        /* NAVBAR */
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; background-color: #0a0a0a; position: relative; z-index: 10; }
-        .logo a { font-size: 2rem !important; font-weight: 800 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; font-style: italic !important; }
+        .logo a { font-size: 2rem !important; font-weight: 800 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; font-style: italic !important; font-family: 'Syncopate', sans-serif !important; }
         .logo a span { color: #ff007f; text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); font-style: normal !important; }
 
+        /* KAIRĖS NUORODOS */
         .nav-links { position: fixed; bottom: 2rem; left: 4rem; list-style: none; display: flex; flex-direction: column; gap: 1rem; z-index: 9999; }
-        .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s ease; }
+        .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s ease; font-family: 'Syncopate', sans-serif !important; }
         .nav-links a:hover { color: #ff007f; transform: translateX(5px); }
 
-        .product-container { max-width: 1100px; margin: 4rem auto; padding: 0 4rem; display: flex; gap: 4rem; flex: 1; align-items: center; }
-        .product-image-side { flex: 1; display: flex; justify-content: center; align-items: center; background: #0b0b0b; border: 1px dashed #222; height: 500px; position: relative; }
-        .img-fallback { color: #333; font-size: 0.7rem; letter-spacing: 2px; }
+        /* PREKĖS IŠDĖSTYMAS (PAGAL PAVYZDĮ) */
+        .product-container { 
+            max-width: 1200px; 
+            margin: 2rem auto 6rem auto; 
+            padding: 0 4rem; 
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 5rem; 
+            flex: 1; 
+            align-items: center;
+            width: 100%;
+        }
         
-        .product-details-side { flex: 1; display: flex; flex-direction: column; gap: 1.5rem; }
-        .meta-tag { font-size: 0.65rem; color: #444; letter-spacing: 1px; text-transform: uppercase; }
-        .product-title { font-size: 1.5rem; letter-spacing: 2px; color: #fff; }
-        .product-price { font-size: 1.2rem; color: #ff007f; font-weight: 800; }
-        .product-desc { font-size: 0.75rem; color: #888; line-height: 1.6; letter-spacing: 1px; font-weight: 700; margin: 1rem 0; }
+        .product-image-side { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background: #0b0b0b; 
+            border: 1px dashed #222; 
+            height: 550px; 
+            position: relative; 
+            width: 100%;
+        }
+        .img-fallback { color: #333; font-size: 0.7rem; letter-spacing: 2px; font-family: 'Syncopate', sans-serif !important; }
+        
+        .product-details-side { display: flex; flex-direction: column; gap: 1.8rem; }
+        .meta-tag { font-size: 0.65rem; color: #555; letter-spacing: 2px; }
+        .product-title { font-size: 1.6rem; letter-spacing: 2px; color: #fff; font-weight: 800; line-height: 1.4; }
+        .product-price { font-size: 1.4rem; color: #ff007f; font-weight: 800; letter-spacing: 1px; }
+        .product-desc { font-size: 0.75rem; color: #888; line-height: 1.8; letter-spacing: 1px; font-weight: 700; text-transform: uppercase; }
+
+        /* DYDŽIAI */
+        .size-header-row { display: flex; justify-content: space-between; font-size: 0.75rem; color: #fff; letter-spacing: 1px; margin-bottom: -0.5rem; }
+        .size-guide-link { color: #666; text-decoration: none; transition: color 0.2s; }
+        .size-guide-link:hover { color: #ff007f; }
 
         .size-selector { display: flex; gap: 0.5rem; }
-        .size-btn { background: transparent; color: #666; border: 1px solid #222; padding: 0.7rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.8rem; cursor: pointer; flex: 1; transition: all 0.2s; }
+        .size-btn { background: transparent; color: #666; border: 1px solid #222; padding: 0.8rem; font-family: 'Syncopate', sans-serif !important; font-weight: 700; font-size: 0.8rem; cursor: pointer; flex: 1; transition: all 0.2s; }
         .size-btn:hover { border-color: #fff; color: #fff; }
         .size-btn.selected { border-color: #ff007f; color: #fff; background: rgba(255, 0, 127, 0.1); text-shadow: 0 0 5px #ff007f; }
 
-        .action-btn { background: #ff007f; color: #fff; border: none; padding: 1.2rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; cursor: pointer; text-transform: uppercase; transition: background 0.3s; margin-top: 1rem; }
-        .action-btn:hover { background: #e00070; box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
+        /* MYGTUKAS */
+        .action-btn { background: #ff007f; color: #fff; border: none; padding: 1.2rem; font-family: 'Syncopate', sans-serif !important; font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; margin-top: 1rem; box-shadow: 0 0 15px rgba(255, 0, 127, 0.2); }
+        .action-btn:hover { background: #fff; color: #000; box-shadow: 0 0 25px rgba(255, 255, 255, 0.5); }
 
-        .custom-notification { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: #0d0d0d; border: 1px solid #ff007f; color: #fff; padding: 1rem 2rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; z-index: 99999999; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: top 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); pointer-events: none; }
+        .custom-notification { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: #0d0d0d; border: 1px solid #ff007f; color: #fff; padding: 1rem 2rem; font-family: 'Syncopate', sans-serif !important; font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; z-index: 99999999; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: top 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); pointer-events: none; }
         .custom-notification.show { top: 2rem; }
 
         .shop-footer { background: #0a0a0a; border-top: 1px solid #111; padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: #444; letter-spacing: 1px; margin-top: auto; }
         
-        @media (max-width: 768px) {
-            .product-container { flex-direction: column; padding: 0 2rem; margin: 2rem auto; gap: 2rem; }
-            .product-image-side { height: 350px; width: 100%; }
+        @media (max-width: 968px) {
+            .product-container { grid-template-columns: 1fr; padding: 0 2rem; margin: 2rem auto; gap: 3rem; }
+            .product-image-side { height: 400px; }
             .nav-links { position: static; flex-direction: row; justify-content: center; width: 100%; padding: 1.5rem 0; border-top: 1px solid #111; margin-top: 2rem; }
             .shop-footer { flex-direction: column; gap: 1rem; text-align: center; }
         }
@@ -53,15 +93,15 @@
     <div class="custom-notification" id="customNotification">[ITEM_ADDED_TO_BAG]</div>
 
     <nav class="navbar">
-        <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
+        <div class="logo"><a href="shop.html">N<span>★</span>CTURN</a></div>
     </nav>
 
     <ul class="nav-links">
-        <li><a href="shop.html" style="color: #ff007f;">Shop</a></li>
-        <li><a href="archive.html">Archive</a></li>
-        <li><a href="subscribe.html">Sign Up</a></li>
-        <li><a href="size-guide.html">Size Guide</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="shop.html" style="color: #ff007f;">SHOP</a></li>
+        <li><a href="archive.html">ARCHIVE</a></li>
+        <li><a href="subscribe.html">SIGN UP</a></li>
+        <li><a href="size-guide.html">SIZE GUIDE</a></li>
+        <li><a href="about.html">ABOUT</a></li>
     </ul>
 
     <main class="product-container">
@@ -74,6 +114,10 @@
             <div class="product-price">45.00 €</div>
             <p class="product-desc">HEAVYWEIGHT COTTON OVERSIZED TEE FEATURING THE SIGNATURE N★CTURN EMBROIDERY AND DISTRESSED EDGES. MADE FOR THE NIGHT.</p>
             
+            <div class="size-header-row">
+                <span>SIZE</span>
+                <a href="size-guide.html" class="size-guide-link">SIZE GUIDE</a>
+            </div>
             <div class="size-selector">
                 <button class="size-btn" onclick="selectSize(this, 'S')">S</button>
                 <button class="size-btn" onclick="selectSize(this, 'M')">M</button>
