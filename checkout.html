@@ -4,257 +4,217 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHECKOUT // N★CTURN</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&display=swap" rel="stylesheet">
-    
-    <script src="https://www.paypal.com/sdk/js?client-id=AVgqVrJ0kfH1BqeSTXdLxhpD1vGuBZEMsS8Xg3fjJIqaBQ9SopfLdWRdEUhqJCRU4-3YO_vczuPea1Oc&currency=EUR"></script>
-
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; }
+        body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; min-height: 100vh; }
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
         
-        .logo a { font-family: 'Syncopate', sans-serif; font-size: 1.4rem; letter-spacing: 3px; color: #fff; text-decoration: none; font-weight: 700; transition: transform 0.3s ease; display: inline-block; }
-        .logo a span { color: #ff007f; transition: color 0.3s ease; }
-        .logo a:hover { transform: scale(1.05); }
-        .logo a:hover span { color: #fff; text-shadow: 0 0 10px #ff007f; }
+        /* NAVBAR LOGO */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; font-family: 'Syncopate', sans-serif; background-color: #0a0a0a; position: relative; z-index: 10; }
+        .logo a { font-size: 2rem !important; font-weight: 700 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
+        .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
+        
+        .logo a span { 
+            color: #ff007f; 
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); 
+            font-style: normal !important; 
+            display: inline-block;
+            animation: starBreathe 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+        @keyframes starBreathe {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.4); }
+            50% { transform: scale(1.15); text-shadow: 0 0 18px rgba(255, 0, 127, 1), 0 0 35px rgba(255, 0, 127, 0.8); }
+        }
 
-        .nav-links { list-style: none; display: flex; gap: 2rem; }
-        .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.9rem; letter-spacing: 2px; transition: color 0.3s; }
-        .nav-links a:hover { color: #ff007f; }
-        .checkout-container { max-width: 1100px; margin: 0 auto; padding: 3rem 4rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; position: relative; z-index: 1; }
-        .checkout-section h2 { font-family: 'Syncopate', sans-serif; font-size: 1.4rem; letter-spacing: 2px; margin-bottom: 2rem; border-bottom: 1px solid #222; padding-bottom: 0.5rem; color: #fff; }
+        /* NUORODOS KAIRĖJE APAČIOJE */
+        .nav-links { position: fixed; bottom: 2rem; left: 4rem; list-style: none; display: flex; flex-direction: column; gap: 1rem; z-index: 9999; font-family: 'Syncopate', sans-serif; text-transform: uppercase; }
+        .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s ease; display: inline-block; }
+        .nav-links a:hover { color: #ff007f; transform: translateX(5px); }
+
+        /* CHECKOUT KONTEINERIS */
+        .checkout-container { max-width: 1100px; margin: 0 auto; padding: 2rem 4rem 8rem 4rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; position: relative; z-index: 1; }
+        .checkout-title { font-family: 'Syncopate', sans-serif; font-size: 2rem; letter-spacing: 4px; margin-bottom: 2rem; color: #fff; grid-column: span 2; border-bottom: 1px solid #222; padding-bottom: 1rem; }
         
-        .payment-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2.5rem; }
-        .method-btn { background: #0d0d0d; border: 1px solid #222; color: #888; padding: 1rem; font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 1px; cursor: pointer; transition: all 0.3s; text-align: center; }
-        .method-btn:hover { border-color: #ff007f; color: #fff; }
-        .method-btn.active { background: #111; border-color: #ff007f; color: #fff; box-shadow: 0 0 10px rgba(255, 0, 127, 0.2); }
-        
+        /* FORMA */
+        .order-form h3, .summary-box h3 { font-family: 'Syncopate', sans-serif; font-size: 1rem; letter-spacing: 2px; margin-bottom: 1.5rem; color: #fff; }
         .form-group { margin-bottom: 1.5rem; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        label { display: block; font-size: 0.75rem; letter-spacing: 1px; color: #666; margin-bottom: 0.5rem; text-transform: uppercase; }
-        input { width: 100%; background: #0d0d0d; border: 1px solid #222; padding: 1rem; color: #fff; font-family: 'Courier New', monospace; font-size: 0.9rem; transition: border-color 0.3s; }
-        input:focus { outline: none; border-color: #ff007f; }
-        
-        #paypalButtonContainer { display: none; margin-top: 2rem; min-height: 150px; position: relative; z-index: 50; }
+        .form-group label { display: block; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; color: #666; }
+        .form-group input { width: 100%; background: #0d0d0d; border: 1px solid #222; padding: 1rem; color: #fff; font-family: monospace; font-size: 0.9rem; transition: border 0.3s; }
+        .form-group input:focus { outline: none; border-color: #ff007f; }
 
-        .order-summary { background: #0d0d0d; border: 1px solid #151515; padding: 2rem; align-self: start; }
-        .summary-items { margin-bottom: 2rem; max-height: 250px; overflow-y: auto; }
-        .summary-item { display: flex; justify-content: space-between; font-size: 0.9rem; padding: 0.8rem 0; border-bottom: 1px solid #151515; }
-        .summary-item h4 { font-family: 'Syncopate', sans-serif; font-size: 0.75rem; color: #aaa; }
-        .summary-total { display: flex; justify-content: space-between; font-family: 'Syncopate', sans-serif; font-size: 1rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #222; }
-        .total-price { color: #ff007f; text-shadow: 0 0 5px rgba(255, 0, 127, 0.4); }
-        .pay-btn { color: #fff; border: none; width: 100%; padding: 1.2rem; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; transition: background 0.3s, box-shadow 0.3s; margin-top: 2rem; background: #ff007f; display: block; }
-        .pay-btn:hover { background: #e00070; box-shadow: 0 0 20px rgba(255, 0, 127, 0.6); }
+        /* UŽSAKYMO SUVESTINĖ */
+        .summary-box { background: #0b0b0b; border: 1px solid #151515; padding: 2rem; height: fit-content; }
+        .summary-item { display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid #151515; font-size: 0.9rem; color: #888; }
+        .summary-item .item-name { max-width: 70%; }
+        .summary-total { display: flex; justify-content: space-between; font-family: 'Syncopate', sans-serif; font-size: 1rem; color: #fff; padding-top: 1.5rem; margin-top: 1rem; border-top: 1px solid #222; }
         
-        .success-screen { display: none; text-align: center; padding: 5rem 2rem; max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
-        .success-screen h1 { font-family: 'Syncopate', sans-serif; color: #ff007f; font-size: 2.5rem; margin-bottom: 1.5rem; text-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
-        .success-screen p { color: #888; line-height: 1.8; margin-bottom: 3rem; }
-        .back-home-btn { background: transparent; color: #fff; border: 2px solid #fff; padding: 1rem 2.5rem; font-family: 'Syncopate', sans-serif; font-size: 0.85rem; text-decoration: none; transition: all 0.3s; }
-        .back-home-btn:hover { background: #fff; color: #0a0a0a; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+        /* MYGTUKAS */
+        .submit-order-btn { background: #ff007f; color: #fff; border: none; width: 100%; padding: 1.2rem; font-family: 'Syncopate', sans-serif; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; text-align: center; margin-top: 2rem; display: block; box-shadow: 0 0 15px rgba(255, 0, 127, 0.3); }
+        .submit-order-btn:hover { background: #e00070; box-shadow: 0 0 25px rgba(255, 0, 127, 0.7); }
+        .submit-order-btn:disabled { background: #222; color: #555; cursor: not-allowed; box-shadow: none; }
 
-        /* MOBILIŲJŲ TELEFONŲ PRITAIKYMAS (IPHONE 14 PRO IR KT.) */
+        /* SĖKMĖS PRANEŠIMAS */
+        .success-message { text-align: center; padding: 5rem 0; grid-column: span 2; display: none; }
+        .success-message h2 { font-family: 'Syncopate', sans-serif; font-size: 2rem; color: #ff007f; margin-bottom: 1rem; text-shadow: 0 0 10px rgba(255, 0, 127, 0.5); }
+        .success-message p { color: #888; font-size: 1rem; letter-spacing: 1px; }
+
+        /* MOBILUS */
         @media (max-width: 768px) {
-            .navbar { padding: 1.5rem 1.5rem; flex-direction: column; gap: 1.5rem; text-align: center; }
-            .logo a { font-size: 1.3rem; letter-spacing: 2px; }
-            .nav-links { gap: 1.5rem; }
-            
-            .checkout-container { grid-template-columns: 1fr; gap: 3rem; padding: 2rem 1.5rem; }
-            .checkout-section h2 { font-size: 1.1rem; margin-bottom: 1.5rem; }
-            
-            .payment-methods { gap: 0.5rem; margin-bottom: 2rem; }
-            .method-btn { padding: 0.8rem; font-size: 0.7rem; }
-            
-            input { padding: 0.8rem; font-size: 0.85rem; }
-            .form-row { gap: 0.5rem; }
-            
-            .order-summary { padding: 1.5rem; }
-            .pay-btn { padding: 1rem; font-size: 0.8rem; }
-            
-            .success-screen { padding: 4rem 1.5rem; }
-            .success-screen h1 { font-size: 1.6rem; }
-            .success-screen p { font-size: 0.85rem; margin-bottom: 2.5rem; }
+            .navbar { padding: 1.5rem 1.5rem; }
+            .logo a { font-size: 1.3rem !important; }
+            .nav-links { position: static; flex-direction: row; justify-content: center; width: 100%; background: #0a0a0a; padding: 1.5rem 0; border-top: 1px solid #111; gap: 2rem; margin-top: 2rem; }
+            .checkout-container { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.5rem 4rem 1.5rem; }
+            .checkout-title { grid-column: span 1; font-size: 1.4rem; text-align: center; }
+            .success-message { grid-column: span 1; }
         }
     </style>
 </head>
 <body>
     <div class="noise-overlay"></div>
+    
     <nav class="navbar">
         <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
-        <ul class="nav-links">
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="archive.html">Archive</a></li>
-            <li><a href="about.html">About</a></li>
-        </ul>
     </nav>
 
-    <main class="checkout-container" id="checkoutMain">
-        <div class="checkout-section">
-            <h2>SELECT_METHOD</h2>
-            <div class="payment-methods">
-                <button class="method-btn active" id="methodCard" onclick="setPaymentMethod('card')">CREDIT_CARD</button>
-                <button class="method-btn" id="methodPaypal" onclick="setPaymentMethod('paypal')">PAYPAL</button>
-            </div>
+    <ul class="nav-links">
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="archive.html">Archive</a></li>
+        <li><a href="about.html">About</a></li>
+    </ul>
 
-            <h2>SHIPPING_DETAILS</h2>
-            <form id="paymentForm" onsubmit="handlePayment(event)">
+    <div class="checkout-container" id="checkoutContainer">
+        <h2 class="checkout-title">SHIPPING_DETAILS</h2>
+        
+        <div class="order-form">
+            <h3>INFORMATION</h3>
+            <form id="orderForm">
                 <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" id="customerEmail" required placeholder="void@nocturn.com">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required placeholder="John Doe">
                 </div>
                 <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" id="customerName" required placeholder="John Doe">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="john@example.com">
                 </div>
                 <div class="form-group">
-                    <label>Shipping Address</label>
-                    <input type="text" id="customerAddress" required placeholder="Street name, Apt, City, Postal Code">
+                    <label for="address">Shipping Address</label>
+                    <input type="text" id="address" required placeholder="Vilniaus g. 10-2">
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" required placeholder="Vilnius">
+                </div>
+                <div class="form-group">
+                    <label for="zip">Zip / Postal Code</label>
+                    <input type="text" id="zip" required placeholder="LT-12345">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" required placeholder="+37060000000">
                 </div>
                 
-                <div id="cardDetailsZone">
-                    <h2 style="margin-top: 3rem;">CARD_DETAILS</h2>
-                    <div class="form-group">
-                        <label>Card Number</label>
-                        <input type="text" maxlength="19" placeholder="0000 0000 0000 0000" id="cardNum" class="card-required">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Expiry Date</label>
-                            <input type="text" maxlength="5" placeholder="MM/YY" id="cardExpiry" class="card-required">
-                        </div>
-                        <div class="form-group">
-                            <label>CVV</label>
-                            <input type="password" maxlength="3" placeholder="***" id="cardCvv" class="card-required">
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="pay-btn" id="mainSubmitBtn">AUTHORIZE_PAYMENT</button>
-                <div id="paypalButtonContainer"></div>
+                <button type="submit" class="submit-order-btn" id="submitBtn">PLACE ORDER</button>
             </form>
         </div>
 
-        <div class="order-summary">
-            <h2>YOUR_ORDER</h2>
-            <div class="summary-items" id="summaryItems"></div>
+        <div class="summary-box">
+            <h3>YOUR_ORDER</h3>
+            <div id="summaryItemsContainer">
+                </div>
             <div class="summary-total">
-                <span>TOTAL TO PAY:</span>
-                <span class="total-price" id="summaryTotal">0.00 €</span>
+                <span>TOTAL:</span>
+                <span id="summaryTotalSum">0.00 €</span>
             </div>
         </div>
-    </main>
+    </div>
 
-    <div class="success-screen" id="successScreen">
-        <h1>ORDER_CONFIRMED</h1>
-        <p>YOUR TRANSACTION WAS SUCCESSFUL. THE SYSTEM IS PROCESSING DROP 001 ORDER BLUEPRINTS. A CONFIRMATION ENVELOPE WILL BE SENT TO YOUR DIGITAL TERMINAL SHORTLY.</p>
-        <a href="index.html" class="back-home-btn">RETURN TO THE VOID</a>
-    </div >
+    <div class="success-message" id="successScreen">
+        <h2>ORDER_RECEIVED</h2>
+        <p>THANK YOU. YOUR ORDER FILES HAVE BEEN LOGGED INTO THE SYSTEM.</p>
+        <p style="margin-top: 1rem;"><a href="shop.html" style="color: #fff; text-decoration: underline;">RETURN TO SHOP</a></p>
+    </div>
 
     <script>
+        // Užkraunam krepšelį iš localStorage
         let cart = JSON.parse(localStorage.getItem('nocturn_cart')) || [];
-        const summaryItems = document.getElementById('summaryItems');
-        const summaryTotal = document.getElementById('summaryTotal');
-        let currentMethod = 'card';
+        const summaryItemsContainer = document.getElementById('summaryItemsContainer');
+        const summaryTotalSum = document.getElementById('summaryTotalSum');
+        const orderForm = document.getElementById('orderForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const checkoutContainer = document.getElementById('checkoutContainer');
+        const successScreen = document.getElementById('successScreen');
 
-        function calculateTotal() {
-            return cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
-        }
-
-        function renderSummary() {
-            if (cart.length === 0) {
-                window.location.href = 'shop.html';
-                return;
-            }
-            summaryItems.innerHTML = '';
+        // Jei krepšelis tuščias, neleidžiam užsakyti
+        if(cart.length === 0) {
+            summaryItemsContainer.innerHTML = '<p style="color:#444; font-style:italic;">Bag is empty.</p>';
+            submitBtn.disabled = true;
+        } else {
+            let total = 0;
+            summaryItemsContainer.innerHTML = '';
             cart.forEach(item => {
-                summaryItems.innerHTML += `
+                total += item.price;
+                summaryItemsContainer.innerHTML += `
                     <div class="summary-item">
-                        <h4>${item.name}</h4>
+                        <span class="item-name">${item.name}</span>
                         <span>${item.price.toFixed(2)} €</span>
                     </div>
                 `;
             });
-            summaryTotal.innerText = `${calculateTotal()} €`;
+            summaryTotalSum.innerText = `${total.toFixed(2)} €`;
         }
 
-        function setPaymentMethod(method) {
-            currentMethod = method;
-            const cardBtn = document.getElementById('methodCard');
-            const paypalBtn = document.getElementById('methodPaypal');
-            const cardZone = document.getElementById('cardDetailsZone');
-            const submitBtn = document.getElementById('mainSubmitBtn');
-            const paypalContainer = document.getElementById('paypalButtonContainer');
-            const cardInputs = document.querySelectorAll('.card-required');
+        // Formos apdorojimas ir siuntimas
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Sustabdom standartinį perkrovimą
+            
+            submitBtn.innerText = "PROCESSING...";
+            submitBtn.disabled = true;
 
-            if (method === 'card') {
-                cardBtn.classList.add('active');
-                paypalBtn.classList.remove('active');
-                cardZone.style.display = 'block';
-                submitBtn.style.display = 'block';
-                paypalContainer.style.display = 'none';
-                cardInputs.forEach(input => input.required = true);
-            } else {
-                paypalBtn.classList.add('active');
-                cardBtn.classList.remove('active');
-                cardZone.style.display = 'none';
-                submitBtn.style.display = 'none';
-                paypalContainer.style.display = 'block';
-                cardInputs.forEach(input => input.required = false);
-            }
-        }
+            // Suformatuojam krepšelio prekes į vieną gražų tekstą laiškui
+            let itemsText = cart.map(item => `${item.name} (${item.price.toFixed(2)}€)`).join(', ');
+            let finalTotal = summaryTotalSum.innerText;
 
-        function handlePayment(event) {
-            event.preventDefault();
-            const payBtn = document.getElementById('mainSubmitBtn');
-            payBtn.innerText = "CONNECTING_TO_GATEWAY...";
-            payBtn.disabled = true;
-            setTimeout(() => { showSuccess(); }, 2000);
-        }
+            // Paruošiam duomenis siuntimui (šituos laukus matysi savo Gmail laiške)
+            let orderData = {
+                Pirkėjas: document.getElementById('name').value,
+                Email: document.getElementById('email').value,
+                Adresas: document.getElementById('address').value,
+                Miestas: document.getElementById('city').value,
+                Pastas_Kodas: document.getElementById('zip').value,
+                Telefonas: document.getElementById('phone').value,
+                UŽSAKYTOS_PREKĖS: itemsText,
+                BENDRA_SUMA: finalTotal
+            };
 
-        function showSuccess() {
-            localStorage.removeItem('nocturn_cart');
-            document.getElementById('checkoutMain').style.display = 'none';
-            document.getElementById('successScreen').style.display = 'block';
-        }
-
-        if (typeof paypal !== 'undefined') {
-            paypal.Buttons({
-                style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'checkout' },
-                onClick: function(data, actions) {
-                    const email = document.getElementById('customerEmail').value;
-                    const name = document.getElementById('customerName').value;
-                    const address = document.getElementById('customerAddress').value;
-                    if (!email || !name || !address) {
-                        alert("Please fill out your shipping details first.");
-                        return actions.reject();
-                    }
-                    return actions.resolve();
+            // SVARBU: Čia įrašyk savo Formspree ID vietoj "TAVO_FORMSPREE_ID"
+            fetch('https://formspree.io/f/TAVO_FORMSPREE_ID', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{ amount: { currency_code: 'EUR', value: calculateTotal() } }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        showSuccess();
-                    });
-                },
-                onError: function(err) {
-                    console.error('PayPal Error:', err);
-                    alert("Transaction error or cancelled.");
+                body: JSON.stringify(orderData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Išvalom krepšelį
+                    localStorage.removeItem('nocturn_cart');
+                    // Paslepiam formą ir parodom sėkmės pranešimą
+                    checkoutContainer.style.display = 'none';
+                    successScreen.style.display = 'block';
+                } else {
+                    alert('Oops! Kaut kas nuėjo ne taip. Bandykite dar kartą.');
+                    submitBtn.innerText = "PLACE ORDER";
+                    submitBtn.disabled = false;
                 }
-            }).render('#paypalButtonContainer');
-        }
-
-        document.getElementById('cardNum').addEventListener('input', function (e) {
-            e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{4})/g, '$1 ').trim();
+            })
+            .catch(error => {
+                alert('Klaida jungiantis prie serverio.');
+                submitBtn.innerText = "PLACE ORDER";
+                submitBtn.disabled = false;
+            });
         });
-        document.getElementById('cardExpiry').addEventListener('input', function (e) {
-            e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{2})/, '$1/').trim();
-        });
-
-        setPaymentMethod('card');
-        renderSummary();
     </script>
 </body>
 </html>
