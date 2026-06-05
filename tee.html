@@ -27,7 +27,7 @@
         .logo a span { color: #ff007f; text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); font-style: normal !important; }
 
         /* MAIN CONTENT GRID */
-        .product-container { max-width: 1200px; margin: auto; padding: 1rem 4rem 10rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; flex-grow: 1; align-items: center; }
+        .product-container { max-width: 1200px; margin: auto; padding: 1rem 4rem 12rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; flex-grow: 1; align-items: center; }
         
         /* DYNAMIC TECH IMAGE BOX */
         .product-image-container { position: relative; width: 100%; aspect-ratio: 1/1; }
@@ -79,19 +79,17 @@
         .stock-status { font-size: 0.6rem; color: #ff007f; letter-spacing: 2px; opacity: 0.8; animation: pulse 2s infinite; text-align: center; margin-top: 0.2rem; }
         @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
 
-        /* SIDEBAR MENU WITH NUMBERS */
-        .sidebar-menu { position: absolute; bottom: 3rem; left: 4rem; display: flex; flex-direction: column; gap: 0.8rem; }
-        .sidebar-menu a { font-family: 'Syncopate', sans-serif !important; font-size: 0.75rem; color: #444; text-decoration: none; letter-spacing: 2px; transition: all 0.3s; width: fit-content; }
-        .sidebar-menu a span { font-size: 0.6rem; color: #222; margin-right: 0.5rem; }
-        .sidebar-menu a.active { color: #ff007f; text-shadow: 0 0 8px rgba(255, 0, 127, 0.3); }
-        .sidebar-menu a.active span { color: #ff007f; }
-        .sidebar-menu a:hover { color: #fff; }
+        /* REVERTED SIDEBAR MENU - CLASSIC STRICT LOOK */
+        .sidebar-menu { position: absolute; bottom: 3rem; left: 4rem; display: flex; flex-direction: column; gap: 1rem; }
+        .sidebar-menu a { font-family: 'Syncopate', sans-serif !important; font-size: 0.8rem; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: 2px; transition: color 0.3s; width: fit-content; text-transform: uppercase; }
+        .sidebar-menu a.active { color: #ff007f; text-shadow: 0 0 8px rgba(255, 0, 127, 0.5); }
+        .sidebar-menu a:hover { color: #ff007f; }
 
         /* FOOTER / COPYRIGHT */
         .footer-copyright { position: absolute; bottom: 3rem; right: 4rem; font-family: 'Syncopate', sans-serif !important; font-size: 0.65rem; color: #222; letter-spacing: 1px; font-weight: 700; }
 
         @media (max-width: 768px) {
-            .product-container { grid-template-columns: 1fr; padding: 2rem 1.5rem 14rem 1.5rem; gap: 3rem; }
+            .product-container { grid-template-columns: 1fr; padding: 2rem 1.5rem 16rem 1.5rem; gap: 3rem; }
             .navbar { padding: 2rem 1.5rem; }
             .sidebar-menu { position: relative; bottom: auto; left: auto; margin-top: 4rem; padding-left: 1.5rem; }
             .footer-copyright { position: relative; bottom: auto; right: auto; margin-top: 2rem; text-align: left; padding-left: 1.5rem; }
@@ -157,11 +155,11 @@
     </div>
 
     <div class="sidebar-menu">
-        <li><a href="shop.html" style="color: #ff007f;">SHOP</a></li>
-        <li><a href="archive.html">ARCHIVE</a></li>
-        <li><a href="subscribe.html">SIGN UP</a></li>
-        <li><a href="size-guide.html">SIZE GUIDE</a></li>
-        <li><a href="about.html">ABOUT</a></li>
+        <a href="shop.html" class="active">SHOP</a>
+        <a href="archive.html">ARCHIVE</a>
+        <a href="signup.html">SIGN UP</a>
+        <a href="size-guide.html">SIZE GUIDE</a>
+        <a href="about.html">ABOUT</a>
     </div>
 
     <div class="footer-copyright">
