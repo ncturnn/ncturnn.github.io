@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ENTER // N★CTURN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght=700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -244,8 +244,7 @@
         <div class="loader-container">
             <div class="loader-logo">N<span>★</span>CTURN</div>
             
-            <div class="terminal-box" id="terminal">
-                </div>
+            <div class="terminal-box" id="terminal"></div>
             
             <div class="progress-bar">
                 <div class="progress-fill"></div>
@@ -267,6 +266,13 @@
     </footer>
 
     <script>
+        // SVEIKAS! ŠTAI ČIA SPRENDIMAS: Tikriname, ar vartotojas jau buvo šiame puslapyje per šią sesiją
+        if (sessionStorage.getItem('nocturn_loaded')) {
+            // Jei jau buvo užėjęs, loaderį išjungiam akimirksniu be jokių animacijų
+            document.getElementById('preloader').style.display = 'none';
+            document.body.classList.add('loaded');
+        }
+
         // JS INTEGRACIJA VARTOTOJO LAIKMAČIUI
         function updateTimer() {
             const now = new Date();
@@ -280,33 +286,38 @@
         setInterval(updateTimer, 10);
         updateTimer();
 
-        // JS INTEGRACIJA TERMINALO LOGAMS (Išdalinta per 5s laiko tarpus)
-        const bootLogs = [
-            { text: "LAUNCHING_NCTURN_CORE...", delay: 200 },
-            { text: "LOADING UNRELEASED BLUEPRINTS...", delay: 1000 },
-            { text: "ESTABLISHING SECURE GATEWAY...", delay: 1800 },
-            { text: "STABILIZING 3D GEOMETRIC GRID...", delay: 2600 },
-            { text: "OVERRIDE STATUS: ACCESS_GRANTED", delay: 3800, type: "success" },
-            { text: "BOOT SEQUENCE COMPLETE.", delay: 4400, type: "success" }
-        ];
+        // Paleidžiame logus ir laikmatį tik tuo atveju, jei puslapis kraunasi PIRMĄ KARTĄ
+        if (!sessionStorage.getItem('nocturn_loaded')) {
+            const bootLogs = [
+                { text: "LAUNCHING_NCTURN_CORE...", delay: 200 },
+                { text: "LOADING UNRELEASED BLUEPRINTS...", delay: 1000 },
+                { text: "ESTABLISHING SECURE GATEWAY...", delay: 1800 },
+                { text: "STABILIZING 3D GEOMETRIC GRID...", delay: 2600 },
+                { text: "OVERRIDE STATUS: ACCESS_GRANTED", delay: 3800, type: "success" },
+                { text: "BOOT SEQUENCE COMPLETE.", delay: 4400, type: "success" }
+            ];
 
-        const terminal = document.getElementById('terminal');
+            const terminal = document.getElementById('terminal');
 
-        bootLogs.forEach(log => {
+            bootLogs.forEach(log => {
+                setTimeout(() => {
+                    if(terminal) {
+                        const p = document.createElement('p');
+                        p.className = 'terminal-line active';
+                        if (log.type === 'success') p.classList.add('success');
+                        p.innerText = `> ${log.text}`;
+                        terminal.appendChild(p);
+                        terminal.scrollTop = terminal.scrollHeight;
+                    }
+                }, log.delay);
+            });
+
+            // Tiksliai po 5 sekundžių išjungiam loaderį ir įrašom reikšmę į sessionStorage
             setTimeout(() => {
-                const p = document.createElement('p');
-                p.className = 'terminal-line active';
-                if (log.type === 'success') p.classList.add('success');
-                p.innerText = `> ${log.text}`;
-                terminal.appendChild(p);
-                terminal.scrollTop = terminal.scrollHeight;
-            }, log.delay);
-        });
-
-        // Tiksliai po 5 sekundžių (5000ms) išjungiam loaderį
-        setTimeout(() => {
-            document.body.classList.add('loaded');
-        }, 5000);
+                document.body.classList.add('loaded');
+                sessionStorage.setItem('nocturn_loaded', 'true');
+            }, 5000);
+        }
     </script>
 </body>
 </html>
