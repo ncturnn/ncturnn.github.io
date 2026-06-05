@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SHOP // N★CTURN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght=700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: #0a0a0a !important; color: #f0f0f0; font-family: 'Syncopate', sans-serif; font-weight: 700; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
@@ -43,12 +44,16 @@
         .close-cart { background: none; border: none; color: #666; font-size: 1.5rem; cursor: pointer; font-family: 'Syncopate', sans-serif; font-weight: 700; }
         .close-cart:hover { color: #ff007f; }
         .cart-items-container { flex: 1; overflow-y: auto; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid #151515; font-size: 0.8rem; }
-        .cart-item-info h4 { font-size: 0.75rem; margin-bottom: 0.3rem; font-weight: 700; }
+        
+        /* Optimizuota prekė krepšelyje (word-break neleidžia tekstui išlipti) */
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0; border-bottom: 1px solid #151515; font-size: 0.8rem; gap: 1rem; }
+        .cart-item-info { flex: 1; word-break: break-word; }
+        .cart-item-info h4 { font-size: 0.75rem; margin-bottom: 0.4rem; font-weight: 700; line-height: 1.4; }
         .cart-item-size { font-size: 0.7rem; color: #666; display: block; margin-bottom: 0.2rem; letter-spacing: 1px; }
         .cart-item-price { color: #ff007f; font-weight: 700; }
-        .remove-item-btn { background: none; border: none; color: #444; cursor: pointer; font-size: 0.75rem; font-family: 'Syncopate', sans-serif; font-weight: 700;}
+        .remove-item-btn { background: none; border: none; color: #444; cursor: pointer; font-size: 0.75rem; font-family: 'Syncopate', sans-serif; font-weight: 700; flex-shrink: 0; }
         .remove-item-btn:hover { color: #ff007f; }
+        
         .cart-footer { border-top: 1px solid #222; padding-top: 2rem; margin-top: 1rem; }
         .cart-total { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 1.5rem; font-weight: 700; }
         .checkout-btn { background: #ff007f; color: #fff; border: none; width: 100%; padding: 1.2rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; transition: background 0.3s; text-align: center; display: block; }
@@ -59,7 +64,6 @@
         .products-section { padding: 3rem 4rem 8rem 4rem; max-width: 1200px; margin: 0 auto; background-color: #0a0a0a; position: relative; z-index: 1; flex: 1; width: 100%; }
         .section-title { font-family: 'Syncopate', sans-serif; font-weight: 800; font-size: 1.6rem; letter-spacing: 4px; margin-bottom: 3rem; border-bottom: 1px dashed #222; padding-bottom: 1rem; color: #fff; }
         
-        /* Atnaujintas tinklelis dviem prekėms */
         .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 800px; margin: 0 auto; }
         
         .product-card { background: #0b0b0b; border: 1px dashed #222; padding: 1.2rem; position: relative; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); display: flex; flex-direction: column; }
@@ -74,7 +78,7 @@
         .image-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; opacity: 0.8; }
         .product-card:hover .image-container img { transform: scale(1.03); opacity: 1; }
         
-        .img-fallback { color: #333; font-size: 0.65rem; letter-spacing: 2px; position: absolute; z-index: 1; }
+        .img-fallback { color: #333; font-size: 0.65rem; letter-spacing: 2px; position: absolute; z-index: 1; text-align: center; padding: 0 1rem; }
         .product-card:hover .img-fallback { color: #ff007f; }
         
         .product-info { margin-bottom: 1.2rem; display: flex; flex-direction: column; gap: 0.4rem; }
@@ -91,7 +95,7 @@
         .add-to-bag-btn:hover { background: #fff; color: #000; border-color: #fff; }
 
         /* PRANEŠIMAS */
-        .custom-notification { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: #0d0d0d; border: 1px solid #ff007f; color: #fff; padding: 1rem 2rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; z-index: 99999999; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: top 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); pointer-events: none; text-transform: uppercase; }
+        .custom-notification { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: #0d0d0d; border: 1px solid #ff007f; color: #fff; padding: 1rem 2rem; font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; z-index: 99999999; box-shadow: 0 0 20px rgba(255, 0, 127, 0.4); transition: top 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99); pointer-events: none; text-transform: uppercase; text-align: center; width: calc(100% - 3rem); max-width: 450px; }
         .custom-notification.show { top: 2rem; }
 
         /* FOOTER */
@@ -107,20 +111,36 @@
             50% { transform: scale(1.15); text-shadow: 0 0 18px rgba(255, 0, 127, 1), 0 0 35px rgba(255, 0, 127, 0.8); }
         }
 
-        /* MOBILUS PRITAIKYMAS */
+        /* MOBILUS PRITAIKYMAS (GRIEŽTAS OPTIMIZAVIMAS) */
         @media (max-width: 968px) {
-            .product-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .navbar { padding: 1.5rem 1.5rem; }
+            .navbar { padding: 1.5rem 1rem; }
             .logo a { font-size: 1.3rem !important; letter-spacing: 2px !important; }
-            .cart-trigger { padding: 0.6rem 1rem; font-size: 0.75rem; }
-            .nav-links { position: static; flex-direction: row; justify-content: center; width: 100%; background: #0a0a0a; padding: 1.5rem 0; border-top: 1px solid #111; gap: 2rem; margin-top: 2rem; }
-            .products-section { padding: 2rem 1.5rem 4rem 1.5rem; }
-            .section-title { font-size: 1.1rem; text-align: center; }
-            .image-container { height: 280px; }
-            .cart-sidebar { width: 100%; right: -100%; padding: 2rem 1.5rem; }
-            .shop-footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
-            .footer-left { position: static; transform: none; }
-            .footer-right { justify-content: center; flex-wrap: wrap; gap: 1rem; margin: 0; }
+            .cart-trigger { padding: 0.6rem 1rem; font-size: 0.75rem; letter-spacing: 1px; }
+            
+            /* Prekių išdėstymas į 1 stulpelį */
+            .product-grid { grid-template-columns: 1fr; gap: 2.5rem; padding: 0 0.5rem; }
+            .product-card { padding: 1rem; }
+            .image-container { height: 340px; } /* Geresnė proporcija telefonų ekranams */
+            
+            /* Didesni, lengviau paspaudžiami mygtukai telefone */
+            .size-btn { padding: 0.8rem 0.5rem; font-size: 0.8rem; }
+            .add-to-bag-btn { padding: 1.1rem; font-size: 0.8rem; }
+
+            /* Krepšelis per visą ekraną telefone */
+            .cart-sidebar { width: 100%; right: -100%; padding: 2.5rem 1.5rem; }
+            .cart-header h2 { font-size: 1.1rem; }
+            
+            /* Sidebar navigacija apačioje */
+            .nav-links { position: static; flex-direction: row; flex-wrap: wrap; justify-content: center; width: 100%; background: #0a0a0a; padding: 2rem 1rem; border-top: 1px solid #111; gap: 1.5rem; margin-top: 3rem; }
+            .nav-links a { font-size: 0.75rem; letter-spacing: 1px; }
+
+            .products-section { padding: 2rem 1rem 2rem 1rem; }
+            .section-title { font-size: 0.95rem; text-align: center; line-height: 1.6; letter-spacing: 2px; margin-bottom: 2rem; }
+            
+            /* Footeris */
+            .shop-footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2.5rem 1rem; }
+            .footer-left { position: static; transform: none; font-size: 0.65rem; }
+            .footer-right { justify-content: center; flex-wrap: wrap; gap: 1.2rem; margin: 0; font-size: 0.65rem; }
         }
     </style>
 </head>
