@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHECKOUT // N★CTURN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght=400;700;800&display=swap" rel="stylesheet">
     <script src="https://www.paypal.com/sdk/js?client-id=ARkQqQDeE0HvraDrLF0_wOjfBnVdql08SvgcJjciqqB1FjNhSl1cHa3nPzpsIOOWbTJABCJTURW3whsr&currency=EUR&components=buttons,card-fields"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,14 +31,9 @@
             transition: all 0.3s ease;
         }
         @keyframes starBreathe {
-            0%, 100 { transform: scale(1); text-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.4); }
+            0%, 100% { transform: scale(1); text-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.4); }
             50% { transform: scale(1.15); text-shadow: 0 0 18px rgba(255, 0, 127, 1), 0 0 35px rgba(255, 0, 127, 0.8); }
         }
-
-        /* NUORODOS KAIRĖJE APAČIOJE */
-        .nav-links { position: fixed; bottom: 2rem; left: 4rem; list-style: none; display: flex; flex-direction: column; gap: 1rem; z-index: 9999; text-transform: uppercase; }
-        .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s ease; display: inline-block; }
-        .nav-links a:hover { color: #ff007f; transform: translateX(5px); }
 
         /* CHECKOUT KONTEINERIS */
         .checkout-container { max-width: 1100px; margin: 0 auto; padding: 2rem 4rem 8rem 4rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; position: relative; z-index: 1; }
@@ -49,7 +44,7 @@
         .form-group { margin-bottom: 1.5rem; }
         .form-group label { display: block; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; color: #666; font-weight: 700; }
         
-        /* INPUT LAUKELIAI (Pakeisti į Syncopate, pridėtas didžiųjų raidžių force) */
+        /* INPUT LAUKELIAI */
         .form-group input { 
             width: 100%; 
             background: #0d0d0d; 
@@ -57,7 +52,7 @@
             padding: 1rem; 
             color: #fff; 
             font-family: 'Syncopate', sans-serif; 
-            font-weight: 400; /* Kad nebūtų per stambus tekstas vedant */
+            font-weight: 400; 
             font-size: 0.8rem; 
             letter-spacing: 1px;
             text-transform: uppercase; 
@@ -88,7 +83,6 @@
         @media (max-width: 768px) {
             .navbar { padding: 1.5rem 1.5rem; }
             .logo a { font-size: 1.3rem !important; }
-            .nav-links { position: static; flex-direction: row; justify-content: center; width: 100%; background: #0a0a0a; padding: 1.5rem 0; border-top: 1px solid #111; gap: 2rem; margin-top: 2rem; }
             .checkout-container { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.5rem 4rem 1.5rem; }
             .checkout-title { grid-column: span 1; font-size: 1.4rem; text-align: center; }
             .success-message { grid-column: span 1; }
@@ -101,14 +95,6 @@
     <nav class="navbar">
         <div class="logo"><a href="index.html">N<span>★</span>CTURN</a></div>
     </nav>
-
-    <ul class="nav-links">
-        <li><a href="shop.html">Shop</a></li>
-        <li><a href="archive.html">Archive</a></li>
-        <li><a href="subscribe.html">Sign Up</a></li>
-        <li><a href="size-guide.html">Size Guide</a></li>
-        <li><a href="about.html">About</a></li>
-    </ul>
 
     <div class="checkout-container" id="checkoutContainer">
         <h2 class="checkout-title">SHIPPING_DETAILS</h2>
