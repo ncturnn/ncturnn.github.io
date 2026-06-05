@@ -39,12 +39,12 @@
         .checkout-container { max-width: 1100px; margin: 0 auto; padding: 2rem 4rem 8rem 4rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; position: relative; z-index: 1; }
         .checkout-title { font-size: 2rem; font-weight: 800; letter-spacing: 4px; margin-bottom: 2rem; color: #fff; grid-column: span 2; border-bottom: 1px solid #222; padding-bottom: 1rem; }
         
-        /* FORMA */
-        .order-form h3, .summary-box h3 { font-size: 1rem; font-weight: 700; letter-spacing: 2px; margin-bottom: 1.5rem; color: #fff; }
+        /* FORMA & TEKSTAI */
+        .order-form h3, .summary-box h3 { font-family: 'Syncopate', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 2px; margin-bottom: 1.5rem; color: #fff; }
         .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; color: #666; font-weight: 700; }
+        .form-group label { display: block; font-family: 'Syncopate', sans-serif; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; color: #666; font-weight: 700; }
         
-        /* INPUT LAUKELIAI */
+        /* FIX: GRAŽINTAS SYNCOPATE ŠRIFTAS Į INPUT LAUKELIUS */
         .form-group input { 
             width: 100%; 
             background: #0d0d0d; 
@@ -52,14 +52,21 @@
             padding: 1rem; 
             color: #fff; 
             font-family: 'Syncopate', sans-serif; 
-            font-weight: 400; 
+            font-weight: 700; 
             font-size: 0.8rem; 
             letter-spacing: 1px;
             text-transform: uppercase; 
             transition: border 0.3s; 
         }
         .form-group input:focus { outline: none; border-color: #ff007f; }
-        .form-group input::placeholder { color: #252525; font-weight: 700; }
+        
+        /* FIX: PLACEHOLDER SYNCOPATE STILIUS */
+        .form-group input::placeholder { 
+            font-family: 'Syncopate', sans-serif; 
+            color: #252525; 
+            font-weight: 700; 
+            letter-spacing: 1px;
+        }
 
         /* TABŲ STILIUS */
         .payment-tabs { display: flex; gap: 1rem; margin-top: 2rem; margin-bottom: 1.5rem; border-bottom: 1px solid #222; padding-bottom: 1rem; }
@@ -70,9 +77,9 @@
 
         /* UŽSAKYMO SUVESTINĖ */
         .summary-box { background: #0b0b0b; border: 1px solid #151515; padding: 2rem; height: fit-content; }
-        .summary-item { display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid #151515; font-size: 0.75rem; letter-spacing: 1px; color: #888; text-transform: uppercase; }
+        .summary-item { display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px solid #151515; font-family: 'Syncopate', sans-serif; font-size: 0.75rem; letter-spacing: 1px; color: #888; text-transform: uppercase; font-weight: 700; }
         .summary-item .item-name { max-width: 70%; }
-        .summary-total { display: flex; justify-content: space-between; font-size: 1rem; font-weight: 800; color: #fff; padding-top: 1.5rem; margin-top: 1rem; border-top: 1px solid #222; }
+        .summary-total { display: flex; justify-content: space-between; font-family: 'Syncopate', sans-serif; font-size: 1rem; font-weight: 800; color: #fff; padding-top: 1.5rem; margin-top: 1rem; border-top: 1px solid #222; }
         
         /* SĖKMĖS PRANEŠIMAS */
         .success-message { text-align: center; padding: 5rem 0; grid-column: span 2; display: none; }
