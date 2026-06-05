@@ -38,7 +38,7 @@
         .cart-count { font-weight: 800; color: #ff007f; transition: color 0.3s; }
         .cart-trigger:hover .cart-count { color: #fff; }
 
-        /* NAV LINKS */
+        /* NAV LINKS (Desktop) */
         .nav-links { position: fixed; bottom: 2rem; left: 4rem; list-style: none; display: flex; flex-direction: column; gap: 1rem; z-index: 9999; text-transform: uppercase; }
         .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s ease; display: inline-block; }
         .nav-links a:hover { color: #ff007f; transform: translateX(5px); }
@@ -122,12 +122,29 @@
             .navbar { padding: 1.5rem; }
             .logo a { font-size: 1.3rem; letter-spacing: 2px; }
             .cart-trigger { padding: 0.6rem 1rem; font-size: 0.75rem; }
-            .nav-links { position: static; flex-direction: row; justify-content: center; width: 100%; background: #0a0a0a; padding: 1.5rem 0; border-top: 1px solid #111; gap: 1.5rem; margin-top: auto; }
+            
+            /* SUTVARKYTOS NUORODOS: dabar jos wrapping'uojasi ir telpa bet kokiame ragelyje */
+            .nav-links { 
+                position: static; 
+                flex-direction: row; 
+                flex-wrap: wrap; 
+                justify-content: center; 
+                align-items: center;
+                width: 100%; 
+                background: #0a0a0a; 
+                padding: 1.5rem 1rem; 
+                border-top: 1px solid #111; 
+                gap: 1rem 1.5rem; 
+                margin-top: auto; 
+            }
+            .nav-links a { font-size: 0.7rem; letter-spacing: 1px; }
+            
             .center-container { margin-top: 2rem; margin-bottom: 2rem; padding: 0 1.5rem; }
             .center-content h1 { font-size: 1.3rem; letter-spacing: 3px; margin-bottom: 1rem; }
             .center-content p { margin-bottom: 2.5rem; font-size: 0.65rem; }
             .input-container { max-width: 100%; }
-            .shop-footer { position: static; flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+            
+            .shop-footer { position: static; flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; border-top: none; }
             .footer-left { position: static; transform: none; }
             .footer-right { justify-content: center; flex-wrap: wrap; gap: 1rem; }
         }
