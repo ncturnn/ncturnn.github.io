@@ -9,7 +9,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            background-color: #0a0a0a !important; 
+            background-color: #0a0a0a; 
             color: #f0f0f0; 
             font-family: 'Syncopate', sans-serif; 
             font-weight: 700; 
@@ -21,38 +21,28 @@
         }
         .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: 0.04; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png'); }
         
-        /* NAVBAR & BREATHE LOGO */
+        /* NAVBAR */
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 2rem 4rem; background-color: #0a0a0a; position: relative; z-index: 10; }
-        .logo a { font-size: 2rem !important; font-weight: 800 !important; letter-spacing: 5px !important; color: #ffffff !important; text-decoration: none !important; transition: all 0.3s ease !important; display: inline-block !important; font-style: italic !important; }
-        .logo a:hover { color: #ff007f !important; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8) !important; }
+        .logo a { font-size: 2rem; font-weight: 800; letter-spacing: 5px; color: #ffffff; text-decoration: none; transition: all 0.3s ease; display: inline-block; font-style: italic; }
+        .logo a:hover { color: #ff007f; text-shadow: 0 0 15px rgba(255, 0, 127, 0.8); }
         .logo a span { 
             color: #ff007f; 
             text-shadow: 0 0 10px rgba(255, 0, 127, 0.8); 
-            font-style: normal !important; 
+            font-style: normal; 
             display: inline-block;
             animation: starBreathe 3s ease-in-out infinite;
-            transition: all 0.3s ease;
         }
-        .logo a:hover span { text-shadow: 0 0 20px rgba(255, 0, 127, 1), 0 0 30px rgba(255, 0, 127, 0.8); }
 
         /* MAIN CONTENT GRID */
         .product-container { max-width: 1200px; margin: auto; padding: 1rem 4rem 14rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; flex-grow: 1; align-items: center; }
         
-        /* TECH IMAGE BOX */
+        /* IMAGE BOX */
         .product-image-container { position: relative; width: 100%; aspect-ratio: 1/1; }
         .product-image-box { 
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             border: 1px solid #161616; 
-            display: flex; 
-            flex-direction: column;
-            align-items: center; 
-            justify-content: center; 
-            background: #0d0d0d; 
-            color: #222; 
-            font-size: 0.65rem; 
-            letter-spacing: 3px; 
-            position: relative;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            background: #0d0d0d; color: #222; font-size: 0.65rem; letter-spacing: 3px; 
         }
         .tech-corner { position: absolute; width: 8px; height: 8px; border-color: #ff007f; border-style: solid; opacity: 0.7; }
         .tl { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
@@ -66,44 +56,41 @@
         .product-title { font-size: 1.5rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 1rem; color: #fff; line-height: 1.3; text-transform: uppercase; }
         .product-price { font-size: 1.1rem; color: #ff007f; margin-bottom: 2rem; letter-spacing: 1px; }
         
-        /* TECH SPECS */
         .tech-specs { margin-bottom: 2rem; font-size: 0.6rem; color: #555; letter-spacing: 1px; line-height: 1.8; }
         .tech-specs span { color: #888; }
-        .product-description { font-size: 0.75rem; color: #888; line-height: 1.8; margin-bottom: 2.5rem; letter-spacing: 1px; font-weight: 700; }
+        .product-description { font-size: 0.75rem; color: #888; line-height: 1.8; margin-bottom: 2.5rem; letter-spacing: 1px; }
 
-        /* SIZE SELECTION & SIZE GUIDE LINK */
+        /* SIZE SELECTION */
         .size-section { margin-bottom: 2.5rem; }
         .size-header { display: flex; justify-content: space-between; font-size: 0.7rem; color: #666; letter-spacing: 2px; margin-bottom: 0.8rem; text-transform: uppercase; }
-        .size-guide-link { color: #444; text-decoration: underline; transition: color 0.3s ease; }
+        .size-guide-link { color: #444; text-decoration: underline; transition: color 0.3s; }
         .size-guide-link:hover { color: #ff007f; text-shadow: 0 0 5px rgba(255, 0, 127, 0.5); }
         .size-grid { display: flex; gap: 0.8rem; }
         .size-btn { background: none; border: 1px solid #222; color: #555; padding: 0.8rem 1.5rem; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.3s; width: 60px; text-align: center; }
         .size-btn:hover, .size-btn.active { border-color: #ff007f; color: #fff; background: rgba(255, 0, 127, 0.05); }
 
-        /* ACTION */
+        /* ACTIONS */
         .action-container { display: flex; flex-direction: column; gap: 1rem; }
         .add-to-bag-btn { width: 100%; background: #ff007f; border: none; color: #fff; padding: 1.2rem; font-size: 0.8rem; font-weight: 800; letter-spacing: 3px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; }
         .add-to-bag-btn:hover { background: #e0006c; box-shadow: 0 0 20px rgba(255, 0, 127, 0.3); }
-        .stock-status { font-size: 0.6rem; color: #ff007f; letter-spacing: 2px; opacity: 0.8; animation: pulse 2s infinite; text-align: center; margin-top: 0.2rem; }
-        @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+        .stock-status { font-size: 0.6rem; color: #ff007f; letter-spacing: 2px; animation: pulse 2s infinite; text-align: center; margin-top: 0.2rem; }
 
-        /* SIDEBAR NAV LINKS */
-        .nav-links { position: fixed; bottom: 2rem; left: 4rem; list-style: none; display: flex; flex-direction: column; gap: 1rem; z-index: 9999; font-family: 'Syncopate', sans-serif; font-weight: 700; text-transform: uppercase; }
-        .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s ease; display: inline-block; }
+        /* NAV LINKS & FOOTER */
+        .nav-links { position: fixed; bottom: 2rem; left: 4rem; list-style: none; display: flex; flex-direction: column; gap: 1rem; z-index: 9999; text-transform: uppercase; }
+        .nav-links a { color: #f0f0f0; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; transition: all 0.3s; display: inline-block; }
         .nav-links a:hover { color: #ff007f; transform: translateX(5px); }
-
-        /* COPYRIGHT */
-        .footer-copyright { position: fixed; bottom: 2rem; right: 4rem; font-family: 'Syncopate', sans-serif; font-size: 0.65rem; color: #444; letter-spacing: 1px; font-weight: 700; z-index: 9999; }
+        .footer-copyright { position: fixed; bottom: 2rem; right: 4rem; font-size: 0.65rem; color: #444; letter-spacing: 1px; z-index: 9999; }
 
         @keyframes starBreathe {
-            0%, 100% { transform: scale(1); text-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.4); }
-            50% { transform: scale(1.15); text-shadow: 0 0 18px rgba(255, 0, 127, 1), 0 0 35px rgba(255, 0, 127, 0.8); }
+            0%, 100% { transform: scale(1); text-shadow: 0 0 8px rgba(255, 0, 127, 0.6); }
+            50% { transform: scale(1.15); text-shadow: 0 0 18px rgba(255, 0, 127, 1); }
         }
+        @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
         @media (max-width: 968px) {
             .product-container { grid-template-columns: 1fr; padding: 2rem 1.5rem 16rem 1.5rem; gap: 3rem; }
-            .navbar { padding: 1.5rem 1.5rem; }
-            .logo a { font-size: 1.3rem !important; letter-spacing: 2px !important; }
+            .navbar { padding: 1.5rem; }
+            .logo a { font-size: 1.3rem; letter-spacing: 2px; }
             .nav-links { position: static; flex-direction: row; justify-content: center; width: 100%; background: #0a0a0a; padding: 1.5rem 0; border-top: 1px solid #111; gap: 2rem; margin-top: 2rem; }
             .footer-copyright { position: static; text-align: center; margin-top: 1rem; padding-bottom: 2rem; }
         }
@@ -118,10 +105,8 @@
 
     <div class="product-container">
         <div class="product-image-container">
-            <div class="tech-corner tl"></div>
-            <div class="tech-corner tr"></div>
-            <div class="tech-corner bl"></div>
-            <div class="tech-corner br"></div>
+            <div class="tech-corner tl"></div><div class="tech-corner tr"></div>
+            <div class="tech-corner bl"></div><div class="tech-corner br"></div>
             <div class="product-image-box">
                 <div class="placeholder-center-star">★</div>
                 <div>[ IMAGE_PLACEHOLDER_003 ]</div>
@@ -175,8 +160,15 @@
         <li><a href="about.html">ABOUT</a></li>
     </ul>
 
-    <div class="footer-copyright">
-        &copy; 2026 N★CTURN. ALL RIGHTS RESERVED.
-    </div>
+    <div class="footer-copyright">&copy; 2026 N★CTURN. ALL RIGHTS RESERVED.</div>
+
+    <script>
+        document.querySelectorAll('.size-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
